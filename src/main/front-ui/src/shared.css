@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Rubik', sans-serif;
+}
+:root{
+    --help-bubble-background-color: #f0f0f0;
+    --help-bubble-icon-size: 20px;
+}
+
+
+
+.button-no-style {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.help-bg {
+    background-color: var(--help-bubble-background-color);
+}

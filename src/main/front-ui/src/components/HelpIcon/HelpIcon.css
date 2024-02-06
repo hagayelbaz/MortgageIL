@@ -1,0 +1,46 @@
+.help-icon {
+    transition: .1s ease-in;
+}
+
+.help-icon:hover {
+    color: color-mix(in srgb, var(--help-bubble-background-color) 40%, black);
+    scale: 1.1;
+}
+
+.help-bubble {
+    background-color: var(--help-bubble-background-color);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.bubble-right {
+    top: 50%;
+    transform: translate(calc(100% + var(--help-bubble-icon-size)), calc(-50% - var(--help-bubble-icon-size) / 2));
+}
+
+.bubble-left {
+    top: 50%;
+    transform: translate(calc(var(--help-bubble-icon-size) - calc(var(--help-bubble-icon-size) * 2 + 10px)), -50%);
+}
+
+
+
+.help-bubble::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    border-width: 10px;
+    border-style: dashed;
+    border-color: var(--help-bubble-background-color) transparent transparent transparent;
+    filter: drop-shadow(1px 1px 0px rgba(0, 0, 0, .2));
+}
+
+.bubble-right::after {
+    left: 0;
+    transform: translateX(-100%) rotate(90deg);
+}
+
+.bubble-left::after {
+    right: 0;
+    transform: translateX(100%) rotate(-90deg);
+}
+
