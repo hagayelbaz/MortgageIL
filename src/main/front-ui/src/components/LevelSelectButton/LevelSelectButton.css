@@ -1,0 +1,13 @@
+.level-select-button{
+    transition: .3s;
+    border: var(--secondary-color) 3px solid;
+    width: 100%;
+}
+
+.level-select-button:hover{
+    scale: 1.05;
+    color: var(--primary-color);
+    background: var(--secondary-color);
+}
+
+

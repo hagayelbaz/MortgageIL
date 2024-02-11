@@ -1,7 +1,10 @@
 import React, {cloneElement, useState} from 'react';
-import { Form, Button, ProgressBar } from 'react-bootstrap';
+import {Form, Button} from 'react-bootstrap';
+import ProgressBar from "../ProgressBar/ProgressBar";
+import LevelSelectButton from "../LevelSelectButton/LevelSelectButton";
+import LevelSelectButtonContainer from "../LevelSelectButtonContainer/LevelSelectButtonContainer";
 
-const MultiStepForm = ({ children , onFormSubmit}) => {
+const MultiStepForm = ({children, onFormSubmit}) => {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({});
     const steps = React.Children.toArray(children);
@@ -21,7 +24,7 @@ const MultiStepForm = ({ children , onFormSubmit}) => {
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData(prev => ({...prev, [name]: value}));
     };
 
     const handleSubmit = (event) => {
@@ -32,21 +35,28 @@ const MultiStepForm = ({ children , onFormSubmit}) => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <ProgressBar now={(step / totalSteps) * 100} />
+            <LevelSelectButtonContainer>
+                <LevelSelectButton label={"דירה"} bootstrapIcon={'bi-house'}/>
+                <LevelSelectButton label={"נכס להשקעה"} bootstrapIcon={'bi-house-add'}/>
+                <LevelSelectButton label={"טוב כבר פה אין מה לכתוב"} bootstrapIcon={'bi-house-add'}/>
+            </LevelSelectButtonContainer>
             <div className="py-5">
                 {cloneElement(children[step - 1], {
-                    onInput: handleInputChange})
+                    onInput: handleInputChange
+                })
                 }
             </div>
             <div className="d-flex justify-content-between">
                 {step > 1 &&
-                    <Button variant="secondary" onClick={handlePrevious}>הבא</Button>
+                    <Button variant="secondary" onClick={handlePrevious}>הקודם</Button>
                 }
                 {step < totalSteps ?
-                    <Button variant="primary" onClick={handleNext}>הקודם</Button> :
+                    <Button variant="primary" onClick={handleNext}>הבא</Button> :
                     <Button variant="primary" type="submit">Submit</Button>
                 }
             </div>
+
+            <ProgressBar currentStep={step} totalSteps={totalSteps}/>
         </Form>
     );
 };

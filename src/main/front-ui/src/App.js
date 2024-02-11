@@ -2,6 +2,8 @@ import React from 'react';
 import HelpIcon from "./components/HelpIcon/HelpIcon";
 import {Col, Container, Form, Row} from "react-bootstrap";
 import MultiStepForm from "./components/MultiStepForm/MultiStepForm";
+import Level from "./components/Level/Level";
+import LevelManager from "./components/LevelManager/LevelManager";
 
 
 function App() {
@@ -14,25 +16,29 @@ function App() {
 
 
     return (
-        <Container className="">
-            <Row className="" style={{height: '25vh'}}></Row>
-            <Row className="">
-                <MultiStepForm onFormSubmit={() => {}}>
-                    <div>
-                        <label>Name</label>
-                        <input type="text" name="name" />
-                    </div>
-                    <div>
-                        <label>Email</label>
-                        <input type="email" name="email" />
-                    </div>
-                    <div>
-                        <label>Message</label>
-                        <textarea name="message" rows="3" />
-                    </div>
-                </MultiStepForm>
-            </Row>
-        </Container>
+        <div className="container-fluid primary-bg vh-100">
+            <LevelManager/>
+            {/*<Container className="">
+                <Row className="" style={{height: '25vh'}}></Row>
+                <Row className="">
+                    <MultiStepForm onFormSubmit={() => {
+                    }}>
+                        <div>
+                            <label>Name</label>
+                            <input type="text" name="name"/>
+                        </div>
+                        <div>
+                            <label>Email</label>
+                            <input type="email" name="email"/>
+                        </div>
+                        <div>
+                            <label>Message</label>
+                            <textarea name="message" rows="3"/>
+                        </div>
+                    </MultiStepForm>
+                </Row>
+            </Container>*/}
+        </div>
     );
 }
 
