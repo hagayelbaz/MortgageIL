@@ -2,28 +2,55 @@
   "levels": [
     {
       "level": 1,
-      "name": "Level 1",
+      "name": "מטרת הלוואה",
       "items": [
         {
           "id": 1,
           "type": "button",
-          "name": "Item 1",
+          "name": "קניית נכס",
           "icon": "house",
           "description": "Description 1",
           "nextLevel": 2,
+          "nextLevelRole": "level",
           "nextLevelInclude": [
-            1,
-            2,
-            4
+            0
           ]
         },
         {
           "id": 2,
-          "name": "Item 2",
+          "name": "שיפוץ / הרחבה",
           "type": "button",
           "icon": "house",
           "description": "Description 2",
           "nextLevel": 3,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": 3,
+          "name": "מחזור",
+          "type": "button",
+          "icon": "house",
+          "description": "Description 2",
+          "nextLevel": 3,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": 4,
+          "name": "מטרה אחרת",
+          "type": "button",
+          "icon": "house",
+          "description": "Description 2",
+          "nextLevel": 3,
+          "nextLevelRole": "level",
           "nextLevelInclude": [
             1,
             2,
@@ -34,31 +61,141 @@
     },
     {
       "level": 2,
-      "name": "Level 2",
+      "name": "איזה סוג נכס תרצה לרכוש?",
       "items": [
         {
           "id": 1,
-          "name": "Item 1 Level 2",
           "type": "button",
+          "name": "דירה / בית",
           "icon": "house",
           "description": "Description 1",
-          "nextLevel": 0,
-          "nextLevelInclude": []
+          "nextLevel": 3,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            1,
+            2,
+            4
+          ]
+        },
+        {
+          "id": 2,
+          "name": "מגרש",
+          "type": "button",
+          "icon": "house",
+          "description": "Description 2",
+          "nextLevel": 3,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            0
+          ]
+        },
+        {
+          "id": 3,
+          "name": "בנייה",
+          "type": "button",
+          "icon": "house",
+          "description": "Description 2",
+          "nextLevel": 3,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            0
+          ]
+        },
+        {
+          "id": 4,
+          "name": "בנייה + מגרש",
+          "type": "button",
+          "icon": "house",
+          "description": "Description 2",
+          "nextLevel": 3,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            0
+          ]
         }
       ]
     },
     {
       "level": 3,
-      "name": "Level 3",
+      "name": "האם יש בבעלותך נכס?",
       "items": [
         {
           "id": 1,
-          "name": "Item 1 Level 3",
           "type": "button",
+          "name": "כן",
           "icon": "house",
           "description": "Description 1",
           "nextLevel": 0,
-          "nextLevelInclude": []
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            0
+          ]
+        },
+        {
+          "id": 2,
+          "name": "לא",
+          "type": "button",
+          "icon": "house",
+          "description": "Description 2",
+          "nextLevel": 0,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            0
+          ]
+        },
+        {
+          "id": 3,
+          "name": "בבעלות חלקית",
+          "type": "button",
+          "icon": "house",
+          "description": "Description 2",
+          "nextLevel": 4,
+          "nextLevelRole": "followup",
+          "nextLevelInclude": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "name": "מה האחוזים?",
+      "items": [
+        {
+          "id": 1,
+          "type": "button",
+          "name": "100%",
+          "icon": "house",
+          "description": "Description 1",
+          "nextLevel": 0,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            0
+          ]
+        },
+        {
+          "id": 2,
+          "name": "50%",
+          "type": "button",
+          "icon": "house",
+          "description": "Description 2",
+          "nextLevel": 0,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            0
+          ]
+        },
+        {
+          "id": 3,
+          "name": "25%",
+          "type": "button",
+          "icon": "house",
+          "description": "Description 2",
+          "nextLevel": 0,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            0
+          ]
         }
       ]
     }
