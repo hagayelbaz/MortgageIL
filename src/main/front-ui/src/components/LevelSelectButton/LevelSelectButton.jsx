@@ -3,14 +3,14 @@ import "./LevelSelectButton.css";
 
 
 const LevelSelectButton = ({label, onClick, bootstrapIcon, selected}) => {
-    const [iconClass, setIconClass] = useState("bi " + bootstrapIcon);
+    const [iconClass, setIconClass] = useState("bi-" + bootstrapIcon);
 
     const onHover = () => {
-        setIconClass("bi " + bootstrapIcon + "-fill");
+        setIconClass("bi-" + bootstrapIcon + "-fill");
     }
 
     const onLeave = () => {
-        setIconClass("bi " + bootstrapIcon);
+        setIconClass("bi-" + bootstrapIcon);
     }
 
     return (

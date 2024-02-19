@@ -41,7 +41,8 @@ const LevelManager = () => {
     };
 
 
-    const isToShow = (index) => {
+    const isToShow = (index, item) => {
+        console.log(item.icon);
         return true;
     }
 
@@ -52,7 +53,8 @@ const LevelManager = () => {
                     <h1>{level.name}</h1>
                     <LevelSelectButtonContainer>
                         {level.items.map((item, index) => (
-                            isToShow(index) ? (
+
+                            isToShow(index, item) ? (
                                 <LevelSelectButton
                                     key={index}
                                     onClick={() => nextLevel(level, item)}
