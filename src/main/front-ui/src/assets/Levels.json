@@ -49,12 +49,10 @@
           "type": "button",
           "icon": "house",
           "description": "Description 2",
-          "nextLevel": 3,
+          "nextLevel": 5,
           "nextLevelRole": "level",
           "nextLevelInclude": [
-            1,
-            2,
-            3
+            0
           ]
         }
       ]
@@ -125,8 +123,8 @@
           "name": "כן",
           "icon": "house",
           "description": "Description 1",
-          "nextLevel": 0,
-          "nextLevelRole": "level",
+          "nextLevel": 5,
+          "nextLevelRole": "followup",
           "nextLevelInclude": [
             0
           ]
@@ -188,6 +186,48 @@
         {
           "id": 3,
           "name": "25%",
+          "type": "button",
+          "icon": "house",
+          "description": "Description 2",
+          "nextLevel": 0,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "מה הסכום שתרצה להלוות?",
+      "items": [
+        {
+          "id": 1,
+          "type": "button",
+          "name": "100,000",
+          "icon": "house",
+          "description": "Description 1",
+          "nextLevel": 0,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            0
+          ]
+        },
+        {
+          "id": 2,
+          "name": "200,000",
+          "type": "button",
+          "icon": "house",
+          "description": "Description 2",
+          "nextLevel": 0,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            0
+          ]
+        },
+        {
+          "id": 3,
+          "name": "300,000",
           "type": "button",
           "icon": "house",
           "description": "Description 2",

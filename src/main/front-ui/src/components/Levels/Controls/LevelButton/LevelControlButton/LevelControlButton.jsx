@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
-import "./LevelSelectButton.css";
+import React, {useState} from "react";
+import "./LevelControlButton.css";
 
 
-const LevelSelectButton = ({label, onClick, bootstrapIcon, selected}) => {
+const LevelControlButton = ({label, onClick, bootstrapIcon, selected}) => {
     const [iconClass, setIconClass] = useState("bi-" + bootstrapIcon);
 
     const onHover = () => {
@@ -24,4 +24,4 @@ const LevelSelectButton = ({label, onClick, bootstrapIcon, selected}) => {
     );
 }
 
-export default LevelSelectButton;
+export default LevelControlButton;

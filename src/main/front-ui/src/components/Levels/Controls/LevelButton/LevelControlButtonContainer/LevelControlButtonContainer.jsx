@@ -1,7 +1,7 @@
-import React, {Children, useEffect} from "react";
-import "./LevelSelectButtonContainer.css";
+import React, {Children} from "react";
+import "./LevelControlButtonContainer.css";
 
-const LevelSelectButtonContainer = ({ children }) => {
+const LevelControlButtonContainer = ({ children }) => {
     return (
         <div className="container-fluid">
             <div className="row">
@@ -23,4 +23,4 @@ const LevelSelectButtonContainer = ({ children }) => {
     );
 }
 
-export default LevelSelectButtonContainer;
+export default LevelControlButtonContainer;

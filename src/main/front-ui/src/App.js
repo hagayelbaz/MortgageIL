@@ -1,45 +1,457 @@
-import React from 'react';
-import HelpIcon from "./components/HelpIcon/HelpIcon";
-import {Col, Container, Form, Row} from "react-bootstrap";
-import MultiStepForm from "./components/MultiStepForm/MultiStepForm";
-import Level from "./components/Level/Level";
-import LevelManager from "./components/LevelManager/LevelManager";
+import React, {useEffect} from 'react';
+import Chart from "./components/Chart/Chart";
+import './shared.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Portal from "./components/Portal/Portal";
+
+
+const data = [
+    {
+        "date": "1998-01-31T22:00:00.000Z",
+        "value": 100
+    },
+    {
+        "date": "1998-02-28T22:00:00.000Z",
+        "value": 100.4
+    },
+    {
+        "date": "1998-03-31T21:00:00.000Z",
+        "value": 100.2
+    },
+    {
+        "date": "1998-04-30T21:00:00.000Z",
+        "value": 100.7
+    },
+    {
+        "date": "1998-05-31T21:00:00.000Z",
+        "value": 100.5
+    },
+    {
+        "date": "1998-06-30T21:00:00.000Z",
+        "value": 101
+    },
+    {
+        "date": "1998-07-31T21:00:00.000Z",
+        "value": 101.5
+    },
+    {
+        "date": "1998-08-31T21:00:00.000Z",
+        "value": 100.8
+    },
+    {
+        "date": "1998-09-30T22:00:00.000Z",
+        "value": 100.9
+    },
+    {
+        "date": "1998-10-31T22:00:00.000Z",
+        "value": 100.2
+    },
+    {
+        "date": "1998-11-30T22:00:00.000Z",
+        "value": 100.5
+    },
+    {
+        "date": "1998-12-31T22:00:00.000Z",
+        "value": 100
+    },
+    {
+        "date": "1999-01-31T22:00:00.000Z",
+        "value": 99.7
+    },
+    {
+        "date": "1999-02-28T22:00:00.000Z",
+        "value": 99.5
+    },
+    {
+        "date": "1999-03-31T22:00:00.000Z",
+        "value": 99.8
+    },
+    {
+        "date": "1999-04-30T21:00:00.000Z",
+        "value": 99.9
+    },
+    {
+        "date": "1999-05-31T21:00:00.000Z",
+        "value": 100.3
+    },
+    {
+        "date": "1999-06-30T21:00:00.000Z",
+        "value": 100.5
+    },
+    {
+        "date": "1999-07-31T21:00:00.000Z",
+        "value": 100.4
+    },
+    {
+        "date": "1999-08-31T21:00:00.000Z",
+        "value": 100.2
+    },
+    {
+        "date": "1999-09-30T22:00:00.000Z",
+        "value": 100.6
+    },
+    {
+        "date": "1999-10-31T22:00:00.000Z",
+        "value": 100.7
+    },
+    {
+        "date": "1999-11-30T22:00:00.000Z",
+        "value": 100.5
+    },
+    {
+        "date": "1999-12-31T22:00:00.000Z",
+        "value": 100.3
+    },
+    {
+        "date": "2000-01-31T22:00:00.000Z",
+        "value": 101.3
+    },
+    {
+        "date": "2000-02-29T22:00:00.000Z",
+        "value": 101.5
+    },
+    {
+        "date": "2000-03-31T22:00:00.000Z",
+        "value": 101.7
+    },
+    {
+        "date": "2000-04-30T21:00:00.000Z",
+        "value": 100.9
+    },
+    {
+        "date": "2000-05-31T21:00:00.000Z",
+        "value": 100.8
+    },
+    {
+        "date": "2000-06-30T21:00:00.000Z",
+        "value": 100.5
+    },
+    {
+        "date": "2000-07-31T21:00:00.000Z",
+        "value": 100.2
+    },
+    {
+        "date": "2000-08-31T21:00:00.000Z",
+        "value": 100.3
+    },
+    {
+        "date": "2000-09-30T21:00:00.000Z",
+        "value": 100.5
+    },
+    {
+        "date": "2000-10-31T22:00:00.000Z",
+        "value": 100.7
+    },
+    {
+        "date": "2000-11-30T22:00:00.000Z",
+        "value": 101
+    },
+    {
+        "date": "2000-12-31T22:00:00.000Z",
+        "value": 101.2
+    },
+    {
+        "date": "2001-01-31T22:00:00.000Z",
+        "value": 101.5
+    },
+    {
+        "date": "2001-02-28T22:00:00.000Z",
+        "value": 101.7
+    },
+    {
+        "date": "2001-03-31T22:00:00.000Z",
+        "value": 101.9
+    },
+    {
+        "date": "2001-04-30T21:00:00.000Z",
+        "value": 102.1
+    },
+    {
+        "date": "2001-05-31T21:00:00.000Z",
+        "value": 101
+    },
+    {
+        "date": "2001-06-30T21:00:00.000Z",
+        "value": 101.2
+    },
+    {
+        "date": "2001-07-31T21:00:00.000Z",
+        "value": 101.5
+    },
+    {
+        "date": "2001-08-31T21:00:00.000Z",
+        "value": 101
+    },
+    {
+        "date": "2001-09-30T22:00:00.000Z",
+        "value": 100.9
+    },
+    {
+        "date": "2001-10-31T22:00:00.000Z",
+        "value": 101
+    },
+    {
+        "date": "2001-11-30T22:00:00.000Z",
+        "value": 101.2
+    },
+    {
+        "date": "2001-12-31T22:00:00.000Z",
+        "value": 101.5
+    },
+    {
+        "date": "2002-01-31T22:00:00.000Z",
+        "value": 101.7
+    },
+    {
+        "date": "2002-02-28T22:00:00.000Z",
+        "value": 101.6
+    },
+    {
+        "date": "2002-03-31T21:00:00.000Z",
+        "value": 101.5
+    }
+];
+const data2 = [
+    {
+        "date": "1998-01-31T22:00:00.000Z",
+        "value": 101.47
+    },
+    {
+        "date": "1998-02-28T22:00:00.000Z",
+        "value": 100.78
+    },
+    {
+        "date": "1998-03-31T21:00:00.000Z",
+        "value": 101.13
+    },
+    {
+        "date": "1998-04-30T21:00:00.000Z",
+        "value": 101.91
+    },
+    {
+        "date": "1998-05-31T21:00:00.000Z",
+        "value": 100.65
+    },
+    {
+        "date": "1998-06-30T21:00:00.000Z",
+        "value": 104.97
+    },
+    {
+        "date": "1998-07-31T21:00:00.000Z",
+        "value": 100.81
+    },
+    {
+        "date": "1998-08-31T21:00:00.000Z",
+        "value": 102.24
+    },
+    {
+        "date": "1998-09-30T22:00:00.000Z",
+        "value": 103.62
+    },
+    {
+        "date": "1998-10-31T22:00:00.000Z",
+        "value": 100.39
+    },
+    {
+        "date": "1998-11-30T22:00:00.000Z",
+        "value": 98.83
+    },
+    {
+        "date": "1998-12-31T22:00:00.000Z",
+        "value": 99.53
+    },
+    {
+        "date": "1999-01-31T22:00:00.000Z",
+        "value": 104.14
+    },
+    {
+        "date": "1999-02-28T22:00:00.000Z",
+        "value": 100.8
+    },
+    {
+        "date": "1999-03-31T22:00:00.000Z",
+        "value": 98.33
+    },
+    {
+        "date": "1999-04-30T21:00:00.000Z",
+        "value": 100.02
+    },
+    {
+        "date": "1999-05-31T21:00:00.000Z",
+        "value": 103.54
+    },
+    {
+        "date": "1999-06-30T21:00:00.000Z",
+        "value": 100.96
+    },
+    {
+        "date": "1999-07-31T21:00:00.000Z",
+        "value": 99.63
+    },
+    {
+        "date": "1999-08-31T21:00:00.000Z",
+        "value": 101.42
+    },
+    {
+        "date": "1999-09-30T22:00:00.000Z",
+        "value": 104.88
+    },
+    {
+        "date": "1999-10-31T22:00:00.000Z",
+        "value": 103.01
+    },
+    {
+        "date": "1999-11-30T22:00:00.000Z",
+        "value": 101.99
+    },
+    {
+        "date": "1999-12-31T22:00:00.000Z",
+        "value": 102.11
+    },
+    {
+        "date": "2000-01-31T22:00:00.000Z",
+        "value": 98.73
+    },
+    {
+        "date": "2000-02-29T22:00:00.000Z",
+        "value": 101.52
+    },
+    {
+        "date": "2000-03-31T22:00:00.000Z",
+        "value": 100.57
+    },
+    {
+        "date": "2000-04-30T21:00:00.000Z",
+        "value": 101.19
+    },
+    {
+        "date": "2000-05-31T21:00:00.000Z",
+        "value": 101.14
+    },
+    {
+        "date": "2000-06-30T21:00:00.000Z",
+        "value": 100.1
+    },
+    {
+        "date": "2000-07-31T21:00:00.000Z",
+        "value": 104.65
+    },
+    {
+        "date": "2000-08-31T21:00:00.000Z",
+        "value": 101.5
+    },
+    {
+        "date": "2000-09-30T21:00:00.000Z",
+        "value": 102.1
+    },
+    {
+        "date": "2000-10-31T22:00:00.000Z",
+        "value": 101.67
+    },
+    {
+        "date": "2000-11-30T22:00:00.000Z",
+        "value": 104.52
+    },
+    {
+        "date": "2000-12-31T22:00:00.000Z",
+        "value": 103.13
+    },
+    {
+        "date": "2001-01-31T22:00:00.000Z",
+        "value": 101
+    },
+    {
+        "date": "2001-02-28T22:00:00.000Z",
+        "value": 99.76
+    },
+    {
+        "date": "2001-03-31T22:00:00.000Z",
+        "value": 103.04
+    },
+    {
+        "date": "2001-04-30T21:00:00.000Z",
+        "value": 104.26
+    },
+    {
+        "date": "2001-05-31T21:00:00.000Z",
+        "value": 101.04
+    },
+    {
+        "date": "2001-06-30T21:00:00.000Z",
+        "value": 101.6
+    },
+    {
+        "date": "2001-07-31T21:00:00.000Z",
+        "value": 98.79
+    },
+    {
+        "date": "2001-08-31T21:00:00.000Z",
+        "value": 103.16
+    },
+    {
+        "date": "2001-09-30T22:00:00.000Z",
+        "value": 99.3
+    },
+    {
+        "date": "2001-10-31T22:00:00.000Z",
+        "value": 104.37
+    },
+    {
+        "date": "2001-11-30T22:00:00.000Z",
+        "value": 99.62
+    },
+    {
+        "date": "2001-12-31T22:00:00.000Z",
+        "value": 102.86
+    },
+    {
+        "date": "2002-01-31T22:00:00.000Z",
+        "value": 103.8
+    },
+    {
+        "date": "2002-02-28T22:00:00.000Z",
+        "value": 102.51
+    },
+    {
+        "date": "2002-03-31T21:00:00.000Z",
+        "value": 104.75
+    }
+];
 
 
 function App() {
-    const options = {
-        'link': 'https://google.com',
-        'text': 'השם שלי זה חגי אלבז ואני רוצה להציג קישור לגוגל כאן רק לבדיקה אם זה עובר שורה אי פעם אני רואה שלא, זה לא לעניין...',
-        'textLink': 'גוגל'
-    }
-
-
 
     return (
-        <div className="container-fluid primary-bg vh-100">
-            <LevelManager/>
-            {/*<Container className="">
-                <Row className="" style={{height: '25vh'}}></Row>
-                <Row className="">
-                    <MultiStepForm onFormSubmit={() => {
-                    }}>
-                        <div>
-                            <label>Name</label>
-                            <input type="text" name="name"/>
-                        </div>
-                        <div>
-                            <label>Email</label>
-                            <input type="email" name="email"/>
-                        </div>
-                        <div>
-                            <label>Message</label>
-                            <textarea name="message" rows="3"/>
-                        </div>
-                    </MultiStepForm>
-                </Row>
-            </Container>*/}
+        <div className="p-0 m-0 primary-bg fw-light">
+            <Portal/>
         </div>
     );
 }
 
 export default App;
+
+//*5*
+//100 => 20
+//50 => 10
+//20 => 4
+
+//formula: 100 / 5 = 20
+
+{/*<LevelManager levelData={levelData}/>*/
+}
+{/*<div className="container-fluid m-0">
+                <div className="row">
+                    <div className="col-3">
+                        <Chart data={data} header={'מדד המחירים לצרכן'} color={'#44f33a'} countXTicks={4}></Chart>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-3">
+                        <Chart data={data} header={'מדד המחירים לצרכן'} color={'#552af2'} countXTicks={4}></Chart>
+                    </div>
+                    <div className="col-3">
+                        <Chart data={data2} header={'מדד המחירים לצרכן'} color={'#00bfff'} countXTicks={4}></Chart>
+                    </div>
+                </div>
+            </div>*/
+}
