@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
-    font-family: 'Rubik', sans-serif;
+    /*font-family: 'Rubik', sans-serif;*/
+    font-family: 'Roboto', sans-serif;
+    font-weight: 250;
 }
+
 :root{
     --help-bubble-background-color: #f0f0f0;
     --help-bubble-icon-size: 20px;
@@ -16,6 +20,10 @@
     --accent-color: #06d567;
     --accent-color-light: #55faa3;
     --accent-color-dark: #04803e;
+    --text-color: #000000;
+
+    --success-color: #519979;
+    --danger-color: #ff0000;
 }
 
 
@@ -33,6 +41,13 @@
 
 
 /* colors as classes */
+.success-color {
+    color: var(--success-color) !important;
+}
+
+.danger-color {
+    color: var(--danger-color) !important;
+}
 
 .primary-color {
     color: var(--primary-color) !important;
@@ -71,6 +86,13 @@
 }
 
 /* background colors as classes */
+.success-bg {
+    background-color: var(--success-color) !important;
+}
+
+.danger-bg {
+    background-color: var(--danger-color) !important;
+}
 
 .primary-bg {
     background-color: var(--primary-color) !important;

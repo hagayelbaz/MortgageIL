@@ -2,6 +2,7 @@
   "levels": [
     {
       "level": 1,
+      "levelOrder": "buttons",
       "name": "מטרת הלוואה",
       "items": [
         {
@@ -59,6 +60,7 @@
     },
     {
       "level": 2,
+      "levelOrder": "buttons",
       "name": "איזה סוג נכס תרצה לרכוש?",
       "items": [
         {
@@ -115,6 +117,7 @@
     },
     {
       "level": 3,
+      "levelOrder": "buttons",
       "name": "האם יש בבעלותך נכס?",
       "items": [
         {
@@ -157,6 +160,7 @@
     },
     {
       "level": 4,
+      "levelOrder": "buttons",
       "name": "מה האחוזים?",
       "items": [
         {
@@ -199,14 +203,17 @@
     },
     {
       "level": 5,
+      "levelOrder": "inputs",
       "name": "מה הסכום שתרצה להלוות?",
       "items": [
         {
           "id": 1,
-          "type": "button",
-          "name": "100,000",
-          "icon": "house",
-          "description": "Description 1",
+          "type": "input",
+          "pattern": ".+",
+          "mask": "NIS",
+          "name": "סכום ההלוואה",
+          "icon": "₪",
+          "placeHolder": "100,000",
           "nextLevel": 0,
           "nextLevelRole": "level",
           "nextLevelInclude": [
@@ -215,22 +222,12 @@
         },
         {
           "id": 2,
-          "name": "200,000",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
-          "nextLevel": 0,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 3,
-          "name": "300,000",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
+          "type": "input",
+          "pattern": ".+",
+          "mask": "percentage",
+          "name": "שיעור מימון",
+          "icon": "%",
+          "placeHolder": "75%",
           "nextLevel": 0,
           "nextLevelRole": "level",
           "nextLevelInclude": [

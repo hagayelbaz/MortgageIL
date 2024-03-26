@@ -3,10 +3,22 @@ import "./Chart.css";
 import {Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import CustomTooltip from "./CustomTooltip/CustomTooltip";
 import calculateDiff from "./chartUtils";
-import { AiFillCaretUp } from "react-icons/ai";
-import { AiFillCaretDown } from "react-icons/ai";
+import {AiFillCaretUp} from "react-icons/ai";
+import {AiFillCaretDown} from "react-icons/ai";
 
-const Chart = ({data, countXTicks, header, color, children}) => {
+const chartStyleDef = {
+    header: 'display-6',
+    percentage: 'fs-3',
+    tick: {
+        fontSize: 12,
+    },
+    tooltip: {
+        container: 'bg-danger text-dark',
+    }
+}
+
+const Chart = ({data, countXTicks, header, color, children, chartStyle}) => {
+    const [style, setStyle] = useState(chartStyle ? chartStyle : chartStyleDef);
     const [dateToShow, setDateToShow] = useState(data);
     //TODO: change it to more reliable id.
     const randomIndex = Math.floor(Math.random() * data.length);
@@ -14,6 +26,11 @@ const Chart = ({data, countXTicks, header, color, children}) => {
     useEffect(() => {
         setDateToShow(data);
     }, [data]);
+
+    useEffect(() => {
+        setStyle(chartStyle ? chartStyle : chartStyleDef);
+    }, [chartStyle]);
+
 
     const xTicks = (val, index) => {
         const _val = new Date(val).toLocaleDateString("en-US", {year: "numeric", month: "2-digit"});
@@ -30,15 +47,15 @@ const Chart = ({data, countXTicks, header, color, children}) => {
 
     return (
         <>
-            <h1 className="chart-header display-6">{header}</h1>
+            <h1 className={style.header}>{header}</h1>
             <div>
                 {children}
             </div>
             <div>
-                <p className="fs-3">
+                <p className={style.percentage}>
                     {diffFromLast() >= 0 ?
-                        <AiFillCaretUp className="text-success" /> :
-                        <AiFillCaretDown className="text-danger" />
+                        <AiFillCaretUp className="text-success"/> :
+                        <AiFillCaretDown className="text-danger"/>
                     }
                     <span className={diffFromLast() >= 0 ? 'text-success' : 'text-danger'}>
                             {`${Math.abs(diffFromLast()).toFixed(2)}%`}
@@ -56,15 +73,17 @@ const Chart = ({data, countXTicks, header, color, children}) => {
                     <XAxis dataKey="date"
                            tickFormatter={xTicks}
                            axisLine={false}
+                           tick={{...style.tick}}
                            tickLine={false}/>
                     <YAxis dataKey="value"
                            tickMargin={50}
                            axisLine={false}
                            tickLine={false}
+                           tick={{...style.tick}}
                            domain={[dateMin => dateMin - 0.2, dateMax => dateMax + 0.2]}
                            tickFormatter={t => `${t}`}/>
                     <CartesianGrid strokeDasharray="2" vertical={false}/>
-                    <Tooltip content={<CustomTooltip data={dateToShow}/>}/>
+                    <Tooltip content={<CustomTooltip data={dateToShow} style={style.tooltip}/>}/>
                     <Area type="monotone"
                           dataKey="value"
                           stroke={color}

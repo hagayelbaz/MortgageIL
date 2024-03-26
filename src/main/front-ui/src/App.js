@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react';
 import Chart from "./components/Chart/Chart";
 import './shared.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Portal from "./components/Portal/Portal";
+import {BrowserRouter} from "react-router-dom";
+import MainRoute from "./Routes/MainRoute/MainRoute";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
 
-
-const data = [
+export const data = [
     {
         "date": "1998-01-31T22:00:00.000Z",
         "value": 100
@@ -211,7 +213,7 @@ const data = [
         "value": 101.5
     }
 ];
-const data2 = [
+export const data2 = [
     {
         "date": "1998-01-31T22:00:00.000Z",
         "value": 101.47
@@ -422,9 +424,9 @@ const data2 = [
 function App() {
 
     return (
-        <div className="p-0 m-0 primary-bg fw-light">
-            <Portal/>
-        </div>
+        <BrowserRouter>
+            <MainRoute/>
+        </BrowserRouter>
     );
 }
 

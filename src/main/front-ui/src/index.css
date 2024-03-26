@@ -1,9 +1,21 @@
-body {
-  margin: 0;
-  padding: 0;
+
+* {
+    margin: 0;
+    padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body{
+    background: #c6d5f2 !important;
+}
+
+body h1{
+    font-weight: 360;
+}
+
+[role="button"] {
+    transition: .2s;
+}
+
+[role="button"]:hover {
+    transform: scale(1.1);
 }

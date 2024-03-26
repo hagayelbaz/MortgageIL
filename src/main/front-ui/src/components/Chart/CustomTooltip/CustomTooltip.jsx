@@ -1,16 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
 import calculateDiff from "../chartUtils";
 import '../../../shared.css';
 import {AiFillCaretDown, AiFillCaretUp} from "react-icons/ai";
 
-const CustomTooltip = ({active, payload, label, data}) => {
+const tooltipStyleDef = {
+    container: 'custom-tooltip p-2 py-1 rounded-2',
+}
+
+const CustomTooltip = ({active, payload, label, data, style}) => {
+    const [tooltipStyle, setTooltipStyle] = React.useState(tooltipStyleDef);
     const item = payload?.length > 0 ? payload[0] : data[0];
     const diff = calculateDiff({value: item.value, date: label}, data);
 
+    useEffect(() => {
+        setTooltipStyle(style ? style : tooltipStyleDef);
+    }, [style]);
 
     if (active) {
         return (
-            <div className="custom-tooltip p-2 py-1 rounded-2">
+            <div className={tooltipStyle.container}>
                 <p>{`${new Date(label).toLocaleDateString("en-US", {
                     month: '2-digit',
                     year: 'numeric'
