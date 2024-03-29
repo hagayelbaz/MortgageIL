@@ -7,10 +7,7 @@
       "items": [
         {
           "id": 1,
-          "type": "button",
           "name": "קניית נכס",
-          "icon": "house",
-          "description": "Description 1",
           "nextLevel": 2,
           "nextLevelRole": "level",
           "nextLevelInclude": [
@@ -20,9 +17,6 @@
         {
           "id": 2,
           "name": "שיפוץ / הרחבה",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
           "nextLevel": 3,
           "nextLevelRole": "level",
           "nextLevelInclude": [
@@ -33,9 +27,6 @@
         {
           "id": 3,
           "name": "מחזור",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
           "nextLevel": 3,
           "nextLevelRole": "level",
           "nextLevelInclude": [
@@ -47,9 +38,6 @@
         {
           "id": 4,
           "name": "מטרה אחרת",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
           "nextLevel": 5,
           "nextLevelRole": "level",
           "nextLevelInclude": [
@@ -65,10 +53,7 @@
       "items": [
         {
           "id": 1,
-          "type": "button",
           "name": "דירה / בית",
-          "icon": "house",
-          "description": "Description 1",
           "nextLevel": 3,
           "nextLevelRole": "level",
           "nextLevelInclude": [
@@ -80,9 +65,6 @@
         {
           "id": 2,
           "name": "מגרש",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
           "nextLevel": 3,
           "nextLevelRole": "level",
           "nextLevelInclude": [
@@ -92,9 +74,6 @@
         {
           "id": 3,
           "name": "בנייה",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
           "nextLevel": 3,
           "nextLevelRole": "level",
           "nextLevelInclude": [
@@ -104,9 +83,6 @@
         {
           "id": 4,
           "name": "בנייה + מגרש",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
           "nextLevel": 3,
           "nextLevelRole": "level",
           "nextLevelInclude": [
@@ -122,10 +98,7 @@
       "items": [
         {
           "id": 1,
-          "type": "button",
           "name": "כן",
-          "icon": "house",
-          "description": "Description 1",
           "nextLevel": 5,
           "nextLevelRole": "followup",
           "nextLevelInclude": [
@@ -135,9 +108,6 @@
         {
           "id": 2,
           "name": "לא",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
           "nextLevel": 0,
           "nextLevelRole": "level",
           "nextLevelInclude": [
@@ -147,9 +117,6 @@
         {
           "id": 3,
           "name": "בבעלות חלקית",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
           "nextLevel": 4,
           "nextLevelRole": "followup",
           "nextLevelInclude": [
@@ -165,10 +132,7 @@
       "items": [
         {
           "id": 1,
-          "type": "button",
           "name": "100%",
-          "icon": "house",
-          "description": "Description 1",
           "nextLevel": 0,
           "nextLevelRole": "level",
           "nextLevelInclude": [
@@ -178,9 +142,6 @@
         {
           "id": 2,
           "name": "50%",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
           "nextLevel": 0,
           "nextLevelRole": "level",
           "nextLevelInclude": [
@@ -190,9 +151,6 @@
         {
           "id": 3,
           "name": "25%",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
           "nextLevel": 0,
           "nextLevelRole": "level",
           "nextLevelInclude": [
@@ -208,7 +166,6 @@
       "items": [
         {
           "id": 1,
-          "type": "input",
           "pattern": ".+",
           "mask": "NIS",
           "name": "סכום ההלוואה",
@@ -222,7 +179,6 @@
         },
         {
           "id": 2,
-          "type": "input",
           "pattern": ".+",
           "mask": "percentage",
           "name": "שיעור מימון",

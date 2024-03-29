@@ -3,8 +3,6 @@ import "./Chart.css";
 import {Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import CustomTooltip from "./CustomTooltip/CustomTooltip";
 import calculateDiff from "./chartUtils";
-import {AiFillCaretUp} from "react-icons/ai";
-import {AiFillCaretDown} from "react-icons/ai";
 
 const chartStyleDef = {
     header: 'display-6',
@@ -53,10 +51,10 @@ const Chart = ({data, countXTicks, header, color, children, chartStyle}) => {
             </div>
             <div>
                 <p className={style.percentage}>
-                    {diffFromLast() >= 0 ?
+                    {/*{diffFromLast() >= 0 ?
                         <AiFillCaretUp className="text-success"/> :
                         <AiFillCaretDown className="text-danger"/>
-                    }
+                    }*/}
                     <span className={diffFromLast() >= 0 ? 'text-success' : 'text-danger'}>
                             {`${Math.abs(diffFromLast()).toFixed(2)}%`}
                     </span>

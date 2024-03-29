@@ -20,7 +20,10 @@ const PortalHome = () => {
         <div className="container-fluid">
             <Row>
                 <div className="col-8">
+                    <h1>Home Page</h1>
+{/*
                     <Chart chartStyle={chartStyle} data={data} color={Vars.ACCENT_COLOR} header="מדד המחירים לצרכן" countXTicks={4}/>
+*/}
                 </div>
             </Row>
         </div>

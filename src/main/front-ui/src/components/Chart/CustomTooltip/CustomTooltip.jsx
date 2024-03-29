@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import calculateDiff from "../chartUtils";
 import '../../../shared.css';
-import {AiFillCaretDown, AiFillCaretUp} from "react-icons/ai";
 
 const tooltipStyleDef = {
     container: 'custom-tooltip p-2 py-1 rounded-2',
@@ -26,8 +25,8 @@ const CustomTooltip = ({active, payload, label, data, style}) => {
                 <p>
                     <span className={diff >= 0 ? 'text-success' : 'text-danger'}>
                         {`${Math.abs(diff).toFixed(2)}%`}
-                        {diff >= 0 && <AiFillCaretUp className="text-success"/>}
-                        {diff < 0 && <AiFillCaretDown className="text-danger"/>}
+                        {diff >= 0 && <i className="text-success"/>}
+                        {diff < 0 && <i className="text-danger"/>}
                     </span>
                 </p>
             </div>

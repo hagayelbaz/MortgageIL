@@ -13,6 +13,7 @@ const LevelControlInput = ({pattern, placeholder, label, required, insideLabel, 
     const onLeave = () => {
 
     }
+
     const currencyInput = ({ maskOptions, ...inputProps }) => {
         return createNumberMask({
             ...mask,

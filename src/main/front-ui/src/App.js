@@ -431,29 +431,3 @@ function App() {
 }
 
 export default App;
-
-//*5*
-//100 => 20
-//50 => 10
-//20 => 4
-
-//formula: 100 / 5 = 20
-
-{/*<LevelManager levelData={levelData}/>*/
-}
-{/*<div className="container-fluid m-0">
-                <div className="row">
-                    <div className="col-3">
-                        <Chart data={data} header={'מדד המחירים לצרכן'} color={'#44f33a'} countXTicks={4}></Chart>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-3">
-                        <Chart data={data} header={'מדד המחירים לצרכן'} color={'#552af2'} countXTicks={4}></Chart>
-                    </div>
-                    <div className="col-3">
-                        <Chart data={data2} header={'מדד המחירים לצרכן'} color={'#00bfff'} countXTicks={4}></Chart>
-                    </div>
-                </div>
-            </div>*/
-}
