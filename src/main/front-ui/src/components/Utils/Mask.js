@@ -1,9 +1,19 @@
+import createNumberMask from 'text-mask-addons/dist/createNumberMask'
+
+
 class Mask {
 
     static mask = [
         {
+            name: "ALL",
+            maskStr: {
+
+            },
+            mask: () => Array(100).fill(/./)
+        },
+        {
             name: "NIS",
-            mask: {
+            maskStr: {
                 prefix: "₪",
                 suffix: "",
                 includeThousandsSeparator: true,
@@ -14,11 +24,12 @@ class Mask {
                 integerLimit: 10,
                 allowNegative: true,
                 allowLeadingZeroes: false
-            }
+            },
+            mask: (maskOptions) => createNumberMask({ ...maskOptions, ...Mask.mask[1].maskStr })
         },
         {
             name: "percentage",
-            mask: {
+            maskStr: {
                 prefix: "",
                 suffix: "%",
                 includeThousandsSeparator: true,
@@ -29,7 +40,8 @@ class Mask {
                 integerLimit: 3,
                 allowNegative: true,
                 allowLeadingZeroes: false
-            }
+            },
+            mask: (maskOptions) => createNumberMask({ ...maskOptions, ...Mask.mask[2].maskStr })
         }
     ]
 }

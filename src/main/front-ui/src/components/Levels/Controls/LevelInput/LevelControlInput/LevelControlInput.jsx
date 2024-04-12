@@ -14,7 +14,7 @@ const LevelControlInput = ({pattern, placeholder, label, required, insideLabel, 
 
     }
 
-    const currencyInput = ({ maskOptions, ...inputProps }) => {
+    const currencyInput = ({maskOptions, ...inputProps}) => {
         return createNumberMask({
             ...mask,
             ...maskOptions,
@@ -35,7 +35,8 @@ const LevelControlInput = ({pattern, placeholder, label, required, insideLabel, 
                                      pattern={pattern}
                                      placeholder={placeholder}
                                      required={required}
-                                     mask={currencyInput({})}/>
+                                     guide={false}
+                                     mask={mask({})}/>
                         <i className="p-2 fw-bold label-icon position-absolute start-0 top-0">
                             {insideLabel}
                         </i>
