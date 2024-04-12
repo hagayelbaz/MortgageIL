@@ -1,17 +1,16 @@
-import React, {Children, useEffect} from "react";
-import "./LevelSelectButtonContainer.css";
+import React, {Children} from "react";
 
-const LevelSelectButtonContainer = ({ children }) => {
+const LevelControlInputContainer = ({children}) => {
     return (
-        <div className="container-fluid">
+        <div className="container-fluid px-2">
             <div className="row">
                 {React.Children.map(children, (child, index) => {
                     const isNotEmpty = Children.count(child.props.children) > 0 || Object.keys(child.props).length > 0;
                     return (
                         isNotEmpty && (
-                            <div key={index} className="col-12 col-md mb-2 m-md-0 d-flex">
+                            <div key={index} className="">
                                 {React.cloneElement(child, {
-                                    className: `${child.props.className} w-100 mx-1`,
+                                    className: `${child.props.className}`,
                                 })}
                             </div>
                         )
@@ -23,4 +22,4 @@ const LevelSelectButtonContainer = ({ children }) => {
     );
 }
 
-export default LevelSelectButtonContainer;
+export default LevelControlInputContainer;
