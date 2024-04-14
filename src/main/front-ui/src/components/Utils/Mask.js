@@ -1,6 +1,7 @@
 import createNumberMask from 'text-mask-addons/dist/createNumberMask'
 
 
+
 class Mask {
 
     static mask = [

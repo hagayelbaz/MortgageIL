@@ -6,22 +6,6 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask'
 
 
 const LevelControlInput = ({pattern, placeholder, label, required, insideLabel, mask}) => {
-    const onHover = () => {
-
-    }
-
-    const onLeave = () => {
-
-    }
-
-    const currencyInput = ({maskOptions, ...inputProps}) => {
-        return createNumberMask({
-            ...mask,
-            ...maskOptions,
-        });
-    }
-
-
     return (
         <div className="my-4 container-fluid">
             <div className="row">
