@@ -5,11 +5,13 @@ import LevelControlRadioButton from "../../Controls/LevelRadioButton/LevelContro
 import LevelControlCheckBox from "../../Controls/LevelRadioCheckBox/LevelControlCheckBox/LevelControlCheckBox";
 
 
-const LevelControl = ({ level, item, levelType, isSelected, nextLevelClicked }) => {
+const LevelControl = ({ level, item, levelType, isSelected, nextLevelClicked, setEnableNext, selected }) => {
     const data = {
         isSelected: isSelected,
         onClick: () => nextLevelClicked(level, item),
-        label: item.name
+        label: item.name,
+        setEnableNext: setEnableNext,
+        selected: selected
     }
 
     if(levelType === "buttons") {

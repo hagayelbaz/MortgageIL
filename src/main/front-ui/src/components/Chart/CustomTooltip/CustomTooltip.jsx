@@ -8,8 +8,8 @@ const tooltipStyleDef = {
 
 const CustomTooltip = ({active, payload, label, data, style}) => {
     const [tooltipStyle, setTooltipStyle] = React.useState(tooltipStyleDef);
-    const item = payload?.length > 0 ? payload[0] : data[0];
-    const diff = calculateDiff({value: item.value, date: label}, data);
+    const item = payload?.length > 0 ? payload[0] : data[0] || {value: 0};
+    const diff = calculateDiff({value: item.value, date: label}, data || []);
 
     useEffect(() => {
         setTooltipStyle(style ? style : tooltipStyleDef);

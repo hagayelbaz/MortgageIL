@@ -2,8 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
-    /*font-family: 'Rubik', sans-serif;*/
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Rubik', sans-serif;
     font-weight: 250;
 }
 
@@ -14,13 +13,13 @@
     --primary-color: #f0f0f0;
     --primary-color-light: #ffffff;
     --primary-color-dark: #c0c0c0;
-    --secondary-color: #0890ff;
-    --secondary-color-light: #6bbcff;
-    --secondary-color-dark: #00579e;
-    --accent-color: #06d567;
-    --accent-color-light: #55faa3;
-    --accent-color-dark: #04803e;
-    --text-color: #000000;
+    --secondary-color: #262853;
+    --secondary-color-light: #5e607f;
+    --secondary-color-dark: #15113a;
+    --accent-color: #01d1ff;
+    --accent-color-light: #4ff9ff;
+    --accent-color-dark: #00a1c2;
+    --text-color: #ffffff;
 
     --success-color: #519979;
     --danger-color: #ff0000;

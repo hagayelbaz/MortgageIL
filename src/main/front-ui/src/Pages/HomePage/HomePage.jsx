@@ -5,7 +5,7 @@ import {Container} from "react-bootstrap";
 
 const HomePage = () => {
     return (
-        <div className="vh-100 d-flex align-items-center">
+        <div className="vh-100 secondary-bg-light d-flex align-items-center">
             <div className="container-fluid">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-10 col-xl-8 col-xxl-6">

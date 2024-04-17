@@ -2,11 +2,12 @@ import React from "react";
 import "./LevelControlButton.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-const LevelControlButton = ({label, onClick, isSelected}) => {
+const LevelControlButton = ({label, onClick, isSelected, setEnableNext, selected}) => {
+
     return (
         <button type="button" onClick={onClick}
-                className={`text-center fs-5 m-2 rounded-2 level-select-button py-3 px-4 position-relative ` + (isSelected
-                ? `bg-primary text-light` : ``)}>
+                className={`text-center secondary-bg-light text-light fs-5 m-2 rounded-2 level-select-button py-3 px-4 position-relative ` + (isSelected
+                ? `secondary-bg-dark text-light` : ``)}>
             {label}
         </button>
     );

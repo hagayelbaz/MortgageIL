@@ -6,60 +6,116 @@ import {MultiConditionalWrapper} from "../../Utils/ConditionalWrapper";
 import LevelControl from "./LevelControl/LevelControl";
 import wrapperVars from "../Wrappers";
 
-
+//TODO: handle when i'm go back and change the selection: delete all after
+//TODO: handle next level where there is no select option
 
 const LevelManager = ({levelData}) => {
-    const [currentLevels, setCurrentLevels] = useState([levelData.levels[0]]);
-    const [history, setHistory] = useState([]);
-    const handleLevels = new HandleLevels(history, levelData, currentLevels);
+    const [levelToShow, setLevelToShow] = useState(0);
+    const [enableNext, setEnableNext] = useState(false);
 
+    //<editor-fold desc="Set initial history">
+    const [history, setHistory] = useState([{
+        selected: -1,
+        role: "level",
+        level: levelData.levels[0],
+    }]);
+    //</editor-fold>
 
-    const nextLevel = (level, item) => setHistory(handleLevels.updateHistory(level, item));
-    const previousLevel = () => setHistory(handleLevels.getPreviousLevel());
+    //<editor-fold desc="Handle next level">
+    const handleNextLevel = (item) => {
+        if (!item && levelToShow !== history.length - 1) {
+            setLevelToShow(levelToShow + 1);
+            return;
+        }
+        const newHistory = [...history];
 
-    useEffect(() => setCurrentLevels(handleLevels.updateLevelFromHistory()), [history]);
+        //if user change the selection, delete all after
+        if (item && levelToShow !== history.length - 1) {
+            newHistory.splice(levelToShow + 1, history.length - levelToShow);
+        }
+        //change the selection for the last item in the history
+        if (item) {
+            newHistory[newHistory.length - 1].selected = item.id;
+        }
 
-
-    const isToShow = (index, item) => {
-        const selected = history[history.length - 1]?.selected;
-        const allowed = handleLevels.getLastLevelFromHistory()?.items.find(i => i.id === selected)?.nextLevelInclude;
-
-        return allowed === undefined || (allowed.includes(item.id) || allowed.includes(0));
+        setHistory([...newHistory, getNewItem(item)]);
+        setLevelToShow(levelToShow + 1);
     }
 
-    const determineIfSelected = (level, item) => {
-        return level === item.id;//TODO: fix this
-    };
+    const getNewItem = (item) => {
+        const firstItem = history[levelToShow].level.items[0];
+        const nextLevelIndex = item ? item?.nextLevel : firstItem.nextLevel;
+        const nextLevelRole = item ? item?.nextLevelRole : firstItem.nextLevelRole;
+        const nextLevel = levelData.levels.find((l) => l.level === nextLevelIndex);
+        return {selected: -1, role: nextLevelRole, level: nextLevel};
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Handle previous level">
+    const handlePrevClicked = () => {
+        const i = history.slice(0, levelToShow).reverse().findIndex(x => x.role === "level");
+        setLevelToShow(i === -1 ? 0 : levelToShow -1 -i);
+    }
+    //</editor-fold>
+
+    const isItemSelected = (item, level) => {
+        const levelIndex = history.findIndex((h) => h.level.level === level.level);
+        const selected = history[levelIndex].selected;
+        return selected === item.id;
+    }
+
+    //<editor-fold desc="if to show the level">
+    const isLevelToShow = (level) => {
+        const firstLevelIndex = history.slice(0, levelToShow +1).reverse().findIndex(x => x.role === "level");
+        const startIndex = firstLevelIndex === -1 ? 0 : levelToShow - firstLevelIndex;
+        const part = history.slice(startIndex, levelToShow + 1);
+        return part.some((h) => h.level.level === level.level);
+    }
+    //</editor-fold>
+
 
     return (
-        <div className="position-relative primary-bg p-3 rounded-2">
-            {currentLevels.map((level, levelIndex) => (
-                <Fragment key={levelIndex}>
-                    <h1 className="text-center py-2 fw-light">{level.name}</h1>
-                    <div className="progress" style={{height: '5px'}}>
-                        <div className="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
-                             aria-valuemax="100" style={{width: `${32}%`}}></div>
-                    </div>
-                    <div>
-                        <MultiConditionalWrapper {...wrapperVars(level)}>
-                            {level.items.map((item, index) =>
-                                isToShow(index, item) && (
-                                    <LevelControl key={index} level={level}
-                                                  isSelected={determineIfSelected(level, item)}
-                                                  levelType={level.levelOrder}
-                                                  item={item}
-                                                  nextLevelClicked={nextLevel}/>))}
+        <div className="position-relative secondary-bg text-light p-3 rounded-2">
+            {history.map((h, index) => {
+                const {conditions, wrappers} = wrapperVars(h.level);
+                return (
+                    <div key={index} className={(isLevelToShow(h.level) ? "d-block" : "d-none")}>
+                        <h1 className="text-center py-2 fw-bold">
+                            {h.level.name}
+                        </h1>
+                        <MultiConditionalWrapper conditions={conditions} wrappers={wrappers}>
+                            {h.level.items.map((item, index) => {
+                                return (
+                                    <LevelControl
+                                        key={index}
+                                        level={h.level}
+                                        item={item}
+                                        levelType={h.level.levelOrder}
+                                        isSelected={isItemSelected(item, h.level)}
+                                        nextLevelClicked={() => handleNextLevel(item)}
+                                        setEnableNext={setEnableNext}
+                                        selected={history[levelToShow].selected}
+                                    />
+                                )
+                            })}
                         </MultiConditionalWrapper>
+                        {index === levelToShow && (
+                            <div className="my-3 mt-5 d-flex justify-content-between px-3">
+                                <a role="button"
+                                   className={`px-5 ` + (index === 0 ? "d-none" : "")}
+                                   onClick={handlePrevClicked}>
+                                    הקודם
+                                </a>
+                                <Button
+                                    className={`px-5 secondary-bg ` + (enableNext ? "" : "disabled")}
+                                    onClick={() => handleNextLevel(null)}>
+                                    הבא
+                                </Button>
+                            </div>
+                        )}
                     </div>
-                </Fragment>
-            ))}
-
-            <div className="my-3 mt-5 d-flex justify-content-between px-3">
-                {history.length > 0 && (
-                    <button className="btn btn-link px-5" onClick={previousLevel}>הקודם</button>
-                )}
-                <Button className="px-5" onClick={previousLevel}>הבא</Button>
-            </div>
+                )
+            })}
         </div>
     );
 };

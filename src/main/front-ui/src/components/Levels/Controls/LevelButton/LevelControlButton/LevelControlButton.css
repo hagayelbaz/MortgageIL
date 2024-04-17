@@ -24,7 +24,7 @@
 .level-select-button:hover {
     transform: scale(1.01);
     color: var(--primary-color);
-    background: var(--secondary-color);
+    background: var(--secondary-color-dark) !important;
 }
 
 .button-icon {

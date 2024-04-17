@@ -5,7 +5,10 @@ import MaskedInput from 'react-text-mask'
 import createNumberMask from 'text-mask-addons/dist/createNumberMask'
 
 
-const LevelControlInput = ({pattern, placeholder, label, required, insideLabel, mask}) => {
+const LevelControlInput = ({pattern, placeholder, label, required, insideLabel, mask, setEnableNext}) => {
+    useEffect(() => {
+        setEnableNext(true);
+    }, [setEnableNext]);
     return (
         <div className="my-4 container-fluid">
             <div className="row">
