@@ -258,7 +258,7 @@ const CardCPI = ({}) => {
                countXTicks={4} aspect={2}>
             <div>
                 <div className="d-flex justify-content-between">
-                    <h2 className="fs-4 fw-lighter">
+                    <h2 className="fs-4 fw-lighter p-0 m-0">
                         מדד המחירים לצרכן
                     </h2>
 

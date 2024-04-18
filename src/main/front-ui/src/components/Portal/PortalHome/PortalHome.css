@@ -1,0 +1,28 @@
+.flex-container {
+    display: flex;
+}
+
+.flex-item {
+    flex: 0 0 50%;
+    position: relative;
+}
+
+.flex-item img {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+
+.flex-item-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+.flex-item-inner p:first-child {
+    margin-top: 0;
+}

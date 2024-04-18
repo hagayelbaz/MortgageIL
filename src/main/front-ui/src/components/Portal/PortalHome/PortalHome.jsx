@@ -1,11 +1,10 @@
 import React from "react";
-import Chart from "../../Chart/Chart";
-import {data2, data} from "../../../App";
-import {Vars} from "../../../Vars";
 import {Col, Row} from "react-bootstrap";
 import DataCard from "../../DataCard/DataCard";
 import CardCPI from "./Cards/CardCPI/CardCPI";
-
+import CardNews from "./Cards/CardNews/CardNews";
+import "./PortalHome.css";
+import CustomTable from "../../CustomTable/CustomTable";
 
 
 const PortalHome = () => {
@@ -26,14 +25,25 @@ const PortalHome = () => {
                 <hr className="p-0 m-0"/>
             </Row>
 
-            <Row className="mt-2 p-3">
-                <Col>
-                    <CardCPI/>
+            <Row className="mt-2 p-3 flex-container">
+                <Col className="col-6">
+                    <div className="h-100 flex-item">
+                        <CardCPI/>
+                    </div>
                 </Col>
-                <Col>
-
+                <Col className="col-6">
+                    <div className="h-100 flex-item">
+                        <CardNews/>
+                    </div>
                 </Col>
             </Row>
+
+            <Row className="p-3">
+                <Col>
+                    <CustomTable/>
+                </Col>
+            </Row>
+
 
             <Row className="mt-4 p-3">
                 <Col>
