@@ -131,6 +131,20 @@
 }
 
 /* border colors as classes */
+.border-1{
+    border-width: 1px !important;
+    border-style: solid;
+}
+
+.border-2{
+    border-width: 2px !important;
+    border-style: solid;
+}
+
+.border-3{
+    border-width: 3px !important;
+    border-style: solid;
+}
 
 .primary-border {
     border-color: var(--primary-color) !important;

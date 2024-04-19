@@ -6,27 +6,56 @@ import calculateDiff from "./chartUtils";
 import {ArrowDropDown, ArrowDropUp} from "@mui/icons-material";
 import NotInterestedIcon from '@mui/icons-material/NotInterested';
 
-const chartStyleDef = {
-    percentage: 'fs-3',
-    container: '',
-    tick: {
-        fontSize: 12,
-    },
-    tooltip: {
-        container: 'bg-danger text-dark',
-    }
-}
+/**
+ * Chart component
+ * <b>Example:</b>
+ * ```javascript
+ *      const chartStyle = {
+ *          percentage: 'fs-6',
+ *          container: 'secondary-bg text-light rounded-2 p-3 card-data',
+ *          tick: {
+ *              fontSize: 12,
+ *          },
+ *          tooltip: {
+ *              container: 'secondary-bg text-light rounded-2 border-1 accent-border px-3 py-1',
+ *          }
+ *      }
+ *      const data = [
+ *          {
+ *              "date": "1998-01-31T22:00:00.000Z",
+ *              "value": 101.47
+ *          },
+ *          {
+ *              "date": "1998-02-28T22:00:00.000Z",
+ *              "value": 100.78
+ *          },
+ *              ...
+ *      ]
+ * ```
+ * ```jsx
+ *      <Chart data={data} countXTicks={5} color={'#ff0000'} chartStyle={chartStyle}>
+ *          <div className="d-flex justify-content-between">
+ *              <p>כותרת</p>
+ *          </div>
+ *      </Chart>
+ * ```
+ * @param data - array of objects with date and value keys
+ * @param countXTicks - number of x ticks to show
+ * @param color - color of the chart
+ * @param children - children to render (like filter/title etc.)
+ * @param chartStyle - style object for the chart
+ * @param aspect - aspect ratio of the chart (default 2)
+ * @returns {Element} - Chart component
+ * @constructor - Chart
+ */
+
 
 const Chart = ({data, countXTicks, color, children, chartStyle, aspect = 2}) => {
-    const [style, setStyle] = useState(chartStyle ? chartStyle : chartStyleDef);
+    const [style, setStyle] = useState(chartStyle ?? chartStyle);
     //TODO: change it to more reliable id.
     const randomIndex = Math.floor(Math.random() * data.length);
+    useEffect(() => setStyle(chartStyle ?? chartStyle), [chartStyle]);
 
-    useEffect(() => setStyle(chartStyle ? chartStyle : chartStyleDef), [chartStyle]);
-
-    useEffect(() => {
-       // console.log(data)
-    },[data]);
 
     const xTicks = (val, index) => {
         if (data.length === 0)
@@ -48,10 +77,10 @@ const Chart = ({data, countXTicks, color, children, chartStyle, aspect = 2}) => 
 
     return (
         <>
-            <div className={style.container}>
+            <div className={style?.container}>
                 {children}
                 <div>
-                    <p className={style.percentage}>
+                    <p className={style?.percentage}>
                         {diffFromLast() >= 0 ?
                             <ArrowDropUp className="text-success"/> :
                             <ArrowDropDown className="text-danger"/>
@@ -62,7 +91,7 @@ const Chart = ({data, countXTicks, color, children, chartStyle, aspect = 2}) => 
                     </p>
                 </div>
                 <ResponsiveContainer className="position-relative" width="100%" minWidth="100%" aspect={aspect}>
-                    {data.length === 0 && (
+                    {data?.length === 0 && (
                         <div className="no-data">
                             <NotInterestedIcon/>
                             <p className="">אין נתונים להצגה</p>
@@ -90,7 +119,7 @@ const Chart = ({data, countXTicks, color, children, chartStyle, aspect = 2}) => 
                                        domain={[dateMin => dateMin - 0.2, dateMax => dateMax + 0.2]}
                                        tickFormatter={t => `${t}`}/>
                                 <CartesianGrid strokeDasharray="2" vertical={false}/>
-                                <Tooltip content={<CustomTooltip data={data} style={style.tooltip}/>}/>
+                                <Tooltip content={<CustomTooltip data={data} style={style?.tooltip}/>}/>
                                 <Area type="monotone"
                                       dataKey="value"
                                       stroke={color}
@@ -105,12 +134,5 @@ const Chart = ({data, countXTicks, color, children, chartStyle, aspect = 2}) => 
     );
 }
 
-const EmptyChart = () => {
-    return (
-        <div className="card-data">
-            <p>אין נתונים להצגה</p>
-        </div>
-    );
-}
 
 export default Chart;
