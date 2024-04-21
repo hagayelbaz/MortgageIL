@@ -2,11 +2,9 @@ import {useEffect, useState} from "react";
 import "./CustomTable.css";
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import SearchIcon from '@mui/icons-material/Search';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import {ReactComponent as ExcelIcon} from '../../assets/svgs/excel.svg';
 import {ReactComponent as PdfIcon} from '../../assets/svgs/pdf.svg';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 /**
  * <b>Data Structure:</b>
  * <p>
@@ -66,12 +64,15 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
  * @param columns - an object with two arrays: names and display
  * @param data - an array of objects
  * @param onOptionClick - a function that will be called when the option button is clicked
+ * @param spacialIcon - a component that will be displayed in the extra column
+ * @param tableStyle - an object with css properties
  * @returns {JSX.Element}
  * @constructor
  */
 
+//TODO: Add pagination (?), when rounded borders are added to the table, the table is not displayed correctly
 
-const CustomTable = ({columns, data, onOptionClick}) => {
+const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30dvh'}}) => {
     const [dataToDisplay, setDataToDisplay] = useState(data);
     const [columnsToDisplay, setColumnsToDisplay] = useState(columns);
     const [sortConfig, setSortConfig] = useState({key: null, direction: 'ascending'});
@@ -79,6 +80,9 @@ const CustomTable = ({columns, data, onOptionClick}) => {
 
     //<editor-fold desc="Add col for option">
     useEffect(() => {
+        if (!spacialIcon || columnsToDisplay.names.includes('extra')) {
+            return;
+        }
         setColumnsToDisplay({
             names: ['extra', ...columnsToDisplay.names],
             display: ['', ...columnsToDisplay.display]
@@ -117,11 +121,6 @@ const CustomTable = ({columns, data, onOptionClick}) => {
     };
     //</editor-fold>
 
-    const optionClick = (row) => {
-        if (onOptionClick) {
-            onOptionClick(row);
-        }
-    }
 
     const exportToExcel = () => {
         //TODO: Implement export to excel
@@ -137,29 +136,33 @@ const CustomTable = ({columns, data, onOptionClick}) => {
 
 
     return (
-        <div className="card-data secondary-bg rounded-2">
-            <div className="d-flex justify-content-between align-items-center p-3 pb-1">
-                <div className="search-container">
-                    <input className="search-box p-1" onChange={onSearch} placeholder="חיפוש..."
-                           style={{width: '300px'}}/>
-                    <SearchIcon className="search-icon"/>
+        <>
+            <div className="p-3 pb-1 container-fluid">
+                <div className="row">
+                    <div className="col-12 col-md-6 col-xl-3 d-flex align-items-center position-relative">
+                        <input className="search-box p-1 w-100" onChange={onSearch} placeholder="חיפוש..."/>
+                        <SearchIcon className="search-icon"/>
+                    </div>
+                    <div className="d-none d-xl-block col-xl-6"></div>
+                    <div className="col-12 col-md-6 col-xl-3 d-flex justify-content-between justify-content-md-end mt-3 mt-xl-0">
+                        <ExcelIcon className="fs-3 mx-2" role='button' onClick={exportToExcel}/>
+                        <PdfIcon className="fs-3 mx-2" role='button' onClick={exportToPdf}/>
+                        <FilterAltIcon className='fs-3' role="button" onClick={filterOptions}/>
+                    </div>
                 </div>
-                <div>
-                    <ExcelIcon className="fs-3 mx-2" role='button' onClick={exportToExcel}/>
-                    <PdfIcon className="fs-3 mx-2" role='button' onClick={exportToPdf}/>
-                    <FilterListIcon className='fs-3' role="button" onClick={filterOptions}/>
+                <div className="row">
+                    <p className="small muted-text">
+                        מציג {dataToDisplay?.length} תוצאות מתוך {data.length}
+                    </p>
                 </div>
             </div>
-            <p className="small px-3 pb-0 pt-2 mt-0 muted-text">
-                מציג {dataToDisplay?.length} תוצאות מתוך {data.length}
-            </p>
             <hr className="p-0 m-0"/>
-            <div className="custom-table-container overflow-y-auto">
+            <div className="container-fluid overflow-x-hidden overflow-y-auto" style={{...tableStyle}}>
                 <table className="secondary-bg custom-table">
                     <thead>
                     <tr>
                         {columnsToDisplay.display?.map((column, index) => (
-                            <th key={index}>
+                            <th key={index} className="d-none d-md-table-cell">{/*??*/}
                                 <div className="d-flex justify-content-between p-2 align-items-center">
                                     <h6>{column}</h6>
                                     {column && (
@@ -184,8 +187,8 @@ const CustomTable = ({columns, data, onOptionClick}) => {
                             {columnsToDisplay.names?.map((column, columnKey) => (
                                 column === 'extra' ? (
                                     <td key={columnKey}>
-                                        <div className="d-flex justify-content-center px-2">
-                                            <MoreVertIcon role="button" onClick={() => optionClick(row)}/>
+                                        <div className="d-flex justify-content-center">
+                                            {spacialIcon ? spacialIcon(row) : null}
                                         </div>
                                     </td>
                                 ) : (
@@ -198,7 +201,7 @@ const CustomTable = ({columns, data, onOptionClick}) => {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </>
     );
 }
 

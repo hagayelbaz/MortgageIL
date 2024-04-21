@@ -1,11 +1,6 @@
-.custom-table-container{
-    max-height: 400px !important;
-}
 
 .custom-table {
     width: 100%;
-    border-collapse: collapse;
-    background-color: #f4f4f4;
 }
 
 .custom-table th,
@@ -62,6 +57,8 @@
 }
 
 .search-icon{
+    position: absolute;
+    left: 0;
     color: var(--mute-color);
-    transform: translateX(calc(100% + 10px));
+    transform: translateX(75%);
 }

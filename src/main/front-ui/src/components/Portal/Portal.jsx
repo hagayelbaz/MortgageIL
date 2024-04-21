@@ -25,7 +25,7 @@ const Portal = () => {
                     <SubMenu label="פרטים אישיים" icon={<CottageIcon className="text-light"/>}>
                         <MenuItem icon={<CottageIcon className="text-light"/>}> הכנסות </MenuItem>
                         <MenuItem icon={<CottageIcon className="text-light"/>}> הוצאות </MenuItem>
-                        <MenuItem icon={<CottageIcon className="text-light"/>}> לווים </MenuItem>
+                        <MenuItem component={<Link to="borrowers"/> } icon={<CottageIcon className="text-light"/>}> לווים </MenuItem>
                     </SubMenu>
 
                     <MenuItem icon={<CottageIcon className="text-light"/>}> מסלולים </MenuItem>
