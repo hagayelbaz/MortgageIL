@@ -26,3 +26,8 @@
 .flex-item-inner p:first-child {
     margin-top: 0;
 }
+
+.spacial-news-divide {
+    padding-left: 0 !important;
+    height: 350px !important;
+}

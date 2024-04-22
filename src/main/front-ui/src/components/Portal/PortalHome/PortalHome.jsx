@@ -19,7 +19,7 @@ const PortalHome = () => {
     return (
         <div className="container-fluid overflow-x-hidden p-2 secondary-bg-dark text-light">
             <Row>
-                <div className="d-flex justify-content-between px-2">
+                <div className="d-flex justify-content-between px-3 muted-text">
                     <p className="fs-5">צהריים טובים חגי</p>
                     <p className="fs-5">
                         {getDate()}
@@ -29,19 +29,39 @@ const PortalHome = () => {
             </Row>
 
             <Row className="mt-2 p-3 flex-container">
-                <Col className="col-5">
+                <Col className="col-12 col-md-8 col-xl-5 order-0">
                     <div className="h-100 flex-item">
                         <CardCPI data={chartData}/>
                     </div>
                 </Col>
-                <Col className="col-4">
+                <Col className="mt-3 mt-md-0 col-6 col-md-4 col-xl-3 order-2 order-md-1">
+                    <div className="h-100 flex-item">
+                        <CardMortgageFile mortgageFile={mortgageFile}/>
+                    </div>
+                </Col>
+                {/* this for control the height of the news card */}
+                <div className="d-block d-md-none col-1 mt-3 spacial-news-divide">
+                    <div className="h-100 flex-item accent-bg rounded-2">
+                    </div>
+                </div>
+                <Col className="mt-3 mt-xl-0 col-11 col-md-8 col-xl-4 order-1 order-md-3 order-xl-2">
                     <div className="h-100 flex-item">
                         <CardNews newsArr={testNews}/>
                     </div>
                 </Col>
-                <Col className="col-3">
+                <Col className="mt-3 col-6 col-md-4 order-3 order-md-2 order-xl-3">
                     <div className="h-100 flex-item">
                         <CardMortgageFile mortgageFile={mortgageFile}/>
+                    </div>
+                </Col>
+                <Col className="mt-3 col-6 col-xl-4 order-4">
+                    <div className="h-100 flex-item">
+                        <DataCard header={"הכנסות (שנה אחרונה)"}/>
+                    </div>
+                </Col>
+                <Col className="mt-3 col-6 col-xl-4 order-5">
+                    <div className="h-100 flex-item">
+                        <DataCard header={"הוצאות (ממש השניה)"}/>
                     </div>
                 </Col>
             </Row>
@@ -55,16 +75,6 @@ const PortalHome = () => {
                                      )}
                                      columns={colData}/>
                     </div>
-                </Col>
-            </Row>
-
-
-            <Row className="mt-4 p-3">
-                <Col>
-                    <DataCard header={"הכנסות (שנה אחרונה)"}/>
-                </Col>
-                <Col>
-                    <DataCard header={"הוצאות (ממש השניה)"}/>
                 </Col>
             </Row>
         </div>
