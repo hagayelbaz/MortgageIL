@@ -5,9 +5,9 @@ import CardCPI from "./Cards/CardCPI/CardCPI";
 import CardNews from "./Cards/CardNews/CardNews";
 import "./PortalHome.css";
 import CustomTable from "../../CustomTable/CustomTable";
-import {chartData, colData, mortgageFile, tableData, testNews} from "../../../Classes/TestData";
+import {chartData, colData, tableData, testNews, mortgageAccStatus} from "../../../Classes/TestData";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import CardMortgageFile from "./Cards/CardMortgageFile/CardMortgageFile";
+import CardAccountStatus from "./Cards/CardAccountStatus/CardAccountStatus";
 
 
 const PortalHome = () => {
@@ -36,7 +36,7 @@ const PortalHome = () => {
                 </Col>
                 <Col className="mt-3 mt-md-0 col-6 col-md-4 col-xl-3 order-2 order-md-1">
                     <div className="h-100 flex-item">
-                        <CardMortgageFile mortgageFile={mortgageFile}/>
+                        <CardAccountStatus mortgageStatus={mortgageAccStatus}/>
                     </div>
                 </Col>
                 {/* this for control the height of the news card */}
@@ -51,7 +51,7 @@ const PortalHome = () => {
                 </Col>
                 <Col className="mt-3 col-6 col-md-4 order-3 order-md-2 order-xl-3">
                     <div className="h-100 flex-item">
-                        <CardMortgageFile mortgageFile={mortgageFile}/>
+                        <CardAccountStatus mortgageStatus={mortgageAccStatus}/>
                     </div>
                 </Col>
                 <Col className="mt-3 col-6 col-xl-4 order-4">

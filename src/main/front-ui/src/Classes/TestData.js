@@ -813,13 +813,16 @@ const colData2 = {
 
 }
 
-const mortgageFile = {
-    loanAmount: 1000000,
-    interestRate: 3.5,
-    loanPeriod: 30,
-    monthlyPayment: 4490.5,
-    totalPayment: 1614780,
-    totalInterest: 614780
+
+const mortgageAccStatus = {
+    DTI: {
+        value: 0.32,
+        color: '#44aa00',
+    },
+    LTV: {
+        value: 0.63,
+        color: '#889900',
+    },
 }
 
 const data01Chart = [
@@ -876,4 +879,4 @@ const data02Chart = [
 ];
 
 
-export {tableData, colData, testNews, chartData, table2, colData2, mortgageFile, data01Chart, data02Chart};
+export {tableData, colData, testNews, chartData, table2, colData2, mortgageAccStatus, data01Chart, data02Chart};

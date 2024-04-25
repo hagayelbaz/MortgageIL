@@ -5,6 +5,7 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import {OverlayTrigger} from "react-bootstrap";
 import './CardCPI.css';
 import OverlayContent from "./OverlayContent";
+import Help from "../../../../Help/Help";
 
 // default style for the chart
 const chartStyle = {
@@ -65,14 +66,15 @@ const CardCPI = ({data}) => {
                         מדד המחירים לצרכן
                     </h2>
 
-                    <OverlayTrigger show={showOverlay} trigger="click" placement="bottom"
+                    <OverlayTrigger show={showOverlay} placement="bottom"
                                     overlay={
                                         OverlayContent({
                                             setShowOverlay, startDate,
                                             setStartDate, endDate, setEndDate
                                         })
                                     }>
-                        <FilterAltIcon onClick={() => setShowOverlay(true)} role="button" className="text-light"/>
+                        <FilterAltIcon onClick={() => setShowOverlay(true)}
+                                       role="button" className="text-light"/>
                     </OverlayTrigger>
                 </div>
                 <hr/>
