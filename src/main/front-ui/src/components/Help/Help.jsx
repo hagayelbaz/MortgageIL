@@ -1,40 +1,44 @@
-import React, {cloneElement, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../shared.css';
 import './Help.css';
-import {Button, Col, Container, Form, OverlayTrigger, Popover, Row} from "react-bootstrap";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import InputGroup from "react-bootstrap/InputGroup";
+import {OverlayTrigger, Popover} from "react-bootstrap";
 
-const popover = () => {
+const popover = (header, text) => {
 
     return (
-        <Popover className="secondary-bg-light text-light border-2">
-            <Popover.Header className="secondary-bg-light" as="h3">
-                <h1>HIIII</h1>
+        <Popover className="secondary-bg-light p-0 text-light border-2 position-fixed">
+            <Popover.Header className="secondary-bg-light p-2" as="h3">
+                {header}
             </Popover.Header>
-            <Popover.Body className="">
-                <p>
-                    some text
-                </p>
+            <Popover.Body className="p-2">
+                {text}
             </Popover.Body>
         </Popover>
     )
 };
 
-function Help({header, text, trigger, children, toShow}) {
-    const [showBubble, setShowBubble] = useState(false);
+function useTooltip() {
+    const [visible, setVisible] = useState(false);
 
-    const handleToggle = () => setShowBubble(!showBubble);
-    const triggerElement = cloneElement(trigger,
-        {
-            onClick: handleToggle
-        });
+    const show = () => setVisible(true);
+    const hide = () => setVisible(false);
 
-    return(
-        <OverlayTrigger show={toShow}
-                        placement="bottom" overlay={popover()}>
-            {triggerElement}
+    return {visible, show, hide};
+}
+
+
+function Help({children, header, text, placement = 'bottom'}) {
+    const {visible, show, hide} = useTooltip();
+
+
+    return (
+        <OverlayTrigger show={visible}
+                        placement={placement}
+                        overlay={popover(header, text)}>
+            <div onMouseEnter={show} onMouseLeave={hide}>
+                {children}
+            </div>
         </OverlayTrigger>
     )
 }

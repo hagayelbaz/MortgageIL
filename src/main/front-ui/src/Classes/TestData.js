@@ -812,7 +812,7 @@ const colData2 = {
     display: ['שם מלא', 'תעודת זהות', 'טלפון']
 
 }
-
+//IMPORTANT! for githb copilot change suggestion type alt + [ and alt + ]
 
 const mortgageAccStatus = {
     DTI: {
@@ -823,8 +823,12 @@ const mortgageAccStatus = {
         value: 0.63,
         color: '#889900',
     },
+    accountHealth: {
+        value: 0.75,
+        color: '#ff0000',
+        text: 'חשוד'
+    }
 }
-
 const data01Chart = [
     {
         "name": "Group A",
@@ -877,6 +881,125 @@ const data02Chart = [
         "value": 4800
     }
 ];
+const userData = {
+    id: 207447152,
+    phoneNumber: '050-1234567',
+    email: 'hagay@gmail.com',
+    firstName: 'חגי',
+    lastName: 'כהן',
+    status: 'רווק',
+    childrenUnder18: 2,
+    address: {
+        city: 'תל אביב',
+        street: 'הרצל',
+        number: 12,
+        apartment: 3
+    },
+    incomes: [
+        {
+            type: 'משכורת',
+            employer: 'טבע',
+            amount: 10000,
+            startDate: '01/01/2022',
+        },
+        {
+            type: 'קצבאות',
+            employer: 'פנסיה',
+            amount: 5000,
+            startDate: '01/01/2022',
+        },
+        {
+            type: 'השקעות',
+            employer: 'אג"ח',
+            amount: 2000,
+            startDate: '01/01/2022',
+        }
+    ],
+}
+const mortgageTracks = [
+    {
+        type: "קבועה לא צמודה",
+        interest: 3.5,
+        startDate: "01/01/2022",
+        payMethod: "שפיצר",
+        amount: 1000000,
+        duration: 360,
+        CPI: 0,
+        firstPayment: 3200,
+        sumPayment: 1152000,
+    },
+    {
+        type: "קבועה צמודה",
+        interest: 2.5,
+        startDate: "01/01/2022",
+        payMethod: "שפיצר",
+        amount: 1000000,
+        duration: 360,
+        CPI: 0,
+        firstPayment: 3200,
+        sumPayment: 1152000,
+    },
+    {
+        type: "משתנה לא צמודה",
+        interest: 3.5,
+        startDate: "01/01/2022",
+        payMethod: "שפיצר",
+        amount: 1000000,
+        duration: 360,
+        CPI: 0,
+        firstPayment: 3200,
+        sumPayment: 1152000,
+    },
+    {
+        type: "משתנה צמודה",
+        interest: 2.5,
+        startDate: "01/01/2022",
+        payMethod: "שפיצר",
+        amount: 1000000,
+        duration: 360,
+        CPI: 0,
+        firstPayment: 3200,
+        sumPayment: 1152000,
+    },
+    {
+        type: "קבועה לא צמודה",
+        interest: 3.5,
+        startDate: "01/01/2022",
+        payMethod: "שפיצר",
+        amount: 1000000,
+        duration: 360,
+        CPI: 0,
+        firstPayment: 3200,
+        sumPayment: 1152000,
+    },
+    {
+        type: "קבועה צמודה",
+        interest: 2.5,
+        startDate: "01/01/2022",
+        payMethod: "שפיצר",
+        amount: 1000000,
+        duration: 360,
+        CPI: 0,
+        firstPayment: 3200,
+        sumPayment: 1152000,
+    }
+];
+const mortgageTracksCols = {
+    names: ['type', 'interest', 'startDate', 'payMethod', 'amount', 'duration', 'CPI', 'firstPayment', 'sumPayment'],
+    display: ['שם מסלול', 'ריבית', 'תאריך פתיחה', 'שיטת תשלום', 'סכום מקורי', 'משך ההלוואה', 'הצמדה למדד', 'תשלום ראשון', 'תשלום חודשי']
+}
 
-
-export {tableData, colData, testNews, chartData, table2, colData2, mortgageAccStatus, data01Chart, data02Chart};
+export {
+    tableData,
+    colData,
+    testNews,
+    chartData,
+    table2,
+    colData2,
+    mortgageAccStatus,
+    data01Chart,
+    data02Chart,
+    userData,
+    mortgageTracks,
+    mortgageTracksCols
+};

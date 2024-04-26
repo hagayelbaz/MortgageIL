@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import {ReactComponent as ExcelIcon} from '../../assets/svgs/excel.svg';
 import {ReactComponent as PdfIcon} from '../../assets/svgs/pdf.svg';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import ExcelExport from "../../Classes/ExcelExport";
 /**
  * <b>Data Structure:</b>
  * <p>
@@ -90,6 +91,7 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
     }, []);
     //</editor-fold>
 
+
     //<editor-fold desc="Search implementation">
     const onSearch = (e) => {
         const searchValue = e.target.value;
@@ -121,9 +123,21 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
     };
     //</editor-fold>
 
+    //<editor-fold desc="Exporting data">
+    const mapDataToHeaders = (data, displayHeaders, nameHeaders) => {
+        return data.map(item => {
+            const newItem = {};
+            displayHeaders.forEach((header, index) => {
+                const key = nameHeaders[index];
+                newItem[header] = item[key];
+            });
+            return newItem;
+        });
+    };
 
     const exportToExcel = () => {
-        //TODO: Implement export to excel
+        const transformedData = mapDataToHeaders(dataToDisplay, columnsToDisplay.display, columnsToDisplay.names);
+        ExcelExport.exportToExcel(transformedData, columnsToDisplay.display, 'mortgageIL');
     }
 
     const exportToPdf = () => {
@@ -133,6 +147,8 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
     const filterOptions = () => {
         //TODO: Implement filter options
     }
+
+    //</editor-fold>
 
 
     return (

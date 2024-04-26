@@ -28,7 +28,7 @@ const Portal = () => {
                         <MenuItem component={<Link to="borrowers"/> } icon={<CottageIcon className="text-light"/>}> לווים </MenuItem>
                     </SubMenu>
 
-                    <MenuItem icon={<CottageIcon className="text-light"/>}> מסלולים </MenuItem>
+                    <MenuItem component={<Link to="mortgageTrack"/> } icon={<CottageIcon className="text-light"/>}> מסלולים </MenuItem>
                     <MenuItem icon={<CottageIcon className="text-light"/>}> מסמכים </MenuItem>
                     <MenuItem icon={<CottageIcon className="text-light"/>} component={<Link to="reminders"/>}
                               suffix={<Badge className="rounded-circle bg-danger">6</Badge>}>

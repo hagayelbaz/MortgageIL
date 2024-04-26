@@ -1,0 +1,32 @@
+/* <editor-fold desc="Accordion"> */
+
+.accordion{
+    --bs-accordion-bg: var(--secondary-color) !important;
+    --bs-accordion-btn-color: white !important;
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 48 48'%3E%3Cpath fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='4' d='M36 18L24 30L12 18'/%3E%3C/svg%3E") !important;
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 48 48'%3E%3Cpath fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='4' d='M36 18L24 30L12 18'/%3E%3C/svg%3E") !important;
+    --bs-accordion-border-color: var(--secondary-color-light) !important;
+}
+
+.accordion-button:not(.collapsed) {
+    color: white !important;
+    --bs-accordion-btn-color: white !important;
+    background-color: var(--secondary-color-dark) !important;
+    border-color: var(--secondary-color-light) !important;
+}
+.accordion-button:focus {
+    box-shadow: none !important;
+    background-color: var(--secondary-color-dark) !important;
+}
+.accordion-button {
+    border: 1px solid var(--secondary-color-light) !important;
+    border-radius: 0.25rem !important;
+}
+
+.accordion-button::after{
+    margin-left: 0 !important;
+    margin-right: auto;
+}
+
+/* </editor-fold> */
+

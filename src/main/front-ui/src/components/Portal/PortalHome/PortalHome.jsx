@@ -11,10 +11,12 @@ import CardAccountStatus from "./Cards/CardAccountStatus/CardAccountStatus";
 
 
 const PortalHome = () => {
+    // <editor-fold defaultstate="collapsed desc="Table Data">
     const getDate = () => {
         const date = new Date();
         return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
     }
+    // </editor-fold>
 
     return (
         <div className="container-fluid overflow-x-hidden p-2 secondary-bg-dark text-light">

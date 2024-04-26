@@ -17,7 +17,7 @@ export const menuStyle = {
         },
     },
     [`.${menuClasses.subMenuContent}`]: {
-        backgroundColor: Vars.SECONDARY_COLOR_LIGHT,
+        backgroundColor: Vars.SECONDARY_COLOR_DARK,
     },
     [`.${menuClasses.icon}`]: {
         color: Vars.SECONDARY_COLOR_DARK,
