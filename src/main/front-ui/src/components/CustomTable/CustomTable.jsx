@@ -6,6 +6,7 @@ import {ReactComponent as ExcelIcon} from '../../assets/svgs/excel.svg';
 import {ReactComponent as PdfIcon} from '../../assets/svgs/pdf.svg';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import ExcelExport from "../../Classes/ExcelExport";
+import Help from "../Help/Help";
 /**
  * <b>Data Structure:</b>
  * <p>
@@ -136,8 +137,18 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
     };
 
     const exportToExcel = () => {
-        const transformedData = mapDataToHeaders(dataToDisplay, columnsToDisplay.display, columnsToDisplay.names);
-        ExcelExport.exportToExcel(transformedData, columnsToDisplay.display, 'mortgageIL');
+        //delete the extra column
+        const tmp = {...columnsToDisplay};
+        if(spacialIcon){
+            const index = tmp.names.indexOf('extra');
+            if (index > -1) {
+                tmp.names.splice(index, 1);
+                tmp.display.splice(index, 1);
+            }
+        }
+
+        const transformedData = mapDataToHeaders(dataToDisplay, tmp.display, tmp.names);
+        ExcelExport.exportToExcel(transformedData, tmp.display, 'mortgageIL');
     }
 
     const exportToPdf = () => {
@@ -161,9 +172,15 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
                     </div>
                     <div className="d-none d-xl-block col-xl-6"></div>
                     <div className="col-12 col-md-6 col-xl-3 d-flex justify-content-between justify-content-md-end mt-3 mt-xl-0">
-                        <ExcelIcon className="fs-3 mx-2" role='button' onClick={exportToExcel}/>
-                        <PdfIcon className="fs-3 mx-2" role='button' onClick={exportToPdf}/>
-                        <FilterAltIcon className='fs-3' role="button" onClick={filterOptions}/>
+                        <Help text="ייצוא לאקסל">
+                            <ExcelIcon className="fs-3 mx-2" role='button' onClick={exportToExcel}/>
+                        </Help>
+                        <Help text="ייצוא ל-PDF">
+                            <PdfIcon className="fs-3 mx-2" role='button' onClick={exportToPdf}/>
+                        </Help>
+                        <Help text="סינון">
+                            <FilterAltIcon className='fs-3' role="button" onClick={filterOptions}/>
+                        </Help>
                     </div>
                 </div>
                 <div className="row">

@@ -22,6 +22,9 @@ const PortalMortgageTrack = () => {
                 <Tab eventKey="home" title="מסלולים">
                     <TabMortgageTrack mortgageTracks={mortgageTracks}/>
                 </Tab>
+                <Tab eventKey="borad" title="לוח תשלומים">
+                    Tab content for Profile
+                </Tab>
                 <Tab eventKey="analist" title="ניתוח תיק">
                     Tab content for Profile
                 </Tab>
