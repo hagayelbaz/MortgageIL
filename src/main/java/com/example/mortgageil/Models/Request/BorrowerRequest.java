@@ -18,4 +18,8 @@ public class BorrowerRequest {
 
     @NotEmpty(message = "Last name is required")
     private String lastName;
+
+    private String email;
+
+    private String phoneNumber;
 }

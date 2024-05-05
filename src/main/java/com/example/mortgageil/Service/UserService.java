@@ -1,14 +1,21 @@
 package com.example.mortgageil.Service;
 
 
+import com.example.mortgageil.Models.Converters.UserEntityToResponseConverter;
+import com.example.mortgageil.Models.Converters.UserRequestToEntityConverter;
+import com.example.mortgageil.Models.Repositories.UserRepository;
+import com.example.mortgageil.Models.Request.UserRequest;
+import com.example.mortgageil.Models.Response.UserResponse;
 import com.example.mortgageil.Models.User;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService extends DBService<User>{
+public class UserService
+        extends DBService<User, UserRequest, UserResponse>{
 
-    public UserService(JpaRepository<User, Long> repository) {
-        super(repository);
+    public UserService(UserRepository repository) {
+        super(repository,
+                new UserRequestToEntityConverter(),
+                new UserEntityToResponseConverter());
     }
 }
