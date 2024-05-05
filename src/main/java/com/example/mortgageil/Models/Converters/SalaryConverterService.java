@@ -18,7 +18,7 @@ public class SalaryConverterService {
 
     public Salary convertFromRequest(SalaryRequest salaryRequest) {
         return Salary.builder()
-                .user(userService.getUser(salaryRequest.getUserId()))
+                //.user(userService.getUser(salaryRequest.getUserId()))
                 .salary(salaryRequest.getSalary())
                 .employer(salaryRequest.getEmployer())
                 .startDate(salaryRequest.getStartDate())
@@ -35,7 +35,7 @@ public class SalaryConverterService {
     public SalaryResponse convertToResponse(Salary salary) {
         return SalaryResponse.builder()
                 .id(salary.getId())
-                .user(salary.getUser())
+                //.user(salary.getUser())
                 .salary(salary.getSalary())
                 .employer(salary.getEmployer())
                 .startDate(salary.getStartDate())

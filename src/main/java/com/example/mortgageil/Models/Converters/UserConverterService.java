@@ -11,8 +11,8 @@ public class UserConverterService {
     public User convertFromRequest(UserRequest userRequest) {
         return User.builder()
                 .email(userRequest.getEmail())
-                .firstName(userRequest.getFirstName())
-                .lastName(userRequest.getLastName())
+                //.firstName(userRequest.getFirstName())
+                //.lastName(userRequest.getLastName())
                 .phoneNumber(userRequest.getPhoneNumber())
                 .build();
     }

@@ -1,13 +1,11 @@
 package com.example.mortgageil.Models;
 
+import com.example.mortgageil.Core.Enum.MortgagePlanType;
 import com.example.mortgageil.Core.Contracts.ManageableJpa;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import java.util.Date;
 
 @Getter
 @Setter
@@ -15,32 +13,31 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "salaries")
-public class Salary implements ManageableJpa {
+@Table(name = "mortgage_plans")
+public class MortgagePlan implements ManageableJpa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CreationTimestamp
-    private Date createdDate;
+    @NotEmpty(message = "Mortgage plan type is required")
+    private MortgagePlanType type;
 
-    @UpdateTimestamp
-    private Date lastModifiedDate;
+    @NotEmpty(message = "Mortgage plan name is required")
+    private double amount;
+
+    @NotEmpty(message = "Interest rate is required")
+    private double interestRate;
+
+    @NotEmpty(message = "Duration is required")
+    private int duration;
+
+    private int balloonDuration;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id", nullable = false)
     private Person person;
-
-    private double salary;
-
-    private String employer;
-
-    private Date startDate;
-
-    private String jobTitle;
-
 
     public Person getPerson() {
         return Person.builder()
