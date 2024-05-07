@@ -10,12 +10,15 @@ import com.example.mortgageil.Models.User;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService
-        extends DBService<User, UserRequest, UserResponse>{
+public class UserService extends DBService<
+        User,
+        UserRequest,
+        UserResponse,
+        UserRepository> {
 
     public UserService(UserRepository repository) {
-        super(repository,
-                new UserRequestToEntityConverter(),
-                new UserEntityToResponseConverter());
+        super(new UserRequestToEntityConverter(),
+                new UserEntityToResponseConverter(),
+                repository);
     }
 }

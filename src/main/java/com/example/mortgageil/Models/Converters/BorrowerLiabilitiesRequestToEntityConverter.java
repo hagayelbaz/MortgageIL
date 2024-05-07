@@ -5,17 +5,24 @@ import com.example.mortgageil.Models.Borrower;
 import com.example.mortgageil.Models.BorrowerLiabilities;
 import com.example.mortgageil.Models.Request.BorrowerLiabilitiesRequest;
 import com.example.mortgageil.Models.Request.BorrowerRequest;
+import com.example.mortgageil.Service.UserService;
+import jakarta.annotation.Resource;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BorrowerLiabilitiesRequestToEntityConverter
         implements RequestToEntityConverter<BorrowerLiabilitiesRequest, BorrowerLiabilities> {
+
+    @Resource(name = "userService")
+    private UserService userService;
 
     @Override
     public BorrowerLiabilities convert(BorrowerLiabilitiesRequest request) {
         return BorrowerLiabilities.builder()
+                .person(userService.getEntityById(request.getPersonId()))
                 .amount(request.getAmount())
                 .endDate(request.getEndDate())
                 .build();
 
-        //TODO: add person
     }
 }

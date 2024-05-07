@@ -9,14 +9,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-public abstract class DBService<T extends ManageableJpa, Rq, Rs> {
-    private final JpaRepository<T, Long> repository;
+public abstract class DBService<
+        T extends ManageableJpa,
+        Rq,
+        Rs,
+        Repository extends JpaRepository<T, Long>> {
+
+    protected final Repository repository;
     private final RequestToEntityConverter<Rq, T> requestConverter;
     private final EntityToResponseConverter<T, Rs> responseConverter;
 
-    public DBService(JpaRepository<T, Long> repository,
-                     RequestToEntityConverter<Rq, T> requestConverter,
-                     EntityToResponseConverter<T, Rs> responseConverter) {
+    public DBService(RequestToEntityConverter<Rq, T> requestConverter,
+                     EntityToResponseConverter<T, Rs> responseConverter,
+                     Repository repository) {
+
         this.repository = repository;
         this.requestConverter = requestConverter;
         this.responseConverter = responseConverter;
@@ -27,6 +33,15 @@ public abstract class DBService<T extends ManageableJpa, Rq, Rs> {
         T entity = requestConverter.convert(request);
         T savedEntity = repository.save(entity);
         return responseConverter.convert(savedEntity);
+    }
+
+    public T createEntity(Rq request) {
+        T entity = requestConverter.convert(request);
+        return repository.save(entity);
+    }
+
+    public T createEntity(T entity) {
+        return repository.save(entity);
     }
     //</editor-fold>
 
@@ -39,11 +54,20 @@ public abstract class DBService<T extends ManageableJpa, Rq, Rs> {
         return null;
     }
 
+    public T getEntityById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+
     public Iterable<Rs> getAll() {
         Iterable<T> entities = repository.findAll();
         return StreamSupport.stream(entities.spliterator(), false)
                 .map(responseConverter::convert)
                 .collect(Collectors.toList());
+    }
+
+    public Iterable<T> getAllEntities() {
+        return repository.findAll();
     }
     //</editor-fold>
 
@@ -56,6 +80,19 @@ public abstract class DBService<T extends ManageableJpa, Rq, Rs> {
         }
         return null;
     }
+
+    public T updateEntity(Long id, Rq request) {
+        T entity = repository.findById(id).orElse(null);
+        if (entity != null) {
+            return repository.save(entity);
+        }
+        return null;
+    }
+
+    public T updateEntity(Long id, T entity) {
+        return repository.save(entity);
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="delete">

@@ -1,6 +1,7 @@
 package com.example.mortgageil.Models.Request;
 
 import com.example.mortgageil.Core.Enum.MortgagePlanType;
+import com.example.mortgageil.Models.Person;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import lombok.Setter;
 public class MortgagePlanRequest {
 
     @NotEmpty(message = "user id is required")
-    private Long userId;
+    private Long personId;
 
     @NotEmpty(message = "Mortgage plan type is required")
     private MortgagePlanType type;
@@ -27,4 +28,6 @@ public class MortgagePlanRequest {
     private int duration;
 
     private int balloonDuration;
+
+    private Person person;
 }
