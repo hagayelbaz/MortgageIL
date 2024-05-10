@@ -10,6 +10,7 @@ public class BorrowerRequestToEntityConverter
     @Override
     public Borrower convert(BorrowerRequest request) {
         return Borrower.builder()
+                .user(request.getUser())
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())

@@ -1,7 +1,8 @@
 package com.example.mortgageil.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.example.mortgageil.Core.Contracts.ManageableJpa;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,29 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Table(name = "borrowers")
-public class Borrower extends Person{
+public class Borrower extends Person implements ManageableJpa {
     private String email;
     private String phoneNumber;
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    public User getUser() {
+        return User.builder()
+                .id(user.getId())
+                .createdDate(user.getCreatedDate())
+                .lastModifiedDate(user.getLastModifiedDate())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .phoneNumber(user.getPhoneNumber())
+                .build();
+    }
+
+    @Override
+    public void deleteRelatedEntities() {
+
+    }
 }

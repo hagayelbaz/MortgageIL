@@ -3,6 +3,7 @@ package com.example.mortgageil.Models.Response;
 import com.example.mortgageil.Models.BorrowerLiabilities;
 import com.example.mortgageil.Models.MortgagePlan;
 import com.example.mortgageil.Models.Salary;
+import com.example.mortgageil.Models.User;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,4 +24,5 @@ public class BorrowerResponse {
     private Set<Salary> salaries;
     private Set<BorrowerLiabilities> borrowerLiabilities;
     private Set<MortgagePlan> mortgagePlans;
+    private User user;
 }

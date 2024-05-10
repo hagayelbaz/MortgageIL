@@ -3,9 +3,11 @@ package com.example.mortgageil.Controller.API.V1.Internal;
 
 import com.example.mortgageil.Models.Request.BorrowerRequest;
 import com.example.mortgageil.Service.BorrowerService;
+import com.example.mortgageil.Service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/api/v1/borrower")
@@ -14,9 +16,14 @@ public class BorrowerController {
     @Resource(name = "borrowerService")
     private BorrowerService borrowerService;
 
+    @Resource(name = "userService")
+    private UserService userService;
+
     //<editor-fold desc="create">
     @PostMapping("")
     public ResponseEntity<?> create(@RequestBody BorrowerRequest borrowerRequest) {
+        Long userId = borrowerRequest.getUserId();
+        borrowerRequest.setUser(userService.getEntityById(userId));
         return ResponseEntity.ok(borrowerService.create(borrowerRequest));
     }
     //</editor-fold>
