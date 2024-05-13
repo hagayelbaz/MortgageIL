@@ -1,6 +1,5 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import './LevelManager.css';
-import HandleLevels from "./handleLevels";
 import {Button} from "react-bootstrap";
 import {MultiConditionalWrapper} from "../../Utils/ConditionalWrapper";
 import LevelControl from "./LevelControl/LevelControl";
@@ -11,15 +10,12 @@ import wrapperVars from "../Wrappers";
 
 const LevelManager = ({levelData}) => {
     const [levelToShow, setLevelToShow] = useState(0);
-    const [enableNext, setEnableNext] = useState(false);
-
-    //<editor-fold desc="Set initial history">
     const [history, setHistory] = useState([{
         selected: -1,
         role: "level",
         level: levelData.levels[0],
     }]);
-    //</editor-fold>
+
 
     //<editor-fold desc="Handle next level">
     const handleNextLevel = (item) => {
@@ -75,7 +71,7 @@ const LevelManager = ({levelData}) => {
 
 
     return (
-        <div className="position-relative secondary-bg text-light p-3 rounded-2">
+        <form className="position-relative secondary-bg text-light p-3 rounded-2">
             {history.map((h, index) => {
                 const {conditions, wrappers} = wrapperVars(h.level);
                 return (
@@ -93,7 +89,6 @@ const LevelManager = ({levelData}) => {
                                         levelType={h.level.levelOrder}
                                         isSelected={isItemSelected(item, h.level)}
                                         nextLevelClicked={() => handleNextLevel(item)}
-                                        setEnableNext={setEnableNext}
                                         selected={history[levelToShow].selected}
                                     />
                                 )
@@ -107,7 +102,7 @@ const LevelManager = ({levelData}) => {
                                     הקודם
                                 </a>
                                 <Button
-                                    className={`px-5 secondary-bg ` + (enableNext ? "" : "disabled")}
+                                    className={`px-5 secondary-bg`}
                                     onClick={() => handleNextLevel(null)}>
                                     הבא
                                 </Button>
@@ -116,7 +111,7 @@ const LevelManager = ({levelData}) => {
                     </div>
                 )
             })}
-        </div>
+        </form>
     );
 };
 

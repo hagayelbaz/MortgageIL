@@ -5,7 +5,7 @@ const LevelControlButtonContainer = ({ children }) => {
     return (
         <div className="container-fluid m-0 p-0">
             <div className="row">
-                {React.Children.map(children, (child, index) => {
+                {Children.map(children, (child, index) => {
                     const isNotEmpty = Children.count(child.props.children) > 0 || Object.keys(child.props).length > 0;
                     return (
                         isNotEmpty && (

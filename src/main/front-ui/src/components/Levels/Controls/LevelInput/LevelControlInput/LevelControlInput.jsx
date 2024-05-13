@@ -2,13 +2,10 @@ import React, {useEffect, useState} from "react";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "./LevelControlInput.css";
 import MaskedInput from 'react-text-mask'
-import createNumberMask from 'text-mask-addons/dist/createNumberMask'
 
 
-const LevelControlInput = ({pattern, placeholder, label, required, insideLabel, mask, setEnableNext}) => {
-    useEffect(() => {
-        setEnableNext(true);
-    }, [setEnableNext]);
+const LevelControlInput = ({pattern, placeholder, label, required, insideLabel, mask}) => {
+
     return (
         <div className="my-4 container-fluid">
             <div className="row">

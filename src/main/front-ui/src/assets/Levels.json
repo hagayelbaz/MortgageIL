@@ -5,14 +5,15 @@
       "levelOrder": "buttons",
       "required": true,
       "allowAppend": false,
-      "name": "מטרת הלוואה",
+      "moveWhenSelected": true,
+      "name": "מהי מטרת ההלוואה?",
+      "help:": "בחר את סוג ההלוואה שאתה צריך",
       "items": [
         {
           "id": 1,
           "type": "button",
           "name": "קניית נכס",
-          "icon": "house",
-          "description": "Description 1",
+          "help": "קנייה של דיורה / מגרש / בנייה",
           "nextLevel": 2,
           "nextLevelRole": "level",
           "nextLevelInclude": [
@@ -21,11 +22,10 @@
         },
         {
           "id": 2,
-          "name": "שיפוץ / הרחבה",
           "type": "button",
-          "icon": "house",
-          "description": "Description 2",
-          "nextLevel": 5,
+          "name": "הרחבה",
+          "help": "הרחבה של נכס קיים",
+          "nextLevel": 2,
           "nextLevelRole": "level",
           "nextLevelInclude": [
             0
@@ -33,11 +33,10 @@
         },
         {
           "id": 3,
-          "name": "מחזור",
           "type": "button",
-          "icon": "house",
-          "description": "Description 2",
-          "nextLevel": 3,
+          "name": "שיפוץ",
+          "help": "שיפוץ נכס קיים",
+          "nextLevel": 2,
           "nextLevelRole": "level",
           "nextLevelInclude": [
             0
@@ -45,11 +44,21 @@
         },
         {
           "id": 4,
-          "name": "מטרה אחרת",
           "type": "button",
-          "icon": "house",
-          "description": "Description 2",
-          "nextLevel": 5,
+          "name": "מחזור",
+          "help": "מחזור הלוואה קיימת",
+          "nextLevel": 6,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            0
+          ]
+        },
+        {
+          "id": 5,
+          "type": "button",
+          "name": "מטרה אחרת",
+          "help": "הלוואה לכל מטרה (החזרת חובות, טיפולים רפואיים וכו')",
+          "nextLevel": 6,
           "nextLevelRole": "level",
           "nextLevelInclude": [
             0
@@ -62,145 +71,60 @@
       "levelOrder": "buttons",
       "required": true,
       "allowAppend": false,
-      "name": "איזה סוג נכס תרצה לרכוש?",
+      "moveWhenSelected": false,
+      "name": "האם בבעלותך דירה?",
+      "help": "דירה או חלק מדירה עד 33% בבעלותך",
       "items": [
         {
           "id": 1,
           "type": "button",
-          "name": "דירה / בית",
-          "icon": "house",
-          "description": "Description 1",
+          "name": "כן",
+          "description": "",
           "nextLevel": 3,
-          "nextLevelRole": "level",
+          "nextLevelRole": "followup",
           "nextLevelInclude": [
-            1,
-            2,
-            3,
-            4,
-            7
+            0
           ]
         },
         {
-          "id": 2,
-          "name": "מגרש",
+          "id": 1,
           "type": "button",
-          "icon": "house",
-          "description": "Description 2",
-          "nextLevel": 3,
-          "nextLevelRole": "level",
+          "name": "לא",
+          "description": "",
+          "nextLevel": 4,
+          "nextLevelRole": "followup",
           "nextLevelInclude": [
-            5,
-            6,
-            7
-          ]
-        },
-        {
-          "id": 3,
-          "name": "בנייה",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
-          "nextLevel": 3,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            5,
-            6,
-            7
-          ]
-        },
-        {
-          "id": 4,
-          "name": "בנייה + מגרש",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
-          "nextLevel": 3,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            5,
-            6,
-            7
+            0
           ]
         }
       ]
     },
     {
       "level": 3,
-      "levelOrder": "inputs",
+      "levelOrder": "radioButtons",
       "required": true,
       "allowAppend": false,
-      "name": "פרטי הנכס",
+      "moveWhenSelected": false,
+      "name": "כמה דירות בבעלותך?",
+      "help": "כמה דירות בבעלותך?",
       "items": [
         {
           "id": 1,
-          "type": "input",
-          "pattern": ".+",
-          "mask": "ALL",
-          "icon" : "0",
-          "name": "כתובת הנכס",
-          "placeHolder": "הגפן 5",
-          "description": "Description 2",
+          "type": "radiobutton",
+          "name": "דירה אחת",
+          "description": "",
           "nextLevel": 5,
-          "nextLevelRole": "level",
+          "nextLevelRole": "followup",
           "nextLevelInclude": [
             0
           ]
         },
         {
           "id": 2,
-          "type": "input",
-          "name": "עיר",
-          "pattern": ".+",
-          "mask": "ALL",
-          "icon" : "0",
-          "placeHolder": "הגפן 5",
-          "description": "Description 2",
-          "nextLevel": 5,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 3,
-          "type": "input",
-          "name": "קומה",
-          "placeHolder": "",
-          "pattern": ".+",
-          "mask": "ALL",
-          "icon" : "0",
-          "description": "Description 2",
-          "nextLevel": 5,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 4,
-          "type": "input",
-          "name": "דירה",
-          "placeHolder": "",
-          "pattern": ".+",
-          "mask": "ALL",
-          "icon" : "0",
-          "description": "Description 2",
-          "nextLevel": 5,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 7,
-          "type": "input",
-          "pattern": ".+",
-          "mask": "NIS",
-          "name": "שווי הנכס",
-          "icon": "₪",
-          "placeHolder": "1000000",
-          "description": "Description 2",
-          "nextLevel": 5,
+          "type": "radiobutton",
+          "name": "יותר מדירה אחת",
+          "description": "",
+          "nextLevel": 6,
           "nextLevelRole": "level",
           "nextLevelInclude": [
             0
@@ -210,43 +134,31 @@
     },
     {
       "level": 4,
-      "levelOrder": "buttons",
+      "levelOrder": "checkBoxes",
       "required": true,
-      "allowAppend": true,
-      "name": "האם יש בבעלותך נכס?",
+      "allowAppend": false,
+      "moveWhenSelected": false,
+      "name": "האם זו דירה ראשונה שלך?",
+      "help": "האם זו דירה ראשונה שלך?",
       "items": [
         {
           "id": 1,
-          "type": "button",
-          "name": "כן",
-          "icon": "house",
+          "type": "checkbox",
+          "name": "דירה ראשונה שלי",
           "description": "",
-          "nextLevel": 15,
-          "nextLevelRole": "followup",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 2,
-          "name": "לא",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
-          "nextLevel": 5,
+          "nextLevel": 6,
           "nextLevelRole": "level",
           "nextLevelInclude": [
             0
           ]
         },
         {
-          "id": 3,
-          "name": "בבעלות חלקית",
-          "type": "button",
-          "icon": "house",
-          "description": "Description 2",
-          "nextLevel": 14,
-          "nextLevelRole": "followup",
+          "id": 2,
+          "type": "checkbox",
+          "name": "מחיר למשתכן",
+          "description": "",
+          "nextLevel": 6,
+          "nextLevelRole": "level",
           "nextLevelInclude": [
             0
           ]
@@ -255,49 +167,44 @@
     },
     {
       "level": 5,
-      "levelOrder": "inputs",
+      "levelOrder": "radioButtons",
       "required": true,
       "allowAppend": false,
-      "name": "מה הסכום שתרצה ללוות?",
+      "moveWhenSelected": false,
+      "name": "האם בכוונתך למכור תוך 18 חודשים",
+      "help": "האם בכוונתך למכור תוך 18 חודשים",
       "items": [
         {
           "id": 1,
-          "type": "input",
-          "pattern": ".+",
-          "mask": "NIS",
-          "name": "סכום ההלוואה",
-          "icon": "₪",
-          "placeHolder": "100,000",
+          "type": "radiobutton",
+          "name": "כן",
+          "description": "",
           "nextLevel": 6,
           "nextLevelRole": "level",
           "nextLevelInclude": [
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8
+            0
           ]
         },
         {
-          "id": 2,
-          "type": "input",
-          "pattern": ".+",
-          "mask": "percentage",
-          "name": "שיעור מימון",
-          "icon": "%",
-          "placeHolder": "75%",
+          "id": 1,
+          "type": "radiobutton",
+          "name": "לא",
+          "description": "",
           "nextLevel": 6,
           "nextLevelRole": "level",
           "nextLevelInclude": [
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8
+            0
+          ]
+        },
+        {
+          "id": 1,
+          "type": "radiobutton",
+          "name": "לא יודע",
+          "description": "",
+          "nextLevel": 6,
+          "nextLevelRole": "level",
+          "nextLevelInclude": [
+            0
           ]
         }
       ]
@@ -306,399 +213,17 @@
       "level": 6,
       "levelOrder": "inputs",
       "required": true,
-      "allowAppend": true,
-      "name": "פרטי לווים",
-      "items": [
-        {
-          "id": 1,
-          "type": "checkBox",
-          "name": "לא לכלול את אשתי",
-          "goDirectlyToNextLevel": true,
-          "nextLevel": 7,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 2,
-          "type": "input",
-          "pattern": "",
-          "mask": "",
-          "name": "שם פרטי",
-          "icon": "",
-          "placeHolder": "שם פרטי",
-          "nextLevel": 7,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 3,
-          "type": "input",
-          "pattern": "",
-          "name": "שם משפחה",
-          "placeHolder": "שם משפחה",
-          "nextLevel": 7,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 4,
-          "type": "input",
-          "pattern": "^(1[8-9]|[2-9][0-9]|100)$",
-          "name": "גיל",
-          "placeHolder": "גיל",
-          "nextLevel": 7,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 5,
-          "type": "input",
-          "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
-          "mask": "",
-          "name": "Mail",
-          "placeHolder": "mortageIl@gmail.com",
-          "nextLevel": 7,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 6,
-          "type": "radioButton",
-          "name": "רווק",
-          "goDirectlyToNextLevel": true,
-          "nextLevel": 7,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 7,
-          "type": "radioButton",
-          "name": "נשוי",
-          "goDirectlyToNextLevel": true,
-          "nextLevel": 6,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            1,
-            2,
-            3,
-            4
-          ]
-        },
-        {
-          "id": 8,
-          "type": "addButton",
-          "name": "הוסף לווה",
-          "icon": "+",
-          "goDirectlyToNextLevel": true,
-          "nextLevel": 6,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8
-          ]
-        }
-      ]
-    },
-    {
-      "level": 7,
-      "levelOrder": "inputs",
-      "required": true,
-      "allowAppend": true,
-      "name": "הכנסות",
-      "items": [
-        {
-          "id": 1,
-          "type": "input",
-          "name": "מקור הכנסה",
-          "placeHolder": "משרה",
-          "nextLevel": 8,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 2,
-          "type": "input",
-          "pattern": ".+",
-          "mask": "NIS",
-          "name": "שיעור מימון",
-          "icon": "₪",
-          "placeHolder": "7500",
-          "nextLevel": 8,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 3,
-          "type": "addButton",
-          "name": "הוסף הכנסה",
-          "icon": "+",
-          "goDirectlyToNextLevel": true,
-          "nextLevel": 7,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        }
-      ]
-    },
-    {
-      "level": 8,
-      "levelOrder": "inputs",
-      "required": true,
-      "allowAppend": true,
-      "name": "הוצאות",
-      "items": [
-        {
-          "id": 1,
-          "type": "input",
-          "name": "סוג הוצאה",
-          "placeHolder": "שכירות/הוצאות שוטפות/משכנתא",
-          "nextLevel": 0,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 2,
-          "type": "input",
-          "pattern": ".+",
-          "mask": "NIS",
-          "name": "סכום",
-          "icon": "₪",
-          "placeHolder": "5000",
-          "nextLevel": 0,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 3,
-          "type": "endButton",
-          "name": "סיים",
-          "icon": "save",
-          "goDirectlyToNextLevel": true,
-          "nextLevel": 0,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        }
-      ,
-        {
-          "id": 4,
-          "type": "addButton",
-          "name": "הוסף הוצאה",
-          "icon": "+",
-          "goDirectlyToNextLevel": true,
-          "nextLevel": 8,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        }
-      ]
-    },
-
-
-    {
-      "level": 14,
-      "levelOrder": "inputs",
-      "required": true,
-      "allowAppend": true,
-      "name": "אחוזים בנכס",
-      "items": [
-        {
-          "id": 1,
-          "name": "אחוזים",
-          "type": "input",
-          "icon": "%",
-          "pattern": ".+",
-          "mask": "percentage",
-          "description": "Description 2",
-          "nextLevel": 5,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 2,
-          "type": "addButton",
-          "allowAppend": true,
-          "name": "הוסף נכס",
-          "icon": "+",
-          "nextLevel": 4,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        }
-      ]
-    },
-    {
-      "level": 15,
-      "levelOrder": "inputs",
-      "required": false,
-      "allowAppend": true,
-      "name": "פרטי הנכס",
-      "items": [
-        {
-          "id": 1,
-          "type": "input",
-          "name": "כתובת הנכס",
-          "placeHolder": "הגפן 5",
-          "description": "Description 2",
-          "nextLevel": 5,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 2,
-          "type": "input",
-          "name": "עיר",
-          "placeHolder": "הגפן 5",
-          "description": "Description 2",
-          "nextLevel": 5,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 3,
-          "type": "input",
-          "name": "קומה",
-          "placeHolder": "",
-          "description": "Description 2",
-          "nextLevel": 5,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 4,
-          "type": "input",
-          "name": "דירה",
-          "placeHolder": "",
-          "description": "Description 2",
-          "nextLevel": 5,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 5,
-          "type": "input",
-          "pattern": ".+",
-          "mask": "NIS",
-          "name": "שווי הנכס",
-          "icon": "₪",
-          "placeHolder": "1000000",
-          "description": "Description 2",
-          "nextLevel": 5,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 4,
-          "type": "addButton",
-          "allowAppend": true,
-          "name": "הוסף נכס",
-          "icon": "+",
-          "nextLevel": 4,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        }
-      ]
-    },
-    {
-      "level": 16,
-      "levelOrder": "inputs",
       "allowAppend": false,
-      "name": "פרטי המשכנתא",
+      "moveWhenSelected": false,
+      "name": "עלות הנכס",
+      "help": "כמה הנכס עולה?",
       "items": [
         {
           "id": 1,
           "type": "input",
-          "pattern": ".+",
+          "name": "",
           "mask": "NIS",
-          "name": "גובה משכנתא",
-          "icon": "₪",
-          "placeHolder": "1000000",
-          "description": "Description 2",
-          "nextLevel": 7,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 2,
-          "type": "input",
-          "pattern": ".+",
-          "mask": "NIS",
-          "name": "החזר חודשי",
-          "icon": "₪",
-          "placeHolder": "1000000",
-          "description": "Description 2",
-          "nextLevel": 7,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 2,
-          "type": "input",
-          "name": "תקופת החזר שנותרה",
-          "placeHolder": "בשנים",
-          "description": "Description 2",
-          "nextLevel": 7,
-          "nextLevelRole": "level",
-          "nextLevelInclude": [
-            0
-          ]
-        },
-        {
-          "id": 4,
-          "type": "input",
-          "pattern": ".+",
-          "mask": "NIS",
-          "name": "החזר חודשי רצוי",
-          "icon": "₪",
-          "placeHolder": "4500",
-          "description": "Description 2",
+          "description": "",
           "nextLevel": 7,
           "nextLevelRole": "level",
           "nextLevelInclude": [
