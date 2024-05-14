@@ -1,8 +1,0 @@
-.checkbox{
-    transition: .3s;
-}
-
-.checkbox:checked {
-    background-color: var(--secondary-color);
-    border: var(--secondary-color);
-}

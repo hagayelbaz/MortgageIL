@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
 import "./ProgressBar.css";
 
-const ProgressBar = ({currentStep, totalSteps, color}) => {
+const ProgressBar = ({currentStep, totalSteps, color, className}) => {
     const progress = (currentStep / totalSteps) * 100;
 
     return (
-        <div className="progress"
+        <div className={`progress ${className}`}
              style={{backgroundColor: 'rgba(200,200,200,.4)'}}>
             <div className="progress-bar rounded-2"
                  role="progressbar" style={{width: `${progress}%`, backgroundColor: `${color ?? color}`}}
