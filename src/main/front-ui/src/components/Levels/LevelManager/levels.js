@@ -1,5 +1,3 @@
-import {useCallback, useState} from "react";
-
 export const levels = [
     //0 (loanPurpose, additionalProperty)
     {
@@ -153,6 +151,79 @@ export const levels = [
                 title: "סכום ההלוואה",
                 minimum: 0,
                 maximum: 100000000
+            }
+        },
+        $calcNext: (formData) => {
+            return 7;
+        }
+    },
+    //7 borrowers details (firstName, lastName, employer, salary)
+    {
+        title: "פרטי הלווים",
+        type: "object",
+        properties: {
+            borrowers: {
+                title: "לווים",
+                type: "array",
+                items: {
+                    type: "object",
+                    required: ["firstName", "lastName", "employer", "salary"],
+                    properties: {
+                        firstName: {
+                            type: "string",
+                            title: "שם פרטי"
+                        },
+                        lastName: {
+                            type: "string",
+                            title: "שם משפחה"
+                        },
+                        employer: {
+                            type: "string",
+                            title: "מעסיק"
+                        },
+                        salary: {
+                            type: "number",
+                            title: "שכר",
+                            minimum: 0,
+                            maximum: 100000000
+                        }
+                    }
+                }
+            }
+        },
+        $calcNext: (formData) => {
+            return 8;
+        }
+    },
+    //8 borrower liabilities (description, amount, endDate)
+    {
+        title: "התחייבויות / הלוואות",
+        type: "object",
+        properties: {
+            borrowerLiabilities: {
+                title: "התחייבויות / הלוואות",
+                type: "array",
+                items: {
+                    type: "object",
+                    required: ["description", "amount"],
+                    properties: {
+                        description: {
+                            type: "string",
+                            title: "תיאור"
+                        },
+                        amount: {
+                            type: "number",
+                            title: "סכום",
+                            minimum: 0,
+                            maximum: 100000000
+                        },
+                        endDate: {
+                            type: "string",
+                            title: "תאריך סיום",
+                            format: "date"
+                        }
+                    }
+                }
             }
         }
     }

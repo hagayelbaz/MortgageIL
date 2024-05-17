@@ -21,11 +21,15 @@ public class BorrowerLiabilities implements ManageableJpa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @NotEmpty(message = "amount is required")
     private double amount;
 
     @NotEmpty(message = "end date is required")
     private Date endDate;
+
+    @NotEmpty(message = "description is required")
+    private String description;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
