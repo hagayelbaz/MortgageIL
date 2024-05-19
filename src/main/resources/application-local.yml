@@ -1,3 +1,5 @@
+# Please check the doc before running the application
+
 server:
   compression:
     enabled: true
@@ -17,6 +19,19 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  cache:
+    type: redis
+    host: localhost
+    port: 6379
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      lettuce:
+        pool:
+          max-active: 10
+          max-idle: 5
+          min-idle: 0
 
 
 api:
@@ -24,3 +39,13 @@ api:
     data-gov:
       base-url: https://data.gov.il/api/3/action/datastore_search
       average-index-linked: 96ba107d-cc15-41cf-b223-5bb592e14666
+    boi:
+      format:
+        json: sdmx-json
+        csv: series-csv
+        xml: sdmx-ml
+      url:
+        base-url: https://edge.boi.gov.il/FusionEdgeServer/sdmx/v2/data/dataflow
+        a: BOI.STATISTICS/BR/1.0/MNT_RIB_BOI_D.D.RIB_BOI
+        boi-interest: BOI.STATISTICS/BR/1.0/MNT_RIB_BOI_D.D.RIB_BOI
+

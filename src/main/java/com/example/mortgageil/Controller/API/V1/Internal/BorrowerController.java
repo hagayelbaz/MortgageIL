@@ -2,8 +2,8 @@ package com.example.mortgageil.Controller.API.V1.Internal;
 
 
 import com.example.mortgageil.Models.Request.BorrowerRequest;
-import com.example.mortgageil.Service.BorrowerService;
-import com.example.mortgageil.Service.UserService;
+import com.example.mortgageil.Service.db.BorrowerService;
+import com.example.mortgageil.Service.db.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

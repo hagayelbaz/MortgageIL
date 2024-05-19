@@ -1,12 +1,12 @@
-package com.example.mortgageil.Core.Helpers;
+package com.example.mortgageil.utils;
 
+import com.example.mortgageil.Core.Contracts.FluentData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.w3c.dom.Node;
 
-import java.io.IOException;
-
-public class FluentJson {
+public class FluentJson implements FluentData<JsonNode> {
     private JsonNode currentNode;
 
     public FluentJson(String json) {

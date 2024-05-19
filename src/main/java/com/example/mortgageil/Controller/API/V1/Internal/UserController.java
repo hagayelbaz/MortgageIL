@@ -1,17 +1,12 @@
 package com.example.mortgageil.Controller.API.V1.Internal;
 
 
-import com.example.mortgageil.Models.Request.SalaryRequest;
 import com.example.mortgageil.Models.Request.UserRequest;
-import com.example.mortgageil.Models.User;
-import com.example.mortgageil.Service.SalaryService;
-import com.example.mortgageil.Service.UserService;
+import com.example.mortgageil.Service.db.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.logging.Logger;
 
 
 @RestController

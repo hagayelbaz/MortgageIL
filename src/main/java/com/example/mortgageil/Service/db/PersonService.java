@@ -1,4 +1,4 @@
-package com.example.mortgageil.Service;
+package com.example.mortgageil.Service.db;
 
 import com.example.mortgageil.Models.Person;
 import com.example.mortgageil.Models.Repositories.PersonRepository;

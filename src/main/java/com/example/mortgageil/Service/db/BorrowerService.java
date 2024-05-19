@@ -1,13 +1,11 @@
-package com.example.mortgageil.Service;
+package com.example.mortgageil.Service.db;
 
 import com.example.mortgageil.Models.Borrower;
 import com.example.mortgageil.Models.Converters.BorrowerEntityToResponseConverter;
-import com.example.mortgageil.Models.Converters.BorrowerLiabilitiesRequestToEntityConverter;
 import com.example.mortgageil.Models.Converters.BorrowerRequestToEntityConverter;
 import com.example.mortgageil.Models.Repositories.BorrowerRepository;
 import com.example.mortgageil.Models.Request.BorrowerRequest;
 import com.example.mortgageil.Models.Response.BorrowerResponse;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
