@@ -1,4 +1,4 @@
-package com.example.mortgageil.Controller.API.V1.Internal;
+package com.example.mortgageil.Controller.API.V1.Internal.db;
 
 
 import com.example.mortgageil.Models.Request.UserRequest;

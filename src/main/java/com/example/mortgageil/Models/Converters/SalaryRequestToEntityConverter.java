@@ -1,6 +1,6 @@
 package com.example.mortgageil.Models.Converters;
 
-import com.example.mortgageil.Core.Contracts.RequestToEntityConverter;
+import com.example.mortgageil.Core.contracts.RequestToEntityConverter;
 import com.example.mortgageil.Models.Request.SalaryRequest;
 import com.example.mortgageil.Models.Salary;
 import org.springframework.stereotype.Service;

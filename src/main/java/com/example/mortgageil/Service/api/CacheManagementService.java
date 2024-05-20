@@ -16,4 +16,10 @@ public class CacheManagementService {
     public void refreshBoiInterestCache() {
         LOGGER.info("Boi interest cache has been refreshed");
     }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "cpi", allEntries = true)
+    public void refreshCpiCache() {
+        LOGGER.info("CPI cache has been refreshed");
+    }
 }

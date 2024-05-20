@@ -1,7 +1,7 @@
 package com.example.mortgageil.Models;
 
 
-import com.example.mortgageil.Core.Contracts.ManageableJpa;
+import com.example.mortgageil.Core.contracts.ManageableJpa;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;

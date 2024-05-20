@@ -104,7 +104,7 @@
                 <configuration>
                     <release>11</release>
                     <source>16</source>
-                    <target>16</target> <!-- Replace this with your JDK version -->
+                    <target>16</target>
                 </configuration>
             </plugin>
             <plugin>

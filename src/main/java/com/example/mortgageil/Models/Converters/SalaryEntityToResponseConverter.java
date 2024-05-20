@@ -1,8 +1,6 @@
 package com.example.mortgageil.Models.Converters;
 
-import com.example.mortgageil.Core.Contracts.EntityToResponseConverter;
-import com.example.mortgageil.Models.Borrower;
-import com.example.mortgageil.Models.Response.BorrowerResponse;
+import com.example.mortgageil.Core.contracts.EntityToResponseConverter;
 import com.example.mortgageil.Models.Response.SalaryResponse;
 import com.example.mortgageil.Models.Salary;
 

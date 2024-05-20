@@ -23,4 +23,14 @@ public class DataController {
     public ResponseEntity<?> getAverageInterestIndexLinked() throws Exception {
         return ResponseEntity.ok(boiService.getBoiInterestHistory());
     }
+
+    @GetMapping("/cpi")
+    public ResponseEntity<?> getCpi() throws Exception {
+        return ResponseEntity.ok(boiService.getCpi());
+    }
+
+    @GetMapping("/current-boi-interest")
+    public ResponseEntity<?> getCurrentInterest() throws Exception {
+        return ResponseEntity.ok(boiService.getBoiCurrentInterest());
+    }
 }

@@ -46,6 +46,6 @@ api:
         xml: sdmx-ml
       url:
         base-url: https://edge.boi.gov.il/FusionEdgeServer/sdmx/v2/data/dataflow
-        a: BOI.STATISTICS/BR/1.0/MNT_RIB_BOI_D.D.RIB_BOI
         boi-interest: BOI.STATISTICS/BR/1.0/MNT_RIB_BOI_D.D.RIB_BOI
-
+        boi-current-interest: https://boi.org.il/PublicApi/GetInterest
+        cpi: BOI.STATISTICS/PRI/1.0/BI_CPI_NO_ADMN_M.CPI.CPI_2_29_1.MAIN.M.N._Z._Z.I_JAN20_L._Z.A._Z._Z._Z

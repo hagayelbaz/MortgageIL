@@ -1,8 +1,8 @@
 package com.example.mortgageil.Service.db;
 
-import com.example.mortgageil.Core.Contracts.EntityToResponseConverter;
-import com.example.mortgageil.Core.Contracts.ManageableJpa;
-import com.example.mortgageil.Core.Contracts.RequestToEntityConverter;
+import com.example.mortgageil.Core.contracts.EntityToResponseConverter;
+import com.example.mortgageil.Core.contracts.ManageableJpa;
+import com.example.mortgageil.Core.contracts.RequestToEntityConverter;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
