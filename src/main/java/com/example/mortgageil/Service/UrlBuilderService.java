@@ -9,23 +9,35 @@ import java.util.*;
 public class UrlBuilderService {
 
     private String baseUrl;
-    private Map<String, String> params = new HashMap<>();
-    private List<String> pathSegments = new ArrayList<>();
+    private Map<String, String> params;
+    private List<String> pathSegments;
 
-    public UrlBuilderService setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
-        return this;
+    public UrlBuilderService() {
+        this.baseUrl = null;
+        this.params = new HashMap<>();
+        this.pathSegments = new ArrayList<>();
     }
 
+    private UrlBuilderService(String baseUrl, Map<String, String> params, List<String> pathSegments) {
+        this.baseUrl = baseUrl;
+        this.params = new HashMap<>(params);
+        this.pathSegments = new ArrayList<>(pathSegments);
+    }
 
-    public UrlBuilderService addParam(String key, String value) {
-        params.put(key, value);
-        return this;
+    public UrlBuilderService setBaseUrl(String baseUrl) {
+        return new UrlBuilderService(baseUrl, this.params, this.pathSegments);
     }
 
     public UrlBuilderService addPathSegment(String segment) {
-        pathSegments.add(segment);
-        return this;
+        List<String> newPathSegments = new ArrayList<>(this.pathSegments);
+        newPathSegments.add(segment);
+        return new UrlBuilderService(this.baseUrl, this.params, newPathSegments);
+    }
+
+    public UrlBuilderService addParam(String key, String value) {
+        Map<String, String> newParams = new HashMap<>(this.params);
+        newParams.put(key, value);
+        return new UrlBuilderService(this.baseUrl, newParams, this.pathSegments);
     }
 
     public String build() {
@@ -37,13 +49,12 @@ public class UrlBuilderService {
 
         if (!params.isEmpty()) {
             urlBuilder.append("?");
-            params.forEach((key, value) -> urlBuilder.append(key)
-                    .append("=")
-                    .append(value)
-                    .append("&"));
-
+            params.forEach((key, value) -> {
+                urlBuilder.append(key).append("=").append(value).append("&");
+            });
             urlBuilder.setLength(urlBuilder.length() - 1);
         }
         return urlBuilder.toString();
     }
 }
+

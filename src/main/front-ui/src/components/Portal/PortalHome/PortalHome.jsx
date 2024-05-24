@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Col, Row} from "react-bootstrap";
 import DataCard from "../../DataCard/DataCard";
 import CardCPI from "./Cards/CardCPI/CardCPI";
@@ -8,9 +8,15 @@ import CustomTable from "../../CustomTable/CustomTable";
 import {chartData, colData, tableData, testNews, mortgageAccStatus} from "../../../Classes/TestData";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import CardAccountStatus from "./Cards/CardAccountStatus/CardAccountStatus";
+import {useGet} from "../../../Classes/RequestHooks";
+import Endpoints from "../../../Classes/Endpoints";
+import Loading from "../../Loading/Loading";
+import BoiCurrentInterestCard from "./Cards/BoiCurrentInterestCard/BoiCurrentInterestCard";
+import CurrentCpiCard from "./Cards/CurrentCpiCard/CurrentCpiCard";
 
 
 const PortalHome = () => {
+
     // <editor-fold defaultstate="collapsed desc="Table Data">
     const getDate = () => {
         const date = new Date();
@@ -53,12 +59,12 @@ const PortalHome = () => {
                 </Col>
                 <Col className="mt-3 col-6 col-md-4 order-3 order-md-2 order-xl-3">
                     <div className="h-100 flex-item">
-                        <CardAccountStatus mortgageStatus={mortgageAccStatus}/>
+                        <BoiCurrentInterestCard/>
                     </div>
                 </Col>
                 <Col className="mt-3 col-6 col-xl-4 order-4">
                     <div className="h-100 flex-item">
-                        <DataCard header={"הכנסות (שנה אחרונה)"}/>
+                        <CurrentCpiCard/>
                     </div>
                 </Col>
                 <Col className="mt-3 col-6 col-xl-4 order-5">

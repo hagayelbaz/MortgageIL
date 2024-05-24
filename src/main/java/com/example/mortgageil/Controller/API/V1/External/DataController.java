@@ -29,8 +29,18 @@ public class DataController {
         return ResponseEntity.ok(boiService.getCpi());
     }
 
+    @GetMapping("/current-cpi")
+    public ResponseEntity<?> getCurrentCpi() throws Exception {
+        return ResponseEntity.ok(boiService.getBoiCurrentCpi());
+    }
+
     @GetMapping("/current-boi-interest")
     public ResponseEntity<?> getCurrentInterest() throws Exception {
         return ResponseEntity.ok(boiService.getBoiCurrentInterest());
+    }
+
+    @GetMapping("/cpi-last-year-change")
+    public ResponseEntity<?> getCpiLastYearChange() throws Exception {
+        return ResponseEntity.ok(boiService.getCpiChangeInLast12Months());
     }
 }

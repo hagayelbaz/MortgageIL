@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.logging.Logger;
+
 
 @Service
 public class BoiService {
 
+    private static final Logger LOGGER = Logger.getLogger(BoiService.class.getName());
     //<editor-fold desc="Fields">
     @Resource(name = "externalApiService")
     private ExternalApiService externalApiService;
@@ -31,6 +34,15 @@ public class BoiService {
 
     @Value("${api.external.boi.url.boi-current-interest}")
     private String boiCurrentInterest;
+
+    @Value("${api.external.boi.url.cpi-percentage}")
+    private String cpiPercentage;
+
+    @Value("${api.external.boi.params.lastOne}")
+    private String lastOne;
+
+    @Value("${api.external.boi.url.cpi-change-in-last-12-months}")
+    private String cpiChangeInLast12Months;
     //</editor-fold>
 
     //<editor-fold desc="Getters">
@@ -43,6 +55,7 @@ public class BoiService {
 
         return get(url);
     }
+
 
     @Cacheable(value = "cpi")
     public JsonNode getCpi() throws Exception {
@@ -59,7 +72,29 @@ public class BoiService {
                 .setBaseUrl(boiCurrentInterest)
                 .build();
 
+        LOGGER.info("CurrentInterestURl " + url);
+
         return new FluentJson(externalApiService.get(url)).get();
+    }
+
+    public JsonNode getBoiCurrentCpi() throws Exception {
+        String url = urlBuilderService
+                .setBaseUrl(boiBaseUrl)
+                .addPathSegment(cpiPercentage)
+                .addParam(lastOne, "1")
+                .build();
+
+        return get(url);
+    }
+
+    public JsonNode getCpiChangeInLast12Months() throws Exception {
+        String url = urlBuilderService
+                .setBaseUrl(boiBaseUrl)
+                .addPathSegment(cpiChangeInLast12Months)
+                .addParam(lastOne, "1")
+                .build();
+
+        return get(url);
     }
     //</editor-fold>
 

@@ -2,7 +2,7 @@ import './DataCard.css'
 import {ArrowDropUp} from "@mui/icons-material";
 
 
-const DataCard = ({ header }) => {
+const DataCard = ({ header, text = "" }) => {
     return (
         <div className="container-fluid p-0 m-0">
             <div className="row p-0 m-0">
@@ -16,12 +16,8 @@ const DataCard = ({ header }) => {
                                 <div className="container-fluid p-0 m-0">
                                     <div className="row">
                                         <div className="col">
-                                            <p className="p-0 m-0 mt-3">
-                                                <span className="fs-2 fw-bold ">122.3</span>
-                                                <span className="fs-4">K</span>
-                                            </p>
-                                            <p className="p-0 mt-0">
-                                                משתמשים
+                                            <p className="p-0 m-0 mt-3 fs-2 fw-bolder">
+                                                {text}
                                             </p>
                                             <p className="p-0 mt-5">
                                                 <ArrowDropUp className="text-success p-0"/>

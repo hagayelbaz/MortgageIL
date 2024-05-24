@@ -24,6 +24,24 @@ class Endpoints {
             .addPath("borrowers");
     }
 
+    static get CURRENT_INTEREST_ENDPOINT() {
+        return this.BASE_ENDPOINT
+            .addPath("data")
+            .addPath("current-boi-interest");
+    }
+
+    static get CURRENT_CPI_ENDPOINT() {
+        return this.BASE_ENDPOINT
+            .addPath("data")
+            .addPath("current-cpi");
+    }
+
+    static get CPI_LAST_YEAR_CHANGE_ENDPOINT() {
+        return this.BASE_ENDPOINT
+            .addPath("data")
+            .addPath("cpi-last-year-change");
+    }
+
 }
 
 export default Endpoints;

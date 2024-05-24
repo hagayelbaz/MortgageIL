@@ -49,3 +49,7 @@ api:
         boi-interest: BOI.STATISTICS/BR/1.0/MNT_RIB_BOI_D.D.RIB_BOI
         boi-current-interest: https://boi.org.il/PublicApi/GetInterest
         cpi: BOI.STATISTICS/PRI/1.0/BI_CPI_NO_ADMN_M.CPI.CPI_2_29_1.MAIN.M.N._Z._Z.I_JAN20_L._Z.A._Z._Z._Z
+        cpi-percentage: BOI.STATISTICS/PRI/1.0/CP_PCH.CPI.CPI_2_29.MAIN.M.N._Z._Z.PT._Z.A.G1._Z.CP
+        cpi-change-in-last-12-months: BOI.STATISTICS/PRI/1.0/CP_PCHYTY.CPI.CPI_2_29.MAIN.M.N._Z._Z.PT._Z.A.G12._Z.CP
+      params:
+        lastOne: lastNObservations

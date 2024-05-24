@@ -1,12 +1,15 @@
 import {useCallback, useState} from "react";
 
+//<editor-fold desc="RequestHooks">
 class RequestHooks {
 
     static #fetch = (urlOptions, endpoint) => {
         return fetch(endpoint, urlOptions)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    return response.text().then(text => {
+                        throw new Error(text || 'מצטערים... משהו השתבש');
+                    });
                 }
                 return response.json();
             });
@@ -25,19 +28,17 @@ class RequestHooks {
     static use = (urlOptions) => {
         const [isLoading, setIsLoading] = useState(false);
         const [data, setData] = useState(null);
-        const [error, setError] = useState(null);
+        const [error, setError] = useState({});
 
         const fetchApi = useCallback((endpoint) => {
-            this.#fetchWithHook(urlOptions,
-                endpoint,
-                setIsLoading,
-                setData,
-                setError);
+            this.#fetchWithHook(urlOptions, endpoint, setIsLoading, setData, setError);
         },[]);
         return {isLoading, data, error, fetchApi};
     }
 }
+//</editor-fold>
 
+//<editor-fold desc="RequestHooks.useGet">
 const useGet = () => {
     const urlOptions = {
         method: 'GET',
@@ -47,7 +48,9 @@ const useGet = () => {
     }
     return RequestHooks.use(urlOptions);
 }
+//</editor-fold>
 
+//<editor-fold desc="RequestHooks.usePost">
 const usePost = () => {
     const urlOptions = {
         method: 'POST',
@@ -57,7 +60,9 @@ const usePost = () => {
     }
     return RequestHooks.use(urlOptions);
 };
+//</editor-fold>
 
+//<editor-fold desc="RequestHooks.usePut">
 const usePut = () => {
     const urlOptions = {
         method: 'PUT',
@@ -67,7 +72,9 @@ const usePut = () => {
     }
     return RequestHooks.use(urlOptions);
 };
+//</editor-fold>
 
+//<editor-fold desc="RequestHooks.useDelete">
 const useDelete = () => {
     const urlOptions = {
         method: 'DELETE',
@@ -77,6 +84,7 @@ const useDelete = () => {
     }
     return RequestHooks.use(urlOptions);
 };
+//</editor-fold>
 
 
 export {useGet, usePost, usePut, useDelete};
