@@ -36,20 +36,63 @@ spring:
 
 api:
   external:
-    data-gov:
-      base-url: https://data.gov.il/api/3/action/datastore_search
-      average-index-linked: 96ba107d-cc15-41cf-b223-5bb592e14666
     boi:
+      base-url: https://edge.boi.gov.il/FusionEdgeServer/sdmx/v2/data/dataflow
+      agency: BOI.STATISTICS
+      filters:
+        LATEST: lastNObservations
+        START_DATE: startPeriod
+        END_DATE: endPeriod
       format:
         json: sdmx-json
         csv: series-csv
         xml: sdmx-ml
-      url:
-        base-url: https://edge.boi.gov.il/FusionEdgeServer/sdmx/v2/data/dataflow
-        boi-interest: BOI.STATISTICS/BR/1.0/MNT_RIB_BOI_D.D.RIB_BOI
-        boi-current-interest: https://boi.org.il/PublicApi/GetInterest
-        cpi: BOI.STATISTICS/PRI/1.0/BI_CPI_NO_ADMN_M.CPI.CPI_2_29_1.MAIN.M.N._Z._Z.I_JAN20_L._Z.A._Z._Z._Z
-        cpi-percentage: BOI.STATISTICS/PRI/1.0/CP_PCH.CPI.CPI_2_29.MAIN.M.N._Z._Z.PT._Z.A.G1._Z.CP
-        cpi-change-in-last-12-months: BOI.STATISTICS/PRI/1.0/CP_PCHYTY.CPI.CPI_2_29.MAIN.M.N._Z._Z.PT._Z.A.G12._Z.CP
-      params:
-        lastOne: lastNObservations
+      endpoints:
+        interest-rate:
+          agency: BR/1.0
+          sub-endpoints:
+            base-rate:
+              description: "ריבית בנק ישראל"
+              endpoint: MNT_RIB_BOI_D.D.RIB_BOI
+        cpi:
+          agency: PRI/1.0
+          sub-endpoints:
+            historic-points:
+              description: "מדד מחירים לצרכן היסטורי (נקודות)"
+              endpoint: BI_CPI_NO_ADMN_M.CPI.CPI_2_29_1.MAIN.M.N._Z._Z.I_JAN20_L._Z.A._Z._Z._Z
+            percentage-change:
+              description: "מדד מחירים לצרכן היסטורי (שינוי באחוזים)"
+              endpoint: CP_PCH.CPI.CPI_2_29.MAIN.M.N._Z._Z.PT._Z.A.G1._Z.CP
+            last-12-months:
+              description: "שינוי במדד מחירים לצרכן ב-12 חודשים האחרונים"
+              endpoint: CP_PCHYTY.CPI.CPI_2_29.MAIN.M.N._Z._Z.PT._Z.A.G12._Z.CP
+            as-group:
+              description: "כל הנתונים היסטוריים של מדד מחירים לצרכן"
+              endpoint: CP_PCHYTY.CPI.CPI_2_29.MAIN.M.N._Z._Z.PT._Z.A.G12._Z.CP,CP_PCH.CPI.CPI_2_29.MAIN.M.N._Z._Z.PT._Z.A.G1._Z.CP,BI_CPI_NO_ADMN_M.CPI.CPI_2_29_1.MAIN.M.N._Z._Z.I_JAN20_L._Z.A._Z._Z._Z
+        inflation-expectations:
+          agency: ZCM/1.0
+          sub-endpoints:
+            next-year:
+              description: "הציפיות משוק ההון לאינפלציה בשנה הקרובה"
+              endpoint: EXP_EXP_01Y_BI_MA.M._Z.CAL.INF_EXP.M_T.Y01T01.INF.CP
+            next-next-year:
+              description: "הציפיות פורוורד משוק ההון לאינפלציה לשנה השנייה"
+              endpoint: EXP_EXB_FRW_ZD_01Y_02Y_MA.M._Z.CAL.FRW_EXP.M_T.2Y.INF.CP
+            five-years:
+              description: "הציפיות משוק ההון לאינפלציה ל-5 שנים"
+              endpoint: EXP_EXB_ZD_5Y_MA.M._Z.CAL.INF_EXP.M_T.Y05T05.INF.CP
+            twelve-months:
+              description: "ממוצע תחזיות החזאים לאינפלציה ל-12 חודשים קדימה"
+              endpoint: EXP_HAZ_MAD_AVG_01Y_MA.M._Z.CAL.INF_EXP._Z.Y01T01.INF.FORC
+            third-year:
+              description: "הציפיות פורוורד משוק ההון לאינפלציה לשנה השלישית"
+              endpoint: EXP_EXB_FRW_ZD_02Y_03Y_MA.M._Z.CAL.FRW_EXP.M_T.3Y.INF.CP
+            five_to_three_years:
+              description: "הציפיות פורוורד משוק ההון לאינפלציה 5-3 שנים"
+              endpoint: EXP_EXB_FRW_ZD_03Y_05Y_MA.M._Z.CAL.FRW_EXP.M_T.Y03T5.INF.CP
+            ten_to_five_years:
+              description: "הציפיות פורוורד משוק ההון לאינפלציה 10-5 שנים"
+              endpoint: EXP_EXB_FRW_ZD_05Y_10Y_MA.M._Z.CAL.FRW_EXP.M_T.Y05T10.INF.CP
+            as-group:
+              description: "כל התחזיות לאינפלציה כקבוצה"
+              endpoint: EXP_EXB_FRW_ZD_05Y_10Y_MA.M._Z.CAL.FRW_EXP.M_T.Y05T10.INF.CP,EXP_EXB_FRW_ZD_03Y_05Y_MA.M._Z.CAL.FRW_EXP.M_T.Y03T5.INF.CP,EXP_EXB_FRW_ZD_02Y_03Y_MA.M._Z.CAL.FRW_EXP.M_T.3Y.INF.CP,EXP_HAZ_MAD_AVG_01Y_MA.M._Z.CAL.INF_EXP._Z.Y01T01.INF.FORC,EXP_EXB_ZD_5Y_MA.M._Z.CAL.INF_EXP.M_T.Y05T05.INF.CP,EXP_EXB_FRW_ZD_01Y_02Y_MA.M._Z.CAL.FRW_EXP.M_T.2Y.INF.CP,EXP_EXP_01Y_BI_MA.M._Z.CAL.INF_EXP.M_T.Y01T01.INF.CP
