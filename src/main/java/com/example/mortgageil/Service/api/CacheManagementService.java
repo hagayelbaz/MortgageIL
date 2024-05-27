@@ -11,27 +11,71 @@ public class CacheManagementService {
 
     private final static Logger LOGGER = Logger.getLogger(CacheManagementService.class.getName());
 
+
     @Scheduled(cron = "0 0 3 * * ?")
-    @CacheEvict(value = "boiInterest", allEntries = true)
-    public void refreshBoiInterestCache() {
-        LOGGER.info("Boi interest cache has been refreshed");
+    @CacheEvict(value = "interest-rate.base-rate", allEntries = true)
+    public void clearInterestRateCache() {
+        LOGGER.info("Interest rate cache cleared");
     }
 
     @Scheduled(cron = "0 0 3 * * ?")
-    @CacheEvict(value = "last12MonthsInterest", allEntries = true)
-    public void refreshLast12MonthsInterestCache() {
-        LOGGER.info("Last 12 months interest cache has been refreshed");
+    @CacheEvict(value = "interest-rate.base-rate.last-12-months", allEntries = true)
+    public void clearLast12MonthsInterestRateCache() {
+        LOGGER.info("Last 12 months interest rate cache cleared");
+    }
+
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "cpi.percentage-change", allEntries = true)
+    public void clearCpiPercentageChangeCache() {
+        LOGGER.info("CPI percentage change cache cleared");
     }
 
     @Scheduled(cron = "0 0 3 * * ?")
-    @CacheEvict(value = "currentInterest", allEntries = true)
-    public void refreshCurrentInterestCache() {
-        LOGGER.info("Current interest cache has been refreshed");
+    @CacheEvict(value = "cpi.historic-points", allEntries = true)
+    public void clearCpiHistoricPointsCache() {
+        LOGGER.info("CPI historic points cache cleared");
     }
 
     @Scheduled(cron = "0 0 3 * * ?")
-    @CacheEvict(value = "cpi", allEntries = true)
-    public void refreshCPICache() {
-        LOGGER.info("CPI cache has been refreshed");
+    @CacheEvict(value = "inflation-expectations.next-year", allEntries = true)
+    public void clearInflationExpectationsNextYearCache() {
+        LOGGER.info("Inflation expectations next year cache cleared");
+    }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "inflation-expectations.next-next-year", allEntries = true)
+    public void clearInflationExpectationsNextNextYearCache() {
+        LOGGER.info("Inflation expectations next next year cache cleared");
+    }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "inflation-expectations.five-years", allEntries = true)
+    public void clearInflationExpectationsFiveYearsCache() {
+        LOGGER.info("Inflation expectations five years cache cleared");
+    }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "inflation-expectations.average-twelve-months", allEntries = true)
+    public void clearInflationExpectationsAverageTwelveMonthsCache() {
+        LOGGER.info("Inflation expectations average twelve months cache cleared");
+    }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "inflation-expectations.third-year", allEntries = true)
+    public void clearInflationExpectationsThirdYearCache() {
+        LOGGER.info("Inflation expectations third year cache cleared");
+    }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "inflation-expectations.five-to-three-years", allEntries = true)
+    public void clearInflationExpectationsFiveToThreeYearsCache() {
+        LOGGER.info("Inflation expectations five to three years cache cleared");
+    }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "inflation-expectations.ten-to-five-years", allEntries = true)
+    public void clearInflationExpectationsTenToFiveYearsCache() {
+        LOGGER.info("Inflation expectations ten to five years cache cleared");
     }
 }

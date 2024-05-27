@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 public class SDMXApiService {
 
     private static final Logger LOGGER = Logger.getLogger(SDMXApiService.class.getName());
+
     // <editor-fold desc="Fields">
     @Resource(name = "apiProperties")
     private ApiProperties apiProperties;
@@ -70,8 +71,6 @@ public class SDMXApiService {
         for (Entry<FilterKey, String> entry : filters.entrySet()) {
             url = url.addParam(apiProperties.getFilters().get(entry.getKey().name()), entry.getValue());
         }
-
-        LOGGER.info("Fetching data from: " + url.build());
 
         return restTemplate.getForObject(url.build(), String.class);
     }
