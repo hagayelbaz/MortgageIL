@@ -1,9 +1,10 @@
 class UrlBuilder {
-    constructor(base) {
+    constructor(base, path = '', queryString = '') {
         this.baseUrl = base.endsWith('/') ? base : `${base}/`;
-        this.path = '';
-        this.queryString = '';
+        this.path = path;
+        this.queryString = queryString;
     }
+
 
     addPath(part) {
         if (this.path.endsWith('/') || part.startsWith('/')) {
@@ -11,7 +12,7 @@ class UrlBuilder {
         } else {
             this.path += `/${part}`;
         }
-        return this;
+        return new UrlBuilder(this.baseUrl, this.path, this.queryString);
     }
 
     addQueryParam(key, value) {
@@ -20,7 +21,7 @@ class UrlBuilder {
         } else {
             this.queryString += `&${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
         }
-        return this;
+        return new UrlBuilder(this.baseUrl, this.path, this.queryString);
     }
 
     toString() {

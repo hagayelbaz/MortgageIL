@@ -15,12 +15,17 @@ class RequestHooks {
             });
     }
 
-    static #fetchWithHook = (urlOptions, endpoint, setIsLoading, setData, setError) => {
+    static #fetchWithHook = (urlOptions, endpoint, setIsLoading, setData, setError, setIsOK) => {
         setIsLoading(true);
         setData(null);
         setError(null);
+        setIsOK(false);
+
         this.#fetch(urlOptions, endpoint)
-            .then(setData)
+            .then((data) => {
+                setData(data);
+                setIsOK(true);
+            })
             .catch(setError)
             .finally(() => setIsLoading(false));
     }
@@ -29,11 +34,18 @@ class RequestHooks {
         const [isLoading, setIsLoading] = useState(false);
         const [data, setData] = useState(null);
         const [error, setError] = useState({});
+        const [isOK, setIsOK] = useState(false);
 
         const fetchApi = useCallback((endpoint) => {
-            this.#fetchWithHook(urlOptions, endpoint, setIsLoading, setData, setError);
+            this.#fetchWithHook(urlOptions, endpoint, setIsLoading, setData, setError, setIsOK);
         },[]);
-        return {isLoading, data, error, fetchApi};
+
+        return {
+            isLoading,
+            data,
+            error,
+            fetchApi,
+            isOK};
     }
 }
 //</editor-fold>

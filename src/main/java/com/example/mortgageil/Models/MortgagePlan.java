@@ -7,6 +7,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Getter
 @Setter
 @Entity
@@ -33,6 +36,8 @@ public class MortgagePlan implements ManageableJpa {
     private int duration;
 
     private int balloonDuration;
+
+    private LocalDate startDate;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)

@@ -4,8 +4,8 @@ import {Spinner} from "react-bootstrap";
 
 const Loading = ({isLoading, children}) => {
     return (
-        <div className="position-relative">
-            <div className={`${isLoading ? 'loading-children' : ''}`}>
+        <div className="position-relative h-100">
+            <div className={`${isLoading ? 'loading-children' : 'h-100'}`}>
                 {children}
             </div>
             {isLoading && (

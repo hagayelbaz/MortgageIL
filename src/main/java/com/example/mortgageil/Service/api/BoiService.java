@@ -85,6 +85,24 @@ public class BoiService {
                 .fetch();
         return DataFormatConverter.sdmxToJson(data);
     }
+
+    public JsonNode getCpiLastMonthChange() throws Exception {
+        String data = SDMXApiService
+                .setEndpoint("cpi")
+                .setSubEndpoint("percentage-change")
+                .addFilter(FilterKey.LATEST, "1")
+                .fetch();
+        return DataFormatConverter.sdmxToJson(data);
+    }
+
+    public JsonNode getLastYearChangeForThisMonth() throws Exception {
+        String data = SDMXApiService
+                .setEndpoint("cpi")
+                .setSubEndpoint("last-12-months")
+                .addFilter(FilterKey.LATEST, "1")
+                .fetch();
+        return DataFormatConverter.sdmxToJson(data);
+    }
     //</editor-fold>
 
     //<editor-fold desc="Inflation Expectations">

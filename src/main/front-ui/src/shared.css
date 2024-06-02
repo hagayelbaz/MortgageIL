@@ -85,6 +85,10 @@
     color: var(--accent-color-dark) !important;
 }
 
+.muted-color {
+    color: var(--mute-color) !important;
+}
+
 /* background colors as classes */
 .success-bg {
     background-color: var(--success-color) !important;

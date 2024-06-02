@@ -50,6 +50,16 @@ public class DataController {
     public ResponseEntity<Object> getCpiLastYearChange() throws Exception {
         return ResponseEntity.ok(boiService.getCpiLastYearChange());
     }
+
+    @GetMapping("/cpi/last-month-change")
+    public ResponseEntity<Object> getCpiLastMonthChange() throws Exception {
+        return ResponseEntity.ok(boiService.getCpiLastMonthChange());
+    }
+
+    @GetMapping("/cpi/last-year-change-this-month")
+    public ResponseEntity<Object> getCpiLastYearChangeThisMonth() throws Exception {
+        return ResponseEntity.ok(boiService.getLastYearChangeForThisMonth());
+    }
     // </editor-fold>
 
     // <editor-fold desc="Inflation Expectations">

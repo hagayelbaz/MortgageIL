@@ -1,54 +1,41 @@
-import {useGet} from "../../../../../Classes/RequestHooks";
-import {useEffect} from "react";
+import {useCallback} from "react";
 import Endpoints from "../../../../../Classes/Endpoints";
-import Loading from "../../../../Loading/Loading";
 import '../../../../../shared.css';
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import './BoiCurrentInterestCard.css';
+import Card from "../Card/Card";
+import CardInside from "../Card/CardInside";
+import withFetch from "../../../../HOC/withFetch";
 
 const BoiCurrentInterestCard = () => {
-    const {
-        data: currentInterest,
-        fetchApi: fetchCurrentInterest,
-        isLoading: isInterestLoading,
-        error: interestError
-    } = useGet();
+    const icon = <TrendingUpIcon/>;
+    const CardWithFetch = withFetch(Card);
+    const InsideCardWithFetch = withFetch(CardInside);
 
-    useEffect(() => fetchCurrentInterest(Endpoints.CURRENT_INTEREST_ENDPOINT), []);
+    const mapData = useCallback((data) => {
+        return {
+            value: `${data?.value || ''}%`,
+            date: `נכון ל: ${data?.date || ''}`
+        }
+    }, []);
 
+    const mapInsideData = useCallback((data) => {
+        return {
+            value: `ריבית פריים: ${(parseFloat(data?.value) + 1.5) || ''}%`,
+        }
+    }, []);
 
     return (
-        <Loading isLoading={isInterestLoading}>
-            <div className="card secondary-bg card-data text-light">
-                <div className="card-body pb-0 mb-0">
-                    <h5 className="card-title small card-data-header mb-1">
-                        ריבית בנק ישראל
-                    </h5>
-                    <div className="icon-circle accent-bg">
-                        <TrendingUpIcon/>
-                    </div>
-                    <div className="card-text">
-                        <p hidden={interestError} className="fs-2">
-                            <span hidden={!isInterestLoading} className="font-200 fs-6">טוען..</span>
-                            <span hidden={isInterestLoading} className="font-700">
-                                {currentInterest?.currentInterest || "אין נתונים"}
-                            </span>
-                            <span hidden={isInterestLoading}>%</span>
-                        </p>
-                        <p hidden={!interestError} className="muted-text my-3">
-                            אירעה שגיאה בטעינת הנתונים
-                            {interestError && interestError.message ? `: ${interestError.message}` : ""}
-                        </p>
-                    </div>
-                </div>
-                <div className="card-footer">
-                    <p hidden={isInterestLoading || interestError} className="muted-text m-0 p-0">
-                        עדכון הבא: &nbsp;
-                        {currentInterest?.nextInterestDate ? new Date(currentInterest.nextInterestDate).toLocaleDateString('he-IL') : "אין נתונים"}
-                    </p>
-                </div>
-            </div>
-        </Loading>
+        <>
+            <CardWithFetch endpoint={Endpoints.INTEREST.CURRENT_ENDPOINT}
+                           icon={icon}
+                           dataMapping={mapData}
+                           iconColor="bg-success"
+                           header="ריבית בנק ישראל">
+                <InsideCardWithFetch endpoint={Endpoints.INTEREST.CURRENT_ENDPOINT}
+                                     dataMapping={mapInsideData}/>
+            </CardWithFetch>
+        </>
     )
 }
 
