@@ -12,9 +12,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Payment {
-    private double principal;
-    private double interest;
-    private double totalPayment;
+    private double payment;
     private double remainingBalance;
+    private double interestPaid;
+    private double principalPaid;
     private LocalDate date;
 }

@@ -5,6 +5,7 @@ import com.example.mortgageil.Models.MortgagePlan;
 
 import java.util.List;
 
-public interface PaymentStrategy {
-    List<Payment> calculatePayments(MortgagePlan mortgageDetails);
+public interface IPaymentStrategy {
+    void load(MortgagePlan mortgagePlan);
+    List<Payment> getPayments();
 }
