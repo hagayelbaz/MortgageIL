@@ -1,16 +1,24 @@
 package com.example.mortgageil.Core.Mortgage;
 
 import com.example.mortgageil.Core.Clasess.Payment;
+import com.example.mortgageil.Core.calc.FinancialMath;
 import com.example.mortgageil.Core.contracts.IPaymentStrategy;
 import com.example.mortgageil.Models.MortgagePlan;
+import jakarta.annotation.Resource;
 import lombok.Getter;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public abstract class AmortizationSchedule implements IPaymentStrategy {
+@Component
+public abstract class AmortizationScheduleService implements IPaymentStrategy {
+
+    @Resource(name = "futureData")
+    protected FutureData futureData;
 
     private MortgagePlan mortgageDetails;
+
     private List<Payment> payments;
     @Getter
     private double paymentsAverage;
@@ -21,18 +29,38 @@ public abstract class AmortizationSchedule implements IPaymentStrategy {
     @Getter
     private double totalPrincipal;
 
+
+
     public void load(MortgagePlan mortgagePlan) {
         this.mortgageDetails = mortgagePlan;
         this.payments = getPayments();
         calc();
     }
 
+    public double getMaxPayment(){
+        return payments.stream().mapToDouble(Payment::getPayment).max().orElse(0);
+    }
+
+    public double getFirstPayment(){
+        return payments.stream().mapToDouble(Payment::getPayment).findFirst().orElse(0);
+    }
+
+    public double getCpi(){
+        return futureData.getFutureCpi(mortgageDetails.getDuration());
+    }
+
+    public double getForecastedTotalInterest(){
+        return FinancialMath
+                .ForecastedTotalInterest(mortgageDetails.getAmount(),
+                        payments.stream().mapToDouble(Payment::getPayment).toArray());
+    }
+
     protected double getFutureInterest(int month){
-        return FutureData.getFutureInterest(mortgageDetails.getType());
+        return futureData.getFutureInterest(mortgageDetails.getType());
     }
 
     protected double getFutureCpi(int month){
-        return FutureData.getFutureCpi(month);
+        return futureData.getFutureCpi(month);
     }
 
     protected MortgagePlan getMortgageDetails() {

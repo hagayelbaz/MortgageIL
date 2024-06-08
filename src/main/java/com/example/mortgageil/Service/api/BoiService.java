@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.function.Function;
 import java.util.logging.Logger;
 
 
@@ -23,6 +24,7 @@ public class BoiService {
     private BoiService getSelf() {
         return context.getBean(BoiService.class);
     }
+
     @Resource(name = "SDMXApiService")
     private SDMXApiService SDMXApiService;
     //</editor-fold>
@@ -172,20 +174,41 @@ public class BoiService {
     public JsonNode getInflationExpectationsByMonths(double months) throws Exception {
         BoiService self = getSelf();
 
-        if(months < 12)
+        if (months < 12)
             return self.getInflationExpectationsNextYear();
-        if(months < 24)
+        if (months < 24)
             return self.getInflationExpectationsNextNextYear();
-        if(months < 36)
+        if (months < 36)
             return self.getInflationExpectationsThirdYear();
-        if(months < 60)
+        if (months < 60)
             return self.getInflationExpectationsFiveToThreeYears();
-        if(months == 60)
+        if (months == 60)
             return self.getInflationExpectationsFiveYears();
-        if(months < 120)
+        if (months < 120)
             return self.getInflationExpectationsTenToFiveYears();
 
         throw new IllegalArgumentException("Invalid months value");
+    }
+
+    public JsonNode test(int month) throws Exception {
+        Function<Integer, String> topicSelector = mnt -> {
+            if (month < 12)
+                return "next-year";
+            if (month < 24)
+                return "next-next-year";
+            if (month < 36)
+                return "third-year";
+            if (month <= 60)
+                return "five-to-three-years";
+            if (month < 72)
+                return "five-years";
+            if (month < 120)
+                return "ten-to-five-years";
+            return "ten-to-five-years";
+        };
+
+        return getGeneralData("inflation-expectations",
+                topicSelector.apply(month), Map.of(FilterKey.LATEST, "1"));
     }
     //</editor-fold>
 

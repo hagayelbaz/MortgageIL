@@ -1,12 +1,20 @@
 package com.example.mortgageil.Core.Mortgage;
 
 import com.example.mortgageil.Core.Enum.MortgagePlanType;
+import com.example.mortgageil.Core.calc.FinancialMath;
+import com.example.mortgageil.Service.api.BoiService;
+import jakarta.annotation.Resource;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class FutureData {
 
-    public static double getFutureInterest(MortgagePlanType type) {
+    @Resource(name = "boiService")
+    private BoiService boiService;
+
+    public double getFutureInterest(MortgagePlanType type) {
         switch (type) {
             case NON_LINKED_FIXED:
                 return 0;
@@ -35,8 +43,13 @@ public class FutureData {
         }
     }
 
-    public static double getFutureCpi(int month) {
-        return Math.pow(1.5 / 100 + 1, 1f / 12f) - 1;
+    public double getFutureCpi(int month) {
+        try {
+            var test = boiService.test(month).get("value").asDouble();
+            return test;//FinancialMath.cpiMonthly(test) +1;
+        }catch (Exception e) {
+            throw new RuntimeException("Failed to get future cpi");
+        }
     }
 
 }

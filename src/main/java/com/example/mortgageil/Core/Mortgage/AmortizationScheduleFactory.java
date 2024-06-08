@@ -1,12 +1,21 @@
 package com.example.mortgageil.Core.Mortgage;
 
 import com.example.mortgageil.Core.Enum.MortgagePlanType;
-import com.example.mortgageil.Models.MortgagePlan;
+import com.example.mortgageil.Core.contracts.IAmortizationScheduleFactory;
+import jakarta.annotation.Resource;
+import org.springframework.stereotype.Component;
 
-public class AmortizationScheduleFactory {
 
-    public static AmortizationSchedule get(MortgagePlanType mortgagePlanType) {
-        AmortizationSchedule amortizationSchedule = null;
+@Component
+public class AmortizationScheduleFactory implements IAmortizationScheduleFactory {
+
+    @Resource(name = "annuityAmortizationScheduleService")
+    private AnnuityAmortizationScheduleService annuityAmortizationScheduleService;
+
+    @Resource(name = "equalPrincipalAmortizationScheduleService")
+    private EqualPrincipalAmortizationScheduleService equalPrincipalAmortizationScheduleService;
+
+    public AmortizationScheduleService get(MortgagePlanType mortgagePlanType) {
         switch (mortgagePlanType) {
             case NON_LINKED_FIXED:
             case PRIME_RATE:
@@ -14,16 +23,14 @@ public class AmortizationScheduleFactory {
             case VARIABLE_EVERY_TWO_AND_HALF_YEARS:
             case VARIABLE_EVERY_TEN_YEARS:
             case ENTITLEMENT:
-                amortizationSchedule = new AnnuityAmortizationSchedule();
-                break;
+                return annuityAmortizationScheduleService;
             case LINKED_FIXED:
             case VARIABLE_EVERY_FIVE_YEARS_LINKED:
             case VARIABLE_EVERY_TWO_AND_HALF_YEARS_LINKED:
             case VARIABLE_EVERY_TEN_YEARS_LINKED:
             case EURO:
-                amortizationSchedule = new EqualPrincipalAmortizationSchedule();
-                break;
+                return equalPrincipalAmortizationScheduleService;
         }
-        return amortizationSchedule;
+        throw new IllegalArgumentException("Unsupported mortgage plan type");
     }
 }

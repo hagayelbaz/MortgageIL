@@ -2,17 +2,23 @@ package com.example.mortgageil.Controller.API.V1.Internal.calc;
 
 
 import com.example.mortgageil.Core.Enum.MortgagePlanType;
-import com.example.mortgageil.Core.Mortgage.AmortizationSchedule;
 import com.example.mortgageil.Core.Mortgage.AmortizationScheduleFactory;
+import com.example.mortgageil.Core.Mortgage.FutureData;
+import com.example.mortgageil.Core.calc.FinancialMath;
 import com.example.mortgageil.Models.MortgagePlan;
+import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
+
 @RestController
 @RequestMapping("/api/v1/internal/calc/mortgage")
 public class MortgageController {
+
+    @Resource(name = "amortizationScheduleFactory")
+    private AmortizationScheduleFactory amortizationScheduleFactory;
 
 
     @GetMapping("/annuity")
@@ -22,14 +28,16 @@ public class MortgageController {
         mortgagePlan.setInterestRate(interestRate);
         mortgagePlan.setDuration(duration);
         mortgagePlan.setStartDate(LocalDate.now());
-        mortgagePlan.setType(MortgagePlanType.LINKED_FIXED);
-        AmortizationSchedule amortizationSchedule = AmortizationScheduleFactory.get(mortgagePlan.getType());
+        mortgagePlan.setType(MortgagePlanType.NON_LINKED_FIXED);
+        var amortizationSchedule = amortizationScheduleFactory.get(MortgagePlanType.NON_LINKED_FIXED);
         amortizationSchedule.load(mortgagePlan);
-        return ResponseEntity.ok(amortizationSchedule.getPayments());
+        return ResponseEntity.ok(amortizationSchedule);//
     }
 
     @GetMapping("/test")
     public ResponseEntity<?> test() {
-        return ResponseEntity.ok("test");
+        double [] values = {-100,40,59,55,20};
+        var irr = FinancialMath.IRR(values);
+        return ResponseEntity.ok(irr);
     }
 }
