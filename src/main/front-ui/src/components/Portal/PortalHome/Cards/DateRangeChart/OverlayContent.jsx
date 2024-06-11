@@ -2,34 +2,29 @@ import {Form, Popover} from "react-bootstrap";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import InputGroup from "react-bootstrap/InputGroup";
 import React, {useEffect, useState} from "react";
-import {DateRange} from "@mui/icons-material";
 
 const OverlayContent = ({setShowOverlay, startDate, setStartDate, endDate, setEndDate}) => {
-    const [tempStartDate, setTempStartDate] = useState(startDate);
-    const [tempEndDate, setTempEndDate] = useState(endDate);
+    const [tmpStartDate, setTmpStartDate] = useState(startDate);
+    const [tmpEndDate, setTmpEndDate] = useState(endDate);
 
-    const formatDate = (date) => {
-        return date.toISOString().substring(0, 10);
+    const formatDate = (date) => date.toISOString().substring(0, 10);
+    const onStartDateChange = (e) => setTmpStartDate(convertDate(e));
+    const onEndDateChange = (e) => setTmpEndDate(convertDate(e));
+    const convertDate = (e) => {
+        const dateValue = e.target.value;
+        if (dateValue && dateValue.match(/^\d{4}-\d{2}-\d{2}$/)) {
+            return new Date(dateValue);
+        }
     }
-
-    const onStartDateChange = (e) => {
-        const dateValue = e.target.value;
-        if (dateValue && dateValue.match(/^\d{4}-\d{2}-\d{2}$/)) {
-            setTempStartDate(new Date(dateValue));
-        }
-    };
-
-    const onEndDateChange = (e) => {
-        const dateValue = e.target.value;
-        if (dateValue && dateValue.match(/^\d{4}-\d{2}-\d{2}$/)) {
-            setTempEndDate(new Date(dateValue));
-        }
-    };
-
     const onFilterClickPr = () => {
-        setStartDate(tempStartDate);
-        setEndDate(tempEndDate);
+        setStartDate(tmpStartDate);
+        setEndDate(tmpEndDate);
     }
+
+    useEffect(() => {
+        setTmpStartDate(startDate);
+        setTmpEndDate(endDate);
+    }, [startDate, endDate]);
 
     return (
         <Popover className="secondary-bg-light text-light border-2">
@@ -45,7 +40,7 @@ const OverlayContent = ({setShowOverlay, startDate, setStartDate, endDate, setEn
                     <InputGroup className="mb-3">
                         <Form.Control className="secondary-bg text-light" type="date"
                                       onChange={onStartDateChange}
-                                      value={formatDate(tempStartDate)}/>
+                                      value={formatDate(tmpStartDate)}/>
                         <InputGroup.Text
                             className="secondary-bg text-light">מתאריך</InputGroup.Text>
                     </InputGroup>
@@ -54,7 +49,7 @@ const OverlayContent = ({setShowOverlay, startDate, setStartDate, endDate, setEn
                     <InputGroup className="mb-3">
                         <Form.Control className="secondary-bg text-light" type="date"
                                       onChange={onEndDateChange}
-                                      value={formatDate(tempEndDate)}/>
+                                      value={formatDate(tmpEndDate)}/>
                         <InputGroup.Text
                             className="secondary-bg text-light">עד תאריך</InputGroup.Text>
                     </InputGroup>

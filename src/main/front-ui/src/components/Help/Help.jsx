@@ -28,7 +28,7 @@ function useTooltip() {
 }
 
 
-function Help({children, header, text, placement = 'bottom'}) {
+function Help({className, children, header, text, placement = 'bottom'}) {
     const {visible, show, hide} = useTooltip();
 
 
@@ -36,7 +36,10 @@ function Help({children, header, text, placement = 'bottom'}) {
         <OverlayTrigger show={visible}
                         placement={placement}
                         overlay={popover(header, text)}>
-            <div onMouseEnter={show} onMouseLeave={hide}>
+            <div role="button"
+                 className={`d-inline ${className}`}
+                 onMouseEnter={show}
+                 onMouseLeave={hide}>
                 {children}
             </div>
         </OverlayTrigger>

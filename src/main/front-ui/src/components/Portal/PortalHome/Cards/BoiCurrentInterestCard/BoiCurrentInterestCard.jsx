@@ -31,6 +31,7 @@ const BoiCurrentInterestCard = () => {
                            icon={icon}
                            dataMapping={mapData}
                            iconColor="bg-success"
+                           help="ריבית בנק ישראל (ריבית הפריים היא ריבית בנק ישראל + 1.5%)"
                            header="ריבית בנק ישראל">
                 <InsideCardWithFetch endpoint={Endpoints.INTEREST.CURRENT_ENDPOINT}
                                      dataMapping={mapInsideData}/>

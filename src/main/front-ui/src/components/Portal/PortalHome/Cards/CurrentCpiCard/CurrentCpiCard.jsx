@@ -31,6 +31,7 @@ const CurrentCpiCard = () => {
                            icon={icon}
                            dataMapping={mapData}
                            iconColor="bg-danger"
+                           help="שינוי במדד מחירים לצרכן מחודש קודם"
                            header="מדד מחירים לצרכן">
                 <InsideCardWithFetch endpoint={Endpoints.CPI.LAST_YEAR_CHANGE_THIS_MONTH_ENDPOINT}
                                      dataMapping={mapInsideData}/>

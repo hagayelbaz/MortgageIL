@@ -20,7 +20,7 @@ const CustomTooltip = ({active, payload, label, data, style}) => {
                 <p>{`${new Date(label).toLocaleDateString("en-US", {
                     month: '2-digit',
                     year: 'numeric'
-                })} - ${item.value}p`}</p>
+                })} - ${parseFloat(item.value).toFixed(2)}p`}</p>
                 <p>
                     <span className={diff >= 0 ? 'text-success' : 'text-danger'}>
                         {`${Math.abs(diff).toFixed(2)}%`}

@@ -1,5 +1,6 @@
 import Loading from "../../../../Loading/Loading";
-
+import Help from "../../../../Help/Help";
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 const Card = ({
                   isLoading = undefined,
@@ -9,6 +10,7 @@ const Card = ({
                   data,
                   icon,
                   iconColor,
+                  help,
                   children
               }) => {
 
@@ -17,7 +19,12 @@ const Card = ({
             <div className="card secondary-bg card-data text-light h-100">
                 <div className="card-body pb-0 mb-0">
                     <h5 className="card-title small card-data-header">
-                        {header}
+                        <span>{header}</span>
+                        {help && (
+                            <Help text={help} className="mx-1">
+                                <HelpOutlineIcon className="muted-color"/>
+                            </Help>
+                        )}
                     </h5>
                     <div className={`icon-circle text-light ${iconColor}`}>
                         {icon}

@@ -19,7 +19,7 @@ const withFetch = (WrappedComponent) => {
 
         return (
             <WrappedComponent {...props}
-                              data={mappedData}
+                              data={mappedData ? mappedData : data}
                               isLoading={isLoading}
                               isOK={isOK}
                               error={error}/>
