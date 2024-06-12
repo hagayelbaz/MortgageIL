@@ -1,0 +1,1 @@
+mvn clean package -Dspring.config.name=application-local

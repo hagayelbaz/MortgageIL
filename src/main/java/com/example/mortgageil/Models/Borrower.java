@@ -1,6 +1,7 @@
 package com.example.mortgageil.Models;
 
 import com.example.mortgageil.Core.contracts.ManageableJpa;
+import com.example.mortgageil.Models.User.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

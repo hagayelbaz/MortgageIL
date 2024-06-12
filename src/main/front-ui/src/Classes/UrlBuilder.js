@@ -1,6 +1,6 @@
 class UrlBuilder {
     constructor(base, path = '', queryString = '') {
-        this.baseUrl = base.endsWith('/') ? base : `${base}/`;
+        this.baseUrl = base.endsWith('/') ? base : `${base}`;
         this.path = path;
         this.queryString = queryString;
     }

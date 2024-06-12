@@ -7,11 +7,11 @@ import {OverlayTrigger, Popover} from "react-bootstrap";
 const popover = (header, text) => {
 
     return (
-        <Popover className="secondary-bg-light p-0 text-light border-2 position-fixed">
-            <Popover.Header className="secondary-bg-light p-2" as="h3">
+        <Popover className="secondary-bg-light p-0 border-2 position-fixed">
+            <Popover.Header className="secondary-bg-light text-light p-2" as="h3">
                 {header}
             </Popover.Header>
-            <Popover.Body className="p-2">
+            <Popover.Body className="p-2 text-light">
                 {text}
             </Popover.Body>
         </Popover>

@@ -2,7 +2,7 @@ package com.example.mortgageil.Models.Converters;
 
 import com.example.mortgageil.Core.contracts.RequestToEntityConverter;
 import com.example.mortgageil.Models.Request.UserRequest;
-import com.example.mortgageil.Models.User;
+import com.example.mortgageil.Models.User.User;
 
 public class UserRequestToEntityConverter implements RequestToEntityConverter<UserRequest, User> {
     @Override

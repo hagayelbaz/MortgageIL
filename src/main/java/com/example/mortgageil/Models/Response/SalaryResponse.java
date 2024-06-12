@@ -2,7 +2,6 @@ package com.example.mortgageil.Models.Response;
 
 
 import com.example.mortgageil.Models.Person;
-import com.example.mortgageil.Models.User;
 import lombok.*;
 
 import java.util.Date;

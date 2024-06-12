@@ -6,6 +6,11 @@ server:
     mime-types: text/html,text/css,application/javascript,application/json
 
 spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false  # Set to true in production
+
   datasource:
     url: jdbc:postgresql://localhost:5432/MortgageIL
     username: postgres
@@ -19,6 +24,7 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+      static-path-pattern: /resources/**
   cache:
     type: redis
     host: localhost
@@ -32,6 +38,29 @@ spring:
           max-active: 10
           max-idle: 5
           min-idle: 0
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 732809784272-05bp2kl2d15qj28efqstt0qer4prcpag.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri: "{baseUrl}/login/oauth2/code/google"
+            client-authentication-method: client_secret_post
+            client-name: Google
+            scope:
+              - email
+              - profile
+            authorization-grant-type: authorization_code
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://www.googleapis.com/oauth2/v4/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            user-name-attribute: sub
+            issuer-uri: https://accounts.google.com
+            jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+            user-info-authentication-method: form
 
 
 api:
@@ -104,3 +133,29 @@ api:
                   endpoint: BNK_99034_LC_BIR_MRTG_230
 
 
+mortgageil:
+  security:
+    paths:
+      guest:
+        - /**
+        - auth/login
+        - about
+        - contact
+        - portal/**
+        - react/**
+      all:
+        - home
+      user:
+        - api/data/**
+      admin:
+        - auth/create-user
+      shared:
+        - account/**
+  auth:
+    login:
+      page-url: /auth/login
+      success-url: /create-delivery
+      failure-url: /auth/login?error=true
+    logout:
+      page-url: /logout
+      success-url: /

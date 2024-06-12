@@ -10,8 +10,8 @@ import PortalMortgageTrack from "../../components/Portal/PortalMortgageTrack/Por
 const MainRoute = () => {
     return (
         <Routes>
-            <Route path="/" element={<HomePage/>} />
-            <Route path="portal/*" element={<Portal/>}>
+            <Route path="/details" element={<HomePage/>} />
+            <Route path="*" element={<Portal/>}>
                 <Route index path="" element={<PortalHome/>}/>
                 <Route path="mortgageTrack" element={<PortalMortgageTrack/>}/>
                 <Route path="borrowers" element={<PortalBorrowers/>}/>
