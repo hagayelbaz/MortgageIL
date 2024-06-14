@@ -7,9 +7,9 @@ export class Vars {
     static SECONDARY_COLOR = "#2b2d30";
     static SECONDARY_COLOR_LIGHT = "#5c5d5e";
     static SECONDARY_COLOR_DARK = "#1e1f22";
-    static ACCENT_COLOR = "#01d1ff";
-    static ACCENT_COLOR_LIGHT = "#4ff9ff";
-    static ACCENT_COLOR_DARK = "#00a1c2";
+    static ACCENT_COLOR = "#439d73";
+    static ACCENT_COLOR_LIGHT = "#00c2a2";
+    static ACCENT_COLOR_DARK = "#007f5f";
     static TEXT_COLOR = "#ffffff";
     static SUCCESS_COLOR = "#519979";
     static DANGER_COLOR = "#ff0000";

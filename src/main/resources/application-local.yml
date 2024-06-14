@@ -131,6 +131,29 @@ api:
                 linked-fixed:
                   description: "ריבית ממוצעת למשכנתא קבועה צמודה"
                   endpoint: BNK_99034_LC_BIR_MRTG_230
+    banks:
+      - leumi:
+          name: לאומי
+          code: 10
+      - discount:
+          name: דיסקונט
+          code: 11
+      - hapoalim:
+          name: הפועלים
+          code: 12
+      - mercantile:
+          name: מרכנתיל
+          code: 17
+      - mizrahi:
+          name: מזרחי
+          code: 20
+      - international:
+          name: הבינלאומי
+          code: 31
+      - jerusalem:
+          name: ירושלים
+          code: 46
+
 
 
 mortgageil:

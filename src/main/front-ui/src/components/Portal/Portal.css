@@ -5,3 +5,9 @@
 .menu-item :hover{
     background-color: red;
 }
+
+.bottom-sidebar {
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+}
