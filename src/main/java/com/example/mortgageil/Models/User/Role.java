@@ -1,54 +1,36 @@
 package com.example.mortgageil.Models.User;
 
-
+import com.example.mortgageil.Core.contracts.ManageableJpa;
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import static com.example.mortgageil.Models.User.Permission.*;
+@Entity
+@Getter
+@Setter
+public class Role implements ManageableJpa {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-@RequiredArgsConstructor
-public enum Role {
+    @Enumerated(EnumType.STRING)
+    private RoleName roleName;
 
-    USER(
-            Set.of(
-                    MANAGER_READ,
-                    MANAGER_CREATE
-            )
-    ),
-    ADMIN(
-            Set.of(
-                    ADMIN_READ,
-                    ADMIN_UPDATE,
-                    ADMIN_DELETE,
-                    ADMIN_CREATE,
-                    MANAGER_READ,
-                    MANAGER_UPDATE,
-                    MANAGER_DELETE,
-                    MANAGER_CREATE
-            )
-    ),
-    MANAGER(
-            Set.of(MANAGER_READ,
-                    MANAGER_UPDATE,
-                    MANAGER_DELETE,
-                    MANAGER_CREATE)
-    );
 
-    @Getter
-    private final Set<Permission> permissions;
-
+    public Set<Permission> getPermissions() {
+        return roleName.getPermissions();
+    }
 
     public List<SimpleGrantedAuthority> getAuthorities() {
-        var authorities = getPermissions()
-                .stream()
-                .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
-                .collect(Collectors.toList());
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
-        return authorities;
+        return roleName.getAuthorities();
+    }
+
+    @Override
+    public void deleteRelatedEntities(){
+
     }
 }

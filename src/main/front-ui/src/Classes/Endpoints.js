@@ -59,6 +59,18 @@ class Endpoints {
         }
     }
 
+    static get BANK(){
+        const createBankDataEndpoint = (suffix) =>
+            this.API_VERSION_END_POINT.addPath("bank").addPath(suffix);
+
+        return {
+            BEST_BANK: createBankDataEndpoint("best-bank"),
+            ALL_BANKS: createBankDataEndpoint("all-banks"),
+            BANK_DATA: createBankDataEndpoint("bank-data"),
+            MORTGAGE: createBankDataEndpoint("mortgage")
+        }
+    }
+
 }
 
 export default Endpoints;

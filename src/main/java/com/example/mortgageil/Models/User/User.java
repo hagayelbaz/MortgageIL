@@ -3,6 +3,7 @@ package com.example.mortgageil.Models.User;
 import com.example.mortgageil.Core.contracts.ManageableJpa;
 import com.example.mortgageil.Models.Borrower;
 import com.example.mortgageil.Models.Person;
+import com.example.mortgageil.validation.ValidationGroups;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -17,6 +18,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -31,15 +33,19 @@ public class User extends Person implements ManageableJpa, UserDetails {
     private String email;
 
     //@Pattern(regexp = "^(\\+\\d{1,3}[- ]?)?\\d{7}$", message = "Phone number is required")
-    @NotEmpty(message = "Phone number is required")
+    @NotEmpty(message = "Phone number is required", groups = ValidationGroups.StandardRegistration.class)
     private String phoneNumber;
 
-    @NotEmpty(message = "Please enter your password")
+    @NotEmpty(message = "Please enter your password", groups = ValidationGroups.StandardRegistration.class)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private Role role = Role.USER;
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user",
@@ -70,8 +76,11 @@ public class User extends Person implements ManageableJpa, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role == Role.ADMIN ? "ROLE_ADMIN" : "ROLE_USER"));
+        return roles.stream()
+                .flatMap(role -> role.getAuthorities().stream())
+                .collect(Collectors.toList());
     }
+
 
     @Override
     public String getUsername() {

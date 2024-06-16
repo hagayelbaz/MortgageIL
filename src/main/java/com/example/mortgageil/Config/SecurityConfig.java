@@ -1,17 +1,13 @@
 package com.example.mortgageil.Config;
 
 import com.example.mortgageil.Models.Repositories.UserRepository;
-import com.example.mortgageil.Models.User.Role;
+import com.example.mortgageil.Models.User.RoleName;
 import com.example.mortgageil.Service.CustomOAuth2UserService;
 import com.example.mortgageil.props.SecurityProperties;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -19,8 +15,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,10 +24,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
-
-import java.util.logging.Logger;
 
 import static com.example.mortgageil.Classes.Utils.combineArrays;
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -71,11 +62,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests((request) -> request
                         .requestMatchers(combineArrays(all, guest)).permitAll()
                         .requestMatchers(shared)
-                        .hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+                        .hasAnyRole(RoleName.USER.name(), RoleName.ADMIN.name())
                         .requestMatchers(user)
-                        .hasRole(Role.USER.name())
+                        .hasRole(RoleName.USER.name())
                         .requestMatchers(admin)
-                        .hasRole(Role.ADMIN.name())
+                        .hasRole(RoleName.ADMIN.name())
                         .anyRequest()
                         .authenticated()
                 )

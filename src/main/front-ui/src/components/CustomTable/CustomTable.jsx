@@ -79,6 +79,9 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
     const [columnsToDisplay, setColumnsToDisplay] = useState(columns);
     const [sortConfig, setSortConfig] = useState({key: null, direction: 'ascending'});
 
+    useEffect(() => {
+        setDataToDisplay(data);
+    }, [data]);
 
     //<editor-fold desc="Add col for option">
     useEffect(() => {
@@ -92,13 +95,12 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
     }, []);
     //</editor-fold>
 
-
     //<editor-fold desc="Search implementation">
     const onSearch = (e) => {
         const searchValue = e.target.value;
         const filteredData = data.filter(row => {
             return Object.values(row).some(value => {
-                return value.toString().toLowerCase().includes(searchValue.toLowerCase());
+                return value?.toString().toLowerCase().includes(searchValue.toLowerCase());
             });
         });
         setDataToDisplay(filteredData);
@@ -126,7 +128,7 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
 
     //<editor-fold desc="Exporting data">
     const mapDataToHeaders = (data, displayHeaders, nameHeaders) => {
-        return data.map(item => {
+        return data?.map(item => {
             const newItem = {};
             displayHeaders.forEach((header, index) => {
                 const key = nameHeaders[index];
@@ -185,7 +187,7 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
                 </div>
                 <div className="row">
                     <p className="small muted-text">
-                        מציג {dataToDisplay?.length} תוצאות מתוך {data.length}
+                        מציג {dataToDisplay?.length} תוצאות מתוך {data?.length}
                     </p>
                 </div>
             </div>
@@ -194,7 +196,7 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
                 <table className="secondary-bg custom-table">
                     <thead>
                     <tr>
-                        {columnsToDisplay.display?.map((column, index) => (
+                        {columnsToDisplay?.display?.map((column, index) => (
                             <th key={index} className="d-none d-md-table-cell">{/*??*/}
                                 <div className="d-flex justify-content-between p-2 align-items-center">
                                     <h6>{column}</h6>

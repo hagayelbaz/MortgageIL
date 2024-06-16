@@ -3,11 +3,17 @@ package com.example.mortgageil.Service.db;
 
 import com.example.mortgageil.Models.Converters.UserEntityToResponseConverter;
 import com.example.mortgageil.Models.Converters.UserRequestToEntityConverter;
+import com.example.mortgageil.Models.Repositories.RoleRepository;
 import com.example.mortgageil.Models.Repositories.UserRepository;
 import com.example.mortgageil.Models.Request.UserRequest;
 import com.example.mortgageil.Models.Response.UserResponse;
+import com.example.mortgageil.Models.User.Role;
+import com.example.mortgageil.Models.User.RoleName;
 import com.example.mortgageil.Models.User.User;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService extends DBService<
@@ -15,6 +21,9 @@ public class UserService extends DBService<
         UserRequest,
         UserResponse,
         UserRepository> {
+
+    @Resource(name = "roleRepository")
+    private RoleRepository roleRepository;
 
     public UserService(UserRepository repository) {
         super(new UserRequestToEntityConverter(),
@@ -25,4 +34,18 @@ public class UserService extends DBService<
     public boolean isUserExistByEmail(String email) {
         return repository.existsByEmail(email);
     }
+
+    public Optional<User> findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
+
+    public Role getDefaultRole() {
+        return roleRepository.findByRoleName(RoleName.USER)
+                .orElseGet(() -> {
+                    Role newUserRole = new Role();
+                    newUserRole.setRoleName(RoleName.USER);
+                    return roleRepository.save(newUserRole);
+                });
+    }
+
 }

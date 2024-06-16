@@ -5,13 +5,18 @@ import BoiCurrentInterestCard from "./Cards/BoiCurrentInterestCard/BoiCurrentInt
 import CurrentCpiCard from "./Cards/CurrentCpiCard/CurrentCpiCard";
 import ChartCpiCard from "./Cards/ChartCpiCard/ChartCpiCard";
 import ChartBoiInterest from "./Cards/ChartBoiInterest/ChartBoiInterest";
-import SettingsIcon from "@mui/icons-material/Settings";
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PortalHomeHeader from "./PortalHomeHeader/PortalHomeHeader";
+import TheBestBankCard from "./Cards/TheBestBankCard/TheBestBankCard";
+import BankAverageInterestCard from "./Cards/BankAverageInterestCard/BankAverageInterestCard";
+import withFetch from "../../HOC/withFetch";
+import Endpoints from "../../../Classes/Endpoints";
+import TableBanksInterest from "./Cards/TableBanksInterest/TableBanksInterest";
+import BanksCard from "./Cards/BanksCard/BanksCard";
 
 const PortalHome = () => {
-
+    const BankAverageInterest = withFetch(BankAverageInterestCard);
+    const BanksInterest = withFetch(TableBanksInterest);
+    const BanksCards = withFetch(BanksCard);
     // <editor-fold defaultstate="collapsed desc="Today">
     const getDate = () => {
         const date = new Date();
@@ -35,7 +40,7 @@ const PortalHome = () => {
                     <BoiCurrentInterestCard/>
                 </Col>
                 <Col className="h-100 mx-0 px-2 col-12 col-md-6 col-xl-3 mt-2 mt-xl-0">
-                    <BoiCurrentInterestCard/>
+                    <TheBestBankCard/>
                 </Col>
                 <Col className="h-100 mx-0 px-2 col-12 col-md-6 col-xl-3 mt-2 mt-xl-0">
                     <BoiCurrentInterestCard/>
@@ -43,12 +48,31 @@ const PortalHome = () => {
             </Row>
 
             <Row className="mt-2">
-                <Col className="h-100 mx-0 px-2 col-12 col-xl-6">
+                <Col className="h-100 mx-0 px-2 col-12 col-md-6">
                     <ChartCpiCard/>
                 </Col>
-                <Col className="h-100 mx-0 px-2 col-12 mt-md-2 mt-xl-0 col-xl-6">
+                <Col className="h-100 mx-0 px-2 col-12 mt-md-2 mt-xl-0 col-md-6">
                     <ChartBoiInterest/>
                 </Col>
+            </Row>
+
+            <Row className="mt-2">
+                <Col className="h-100 mx-0 px-2 col-12 mt-md-2 mt-xl-0 col-xl-6">
+                    <BankAverageInterest endpoint={Endpoints.BANK.MORTGAGE.addQueryParam("mortgage","irr")}/>
+                </Col>
+            </Row>
+
+            <Row className="mt-2 d-flex align-items-stretch">
+                <Col className="px-2 mt-2 mt-xl-0 col-12 col-md-4">
+                    <BanksCards endpoint={Endpoints.BANK.ALL_BANKS} />
+                </Col>
+                <Col className="px-2 mt-2 mt-xl-0 col-12 col-md-8">
+                    <BanksInterest endpoint={Endpoints.BANK.ALL_BANKS} />
+                </Col>
+            </Row>
+
+            <Row>
+                <h1>ji</h1>
             </Row>
         </div>
     );

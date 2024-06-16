@@ -131,45 +131,97 @@ api:
                 linked-fixed:
                   description: "ריבית ממוצעת למשכנתא קבועה צמודה"
                   endpoint: BNK_99034_LC_BIR_MRTG_230
-    banks:
-      - leumi:
-          name: לאומי
-          code: 10
-      - discount:
-          name: דיסקונט
-          code: 11
-      - hapoalim:
-          name: הפועלים
-          code: 12
-      - mercantile:
-          name: מרכנתיל
-          code: 17
-      - mizrahi:
-          name: מזרחי
-          code: 20
-      - international:
-          name: הבינלאומי
-          code: 31
-      - jerusalem:
-          name: ירושלים
-          code: 46
+    boi-mortgage:
+      # structure: {base-url}/{agency}/1.0/{base-code}_<bank-full-code>_<section>_{final-code}_<mortgage-code>
+      base-url: https://edge.boi.gov.il/FusionEdgeServer/sdmx/v2/data/dataflow
+      agency: BOI.BankingSupervision/WEB_M
+      base-code: BNK
+      final-code: BIR_MRTG
 
 
 
 mortgageil:
-  security:
+  data:
+    banks:
+      - name: לאומי
+        code: 10
+        color: "#00b0f0"
+        full-code: 10001
+        logo-url: https://play-lh.googleusercontent.com/ifS3ZQkc31sCsO315uv25uGHNkdORi1TkYwkdr_6EoTu-cQypzZRoqT6KEwE7aNFYak=s48-rw
+        pre-approved-url: https://leumi.easysend.app/mortgage-request-new/
+      - name: דיסקונט
+        code: 11
+        color: "#62a93b"
+        full-code: 11001
+        logo-url: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkxihLZaxVFo8zuh8KyNMUke8e0YP1Yix_BQ&s
+        pre-approved-url: https://mortgage.discountbank.co.il/
+      - name: הפועלים
+        code: 12
+        color: "#ed1b2e"
+        full-code: 12001
+        logo-url: https://play-lh.googleusercontent.com/5aAU4pZJsYHTQhgVXkwT-L3ZDtCHK8nVtJxcfXmoj7rmmELX-85f78QRYd5VO2KyoA
+        pre-approved-url: https://mortgage.bankhapoalim.co.il/ng-portals/dm/he/all-purposes
+      - name: מרכנתיל
+        code: 17
+        color: "#409261"
+        full-code: 17001
+        logo-url: https://www.mercantile.co.il/media/4sinzl2k/logo_mer_yellow_ribbon-3.svg
+        pre-approved-url: https://mortgage.mercantile.co.il/
+      - name: מזרחי
+        code: 20
+        color: "#f5821f"
+        full-code: 20001
+        logo-url: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzm-X_utUQz5Jm7gkakDXX8XYHiVYmr9LYxQ&s
+        pre-approved-url: https://sc.mizrahi-tefahot.co.il/TofesMashkantaClient/
+      - name: הבינלאומי
+        code: 31
+        color: "#fdb726"
+        full-code: 31001
+        logo-url: https://www.fibi.co.il/media/uo1anbe3/logo-header.png
+        pre-approved-url: https://mortgage.fibi.co.il/digmo/
+      - name: ירושלים
+        code: 54
+        color: "#c1905a"
+        full-code: 54001
+        logo-url: https://cdn2.downdetector.com/static/uploads/c/300/581cd/download_6jD6tW2.png
+        pre-approved-url: https://www.bankjerusalem.co.il/mortgage/go_mortgage/target-details
+      - name: מערכת
+        code: 99
+        color: "#f7e017"
+        full-code: 99034
+        pre-approved-url: null
+    mortgages:
+      - name: קבועה צמודה
+        code: 230
+        section: LC
+      - name: משתנה צמודה
+        code: 236
+        section: LC
+      - name: קבועה לא צמודה
+        code: 240
+        section: LC
+      - name: פריים
+        code: 246
+        section: LC
+      - name: משתנה לא צמודה
+        code: 260
+        section: LC
+      - name: irr
+        code: 1
+        section: MA
+
+  security: #TODO: change it so the use will be with prefix
     paths:
       guest:
         - /**
         - auth/login
         - about
         - contact
-        - portal/**
-        - react/**
       all:
         - home
       user:
         - api/data/**
+        - portal/**
       admin:
         - auth/create-user
       shared:
