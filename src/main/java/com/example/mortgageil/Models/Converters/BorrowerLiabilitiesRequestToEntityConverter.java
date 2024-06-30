@@ -23,4 +23,12 @@ public class BorrowerLiabilitiesRequestToEntityConverter
                 .build();
 
     }
+
+    @Override
+    public void applyChanges(BorrowerLiabilitiesRequest request, BorrowerLiabilities entity) {
+        entity.setPerson(userService.getEntityById(request.getPersonId()));
+        entity.setAmount(request.getAmount());
+        entity.setEndDate(request.getEndDate());
+        entity.setDescription(request.getDescription());
+    }
 }

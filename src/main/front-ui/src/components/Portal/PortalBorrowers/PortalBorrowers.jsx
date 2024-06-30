@@ -6,7 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import {Accordion, Col, Row} from "react-bootstrap";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Help from "../../Help/Help";
-import {useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import SaveIcon from '@mui/icons-material/Save';
 import CustomInput from "../../CustomInput/CustomInput";
@@ -14,143 +14,105 @@ import {Person} from "@mui/icons-material";
 import FormHeader from "../../FormHeader/FormHeader";
 import SmartphoneIcon from '@mui/icons-material/Smartphone';
 import EmailIcon from '@mui/icons-material/Email';
+import {UserDataContext} from "../../../Provider/UserDataProvider";
+import NewBorrower from "./NewBorrower";
+import {useGet, usePut} from "../../../Classes/RequestHooks";
+import Endpoints from "../../../Classes/Endpoints";
+import EditBorrower from "./EditBorrower";
+import BorrowersTable from "./BorrowersTable";
+import NewBorrowerButton from "./NewBorrowerButton";
+import CurrentBorrowerOption from "./CurrentBorrowerOption";
+import {useNotifications} from "../../../Provider/NotificationProvider";
 
 
 const PortalBorrowers = () => {
+
+    //<editor-fold desc="State">
     const [editMode, setEditMode] = useState(false);
-    const [selectedUser, setSelectedUser] = useState(null);
+    const [selectedBorrower, setSelectedBorrower] = useState(null);
+    const {user} = useContext(UserDataContext);
+    const [showAdd, setShowAdd] = useState(false);
+    const {
+        fetchApi: getBorrowers,
+        data: borrowersData,
+        error: borrowersError,
+        isOK: borrowersIsOK
+    } = useGet();
+    const {
+        fetchApi: updateBorrower,
+        isOK: updateIsOK,
+        error: updateError
+    } = usePut();
+    const { addNotification } = useNotifications();
+    //</editor-fold>
 
-    const getUserData = (id) => {
-        //TODO: get user data from server
-        return userData;
-    }
+    //<editor-fold desc="Use Effects">
+    useEffect(() => {
+        getBorrowers(Endpoints.BORROWER_ENDPOINT)
+    }, [showAdd]);
 
-    const optionClick = (usr) => {
-        setSelectedUser(getUserData(usr.id));
-        setEditMode(true);
-    }
+    useEffect(() => {
+        if(!editMode)
+            getBorrowers(Endpoints.BORROWER_ENDPOINT)
+    }, [editMode]);
 
-    const changesHandler = (e) => {
-        setSelectedUser({
-            ...selectedUser,
-            [e.target.name]: e.target.value
-        });
+    useEffect(() => {
+        if (updateIsOK) {
+            addNotification({
+                type: 'success',
+                header: 'לווה עודכן',
+                message: `הלווה ${selectedBorrower.firstName} ${selectedBorrower.lastName} עודכן בהצלחה!`
+            });
+        }
+    }, [updateIsOK]);
+
+    useEffect(() => {
+        if (updateError?.message) {
+            addNotification({
+                type: 'error',
+                header: 'שגיאה בעדכון לווה',
+                message: `חלה שגיאה בעדכון הלווה ${selectedBorrower.firstName} ${selectedBorrower.lastName} אנא נסה שנית`
+            });
+        }
+    }, [updateError]);
+    //</editor-fold>
+
+    //<editor-fold desc="Actions">
+    const saveChanges = () => {
+        const path = Endpoints.BORROWER_ENDPOINT.addPath(selectedBorrower?.id);
+        updateBorrower(path, selectedBorrower);
     }
+    //</editor-fold>
+
 
     return (
         <div className="container-fluid secondary-bg-dark overflow-y-auto">
             <Row className="sticky-top secondary-bg-dark">
                 <div className="d-flex justify-content-between">
                     <h1 className='py-3 pb-0 position-sticky z-2'>
-                        {editMode ? `${selectedUser.firstName} ${selectedUser.lastName}` : 'לווים בתיק'}
+                        {editMode ? `${selectedBorrower.firstName} ${selectedBorrower.lastName}` : 'לווים בתיק'}
                     </h1>
+                    <NewBorrower show={showAdd} setShow={setShowAdd}/>
                     <div className="d-flex align-items-center">
                         {!editMode && (
-                            <Help text='לחץ ליצירת לווה חדש'>
-                                <AddCircleIcon role="button" className="fs-3 mx-2"/>
-                            </Help>
+                            <NewBorrowerButton setShowAdd={setShowAdd}/>
                         )}
-                        <MoreVertIcon role="button" className="fs-3 mx-2"/>
                         {editMode && (
-                            <>
-                                <Help text='שמור שינויים'>
-                                    <SaveIcon role="button" className="fs-3 mx-2"/>
-                                </Help>
-                                <Help text='חזרה לרשימת לווים'>
-                                    <ArrowBackIosIcon role="button" className="fs-3 mx-2"
-                                                      onClick={() => setEditMode(false)}/>
-                                </Help>
-                            </>
+                            <CurrentBorrowerOption setEditMode={setEditMode}
+                                                   onSave={saveChanges}/>
                         )}
                     </div>
                 </div>
                 <hr/>
             </Row>
             {!editMode && (
-                <Row>
-                    <CustomTable data={table2}
-                                 columns={colData2}
-                                 spacialIcon={(usr) => (
-                                     <Help text="לחץ על עריכה כדי לערוך את פרטי הלקוח">
-                                         <EditIcon role="button"
-                                                   className="p-0 mx-1"
-                                                   onClick={() => optionClick(usr)}/>
-                                     </Help>
-                                 )}
-                                 tableStyle={{maxHeight: '65dvh'}}/>
-                </Row>
+                <BorrowersTable borrowers={borrowersData}
+                                setSelectedBorrower={setSelectedBorrower}
+                                setEditMode={setEditMode}/>
             )}
             {editMode && (
-                <div className="container-fluid p-0 col-8 mb-5">
-                    <Row className="mb-2">
-                        <FormHeader title="פרטים אישיים" no={1}/>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <CustomInput placeholder="שם פרטי" value={selectedUser.firstName}
-                                         icon={Person} name="firstName" onChange={changesHandler}/>
-                        </Col>
-                        <Col>
-                            <CustomInput placeholder="שם משפחה" value={selectedUser.lastName}
-                                         icon={Person} name="lastName" onChange={changesHandler}/>
-                        </Col>
-                    </Row>
-                    <Row className="mt-4">
-                        <Col>
-                            <CustomInput placeholder="מספר ת.ז." value={selectedUser.id}
-                                         disabled
-                                         icon={Person} name="id" onChange={changesHandler}/>
-                        </Col>
-                        <Col>
-                            <CustomInput placeholder="טלפון" value={selectedUser.phoneNumber}
-                                         icon={SmartphoneIcon} name="phone" onChange={changesHandler}/>
-                        </Col>
-                    </Row>
-                    <Row className="mt-4">
-                        <Col>
-                            <CustomInput placeholder="אימייל" value={selectedUser.email}
-                                         icon={EmailIcon} name="email" onChange={changesHandler}/>
-                        </Col>
-                    </Row>
-
-                    <Row className="mt-4">
-                        <FormHeader title="הכנסות" no={3}/>
-                    </Row>
-                    <Accordion className="" defaultActiveKey="0" flush>
-                        {selectedUser.incomes.map((income, index) => (
-                            <Accordion.Item eventKey={index.toString()} key={index}>
-                                <Accordion.Header>
-                                    <h5 className="fw-light">
-                                        <span className="muted-text">{index + 1}. &nbsp;</span>
-                                        <span>{income.employer}</span>
-                                    </h5>
-                                </Accordion.Header>
-                                <Accordion.Body>
-                                    <Row className="mt-4">
-                                        <Col>
-                                            <CustomInput placeholder="תיאור" value={income.type}
-                                                         icon={Person} name="type" onChange={changesHandler}/>
-                                        </Col>
-                                        <Col>
-                                            <CustomInput placeholder="תחילת עבודה" value={income.date}
-                                                         icon={Person} name="date" onChange={changesHandler}/>
-                                        </Col>
-                                    </Row>
-                                    <Row className="mt-4">
-                                        <Col>
-                                            <CustomInput placeholder="מעסיק" value={income.employer}
-                                                         icon={Person} name="employer" onChange={changesHandler}/>
-                                        </Col>
-                                        <Col>
-                                            <CustomInput placeholder="סכום" value={income.amount}
-                                                         icon={Person} name="amount" onChange={changesHandler}/>
-                                        </Col>
-                                    </Row>
-                                </Accordion.Body>
-                            </Accordion.Item>
-                        ))}
-                    </Accordion>
-                </div>
+                <EditBorrower borrower={selectedBorrower}
+                              setBorrower={setSelectedBorrower}/>
             )}
         </div>
     )

@@ -5,10 +5,18 @@ class Endpoints {
     static BASE_URL = "http://localhost:8080";
     static API_VERSION = "api/v1";
     static DATA = "data";
+    static AUTH = "auth";
+    static TOKEN = "csrf-token";
+    static USER = "user";
+    static BORROWER = "borrower";
 
     //TODO: Change to production URL
     static get BASE_URL_END_POINT() {
         return UrlBuilderFactory(this.BASE_URL);
+    }
+
+    static get TOKEN_ENDPOINT() {
+        return this.BASE_URL_END_POINT.addPath(this.AUTH).addPath(this.TOKEN);
     }
 
     static get API_VERSION_END_POINT() {
@@ -17,6 +25,18 @@ class Endpoints {
 
     static get DATA_ENDPOINT() {
         return this.API_VERSION_END_POINT.addPath(this.DATA);
+    }
+
+    static get USER_ENDPOINT() {
+        return this.API_VERSION_END_POINT.addPath(this.USER);
+    }
+
+    static get BORROWER_ENDPOINT() {
+        return this.API_VERSION_END_POINT.addPath(this.BORROWER);
+    }
+
+    static get USER_DATA_ENDPOINT() {
+        return this.USER_ENDPOINT.addPath("default");
     }
 
     static get INTEREST() {

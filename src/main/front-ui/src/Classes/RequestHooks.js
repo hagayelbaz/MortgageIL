@@ -1,4 +1,5 @@
-import {useCallback, useState} from "react";
+import React, {useCallback, useContext, useState} from "react";
+import {TokenContext} from "../Provider/TokenProvider";
 
 //<editor-fold desc="RequestHooks">
 class RequestHooks {
@@ -36,8 +37,18 @@ class RequestHooks {
         const [error, setError] = useState({});
         const [isOK, setIsOK] = useState(false);
 
-        const fetchApi = useCallback((endpoint) => {
-            this.#fetchWithHook(urlOptions, endpoint, setIsLoading, setData, setError, setIsOK);
+        const fetchApi = useCallback((endpoint, body) => {
+            const newUrlOptions = {...urlOptions};
+            if (body) {
+                newUrlOptions.body = JSON.stringify(body);
+            }
+
+            this.#fetchWithHook(newUrlOptions,
+                endpoint,
+                setIsLoading,
+                setData,
+                setError,
+                setIsOK);
         },[]);
 
         return {
@@ -50,13 +61,22 @@ class RequestHooks {
 }
 //</editor-fold>
 
+const useDefaultHeaders = () => {
+    const {token} = useContext(TokenContext);
+
+    return {
+        [token?.headerName]: token?.token,
+        "charset": "UTF-8",
+        'Content-Type': 'application/json',
+    }
+}
+
 //<editor-fold desc="RequestHooks.useGet">
 const useGet = () => {
     const urlOptions = {
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        }
+        headers: useDefaultHeaders(),
+        credentials: 'include'
     }
     return RequestHooks.use(urlOptions);
 }
@@ -66,9 +86,8 @@ const useGet = () => {
 const usePost = () => {
     const urlOptions = {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        }
+        headers: useDefaultHeaders(),
+        credentials: 'include',
     }
     return RequestHooks.use(urlOptions);
 };
@@ -78,9 +97,8 @@ const usePost = () => {
 const usePut = () => {
     const urlOptions = {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        }
+        headers: useDefaultHeaders(),
+        credentials: 'include'
     }
     return RequestHooks.use(urlOptions);
 };
@@ -90,9 +108,8 @@ const usePut = () => {
 const useDelete = () => {
     const urlOptions = {
         method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        }
+        headers: useDefaultHeaders(),
+        credentials: 'include'
     }
     return RequestHooks.use(urlOptions);
 };

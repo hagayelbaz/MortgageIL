@@ -14,4 +14,12 @@ public class UserRequestToEntityConverter implements RequestToEntityConverter<Us
                 .phoneNumber(request.getPhoneNumber())
                 .build();
     }
+
+    @Override
+    public void applyChanges(UserRequest request, User entity) {
+        entity.setFirstName(request.getFirstName());
+        entity.setLastName(request.getLastName());
+        entity.setEmail(request.getEmail());
+        entity.setPhoneNumber(request.getPhoneNumber());
+    }
 }

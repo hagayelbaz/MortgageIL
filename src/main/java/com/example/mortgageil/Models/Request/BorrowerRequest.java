@@ -11,8 +11,7 @@ import lombok.Setter;
 @Builder
 public class BorrowerRequest {
 
-    @NotEmpty(message = "user id is required")
-    private Long userId;
+    private Long id;
 
     @NotEmpty(message = "First name is required")
     private String firstName;

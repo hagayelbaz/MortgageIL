@@ -39,13 +39,8 @@ public class User extends Person implements ManageableJpa, UserDetails {
     @NotEmpty(message = "Please enter your password", groups = ValidationGroups.StandardRegistration.class)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles = new HashSet<>();
+    @Enumerated(EnumType.STRING)
+    private RoleName roleName;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user",
@@ -76,9 +71,7 @@ public class User extends Person implements ManageableJpa, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .flatMap(role -> role.getAuthorities().stream())
-                .collect(Collectors.toList());
+        return roleName.getAuthorities();
     }
 
 

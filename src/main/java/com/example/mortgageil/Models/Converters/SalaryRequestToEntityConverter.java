@@ -21,4 +21,13 @@ public class SalaryRequestToEntityConverter
                 .jobTitle(request.getJobTitle())
                 .build();
     }
+
+    @Override
+    public void applyChanges(SalaryRequest request, Salary entity) {
+        entity.setPerson(request.getPerson());
+        entity.setSalary(request.getSalary());
+        entity.setEmployer(request.getEmployer());
+        entity.setStartDate(request.getStartDate());
+        entity.setJobTitle(request.getJobTitle());
+    }
 }

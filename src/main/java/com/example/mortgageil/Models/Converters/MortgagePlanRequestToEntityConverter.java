@@ -27,4 +27,14 @@ public class MortgagePlanRequestToEntityConverter
                 .build();
 
     }
+
+    @Override
+    public void applyChanges(MortgagePlanRequest request, MortgagePlan entity) {
+        entity.setPerson(userService.getEntityById(request.getPersonId()));
+        entity.setType(request.getType());
+        entity.setAmount(request.getAmount());
+        entity.setInterestRate(request.getInterestRate());
+        entity.setDuration(request.getDuration());
+        entity.setBalloonDuration(request.getBalloonDuration());
+    }
 }

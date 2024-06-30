@@ -17,4 +17,12 @@ public class BorrowerRequestToEntityConverter
                 .phoneNumber(request.getPhoneNumber())
                 .build();
     }
+
+    @Override
+    public void applyChanges(BorrowerRequest request, Borrower entity) {
+        entity.setFirstName(request.getFirstName());
+        entity.setLastName(request.getLastName());
+        entity.setEmail(request.getEmail());
+        entity.setPhoneNumber(request.getPhoneNumber());
+    }
 }

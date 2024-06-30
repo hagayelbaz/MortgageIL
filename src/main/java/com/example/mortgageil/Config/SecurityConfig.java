@@ -2,7 +2,6 @@ package com.example.mortgageil.Config;
 
 import com.example.mortgageil.Models.Repositories.UserRepository;
 import com.example.mortgageil.Models.User.RoleName;
-import com.example.mortgageil.Service.CustomOAuth2UserService;
 import com.example.mortgageil.props.SecurityProperties;
 import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +14,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -37,9 +37,6 @@ public class SecurityConfig {
     @Resource(name = "userRepository")
     private UserRepository userRepository;
 
-    @Resource(name = "customOAuth2UserService")
-    private CustomOAuth2UserService customOAuth2UserService;
-
     @Resource(name = "securityProperties")
     private SecurityProperties securityProperties;
 
@@ -50,6 +47,7 @@ public class SecurityConfig {
         String [] shared = securityProperties.getSecurity().getPaths().getShared();
         String [] user = securityProperties.getSecurity().getPaths().getUser();
         String [] admin = securityProperties.getSecurity().getPaths().getAdmin();
+        String loginPageUrl = securityProperties.getAuth().getLogin().getPageUrl();
         String loginSuccessUrl = securityProperties.getAuth().getLogin().getSuccessUrl();
         String loginFailureUrl = securityProperties.getAuth().getLogin().getFailureUrl();
         String logoutPageUrl = securityProperties.getAuth().getLogout().getPageUrl();
@@ -60,7 +58,8 @@ public class SecurityConfig {
                 .cors(withDefaults())
                 .csrf(withDefaults())
                 .authorizeHttpRequests((request) -> request
-                        .requestMatchers(combineArrays(all, guest)).permitAll()
+                        .requestMatchers(combineArrays(all, guest))
+                        .permitAll()
                         .requestMatchers(shared)
                         .hasAnyRole(RoleName.USER.name(), RoleName.ADMIN.name())
                         .requestMatchers(user)
@@ -71,21 +70,12 @@ public class SecurityConfig {
                         .authenticated()
                 )
                 .formLogin((form) -> form
-                        .loginPage(logoutPageUrl)
+                        .loginPage(loginPageUrl)
                         .usernameParameter("email")
                         .passwordParameter("password")
                         .defaultSuccessUrl(loginSuccessUrl, true)
                         .failureUrl(loginFailureUrl)
                         .permitAll()
-                )
-                .oauth2Login((oauth2) -> oauth2
-                        .userInfoEndpoint((endpoint) -> endpoint
-                                .userService(customOAuth2UserService)
-                        )
-                        .defaultSuccessUrl(loginSuccessUrl, true)
-                        .failureUrl(loginFailureUrl).permitAll()//did go to this
-                        .successHandler(oauth2AuthenticationSuccessHandler())
-                        .failureHandler(oauth2AuthenticationFailureHandler())
                 )
                 .exceptionHandling(e -> e
                         .accessDeniedPage("/?error=something-went-wrong"))

@@ -41,6 +41,8 @@ public class Salary implements ManageableJpa {
 
     private String jobTitle;
 
+    private String description;
+
 
     public Person getPerson() {
         return Person.builder()

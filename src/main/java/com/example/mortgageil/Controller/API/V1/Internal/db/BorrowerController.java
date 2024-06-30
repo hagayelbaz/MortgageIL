@@ -8,6 +8,8 @@ import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 
 @RestController
 @RequestMapping("/api/v1/borrower")
@@ -21,8 +23,8 @@ public class BorrowerController {
 
     //<editor-fold desc="create">
     @PostMapping("")
-    public ResponseEntity<?> create(@RequestBody BorrowerRequest borrowerRequest) {
-        Long userId = borrowerRequest.getUserId();
+    public ResponseEntity<?> create(Principal principal, @RequestBody BorrowerRequest borrowerRequest) {
+        Long userId = userService.findByEmail(principal.getName()).get().getId();
         borrowerRequest.setUser(userService.getEntityById(userId));
         return ResponseEntity.ok(borrowerService.create(borrowerRequest));
     }
@@ -30,8 +32,10 @@ public class BorrowerController {
 
     //<editor-fold desc="get">
     @GetMapping("")
-    public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(borrowerService.getAll());
+    public ResponseEntity<?> getAll(Principal principal) {
+        Long userId = userService.findByEmail(principal.getName()).get().getId();
+        var a =  ResponseEntity.ok(borrowerService.getAllByUserId(userId));
+        return a;
     }
 
     @GetMapping("/{id}")

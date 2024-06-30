@@ -1,15 +1,15 @@
 import './CustomInput.css';
 
 
-const CustomInput = ({placeholder, value, required, onChange, name, icon: Icon, disabled = false}) => {
+const CustomInput = ({placeholder, value, required, onChange, name, icon: Icon, disabled = false, type}) => {
 
     return (
         <div className="custom-input-container">
             {Icon && <Icon className="custom-input-icon"/>}
-            <input type="text"
+            <input type={type ? type : 'text'}
                    placeholder=" "
                    value={value}
-                   onChange={(e) => onChange(e.target.value)}
+                   onChange={onChange}
                    className="custom-input text-light"
                    name={name}
                    required={required}
