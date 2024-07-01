@@ -5,9 +5,11 @@ import com.example.mortgageil.Models.BorrowerLiabilities;
 import com.example.mortgageil.Models.Request.BorrowerLiabilitiesRequest;
 import com.example.mortgageil.Service.db.UserService;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 public class BorrowerLiabilitiesRequestToEntityConverter
         implements RequestToEntityConverter<BorrowerLiabilitiesRequest, BorrowerLiabilities> {
 

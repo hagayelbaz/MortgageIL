@@ -31,16 +31,19 @@ public abstract class DBService<
     //<editor-fold desc="create">
     public Rs create(Rq request) {
         T entity = requestConverter.convert(request);
+        entity.saveRelatedEntities();
         T savedEntity = repository.save(entity);
         return responseConverter.convert(savedEntity);
     }
 
     public T createEntity(Rq request) {
         T entity = requestConverter.convert(request);
+        entity.saveRelatedEntities();
         return repository.save(entity);
     }
 
     public T createEntity(T entity) {
+        entity.saveRelatedEntities();
         return repository.save(entity);
     }
     //</editor-fold>
@@ -79,6 +82,7 @@ public abstract class DBService<
             return null;
         }
         requestConverter.applyChanges(request, existingEntity);
+        existingEntity.saveRelatedEntities();
         T savedEntity = repository.save(existingEntity);
         return responseConverter.convert(savedEntity);
     }
@@ -91,10 +95,12 @@ public abstract class DBService<
             return null;
         }
         requestConverter.applyChanges(request, existingEntity);
+        existingEntity.saveRelatedEntities();
         return repository.save(existingEntity);
     }
 
     public T updateEntity(Long id, T entity) {
+        entity.saveRelatedEntities();
         return repository.save(entity);
     }
 

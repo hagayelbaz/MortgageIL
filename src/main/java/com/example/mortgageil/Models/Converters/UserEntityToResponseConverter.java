@@ -3,7 +3,10 @@ package com.example.mortgageil.Models.Converters;
 import com.example.mortgageil.Core.contracts.EntityToResponseConverter;
 import com.example.mortgageil.Models.Response.UserResponse;
 import com.example.mortgageil.Models.User.User;
+import org.springframework.stereotype.Component;
 
+
+@Component
 public class UserEntityToResponseConverter implements EntityToResponseConverter<User, UserResponse> {
 
     @Override

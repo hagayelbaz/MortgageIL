@@ -3,10 +3,12 @@ package com.example.mortgageil.Models.Converters;
 import com.example.mortgageil.Core.contracts.RequestToEntityConverter;
 import com.example.mortgageil.Models.Request.SalaryRequest;
 import com.example.mortgageil.Models.Salary;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
-@Service
+@Component
 public class SalaryRequestToEntityConverter
         implements RequestToEntityConverter<SalaryRequest, Salary> {
 
@@ -19,6 +21,7 @@ public class SalaryRequestToEntityConverter
                 .employer(request.getEmployer())
                 .startDate(request.getStartDate())
                 .jobTitle(request.getJobTitle())
+                .description(request.getDescription())
                 .build();
     }
 
@@ -29,5 +32,6 @@ public class SalaryRequestToEntityConverter
         entity.setEmployer(request.getEmployer());
         entity.setStartDate(request.getStartDate());
         entity.setJobTitle(request.getJobTitle());
+        entity.setDescription(request.getDescription());
     }
 }

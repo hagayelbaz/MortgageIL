@@ -3,7 +3,9 @@ package com.example.mortgageil.Models.Converters;
 import com.example.mortgageil.Core.contracts.EntityToResponseConverter;
 import com.example.mortgageil.Models.MortgagePlan;
 import com.example.mortgageil.Models.Response.MortgagePlanResponse;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MortgagePlanEntityToResponseConverter
         implements EntityToResponseConverter<MortgagePlan, MortgagePlanResponse> {
 

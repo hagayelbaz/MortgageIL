@@ -1,10 +1,14 @@
 package com.example.mortgageil.Models.Request;
 
+import com.example.mortgageil.Models.Borrower;
+import com.example.mortgageil.Models.Salary;
 import com.example.mortgageil.Models.User.User;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -22,6 +26,12 @@ public class BorrowerRequest {
     private String email;
 
     private String phoneNumber;
+
+    private Set<SalaryRequest> salaries;
+
+    private Set<BorrowerLiabilitiesRequest> borrowerLiabilities;
+
+    private Set<MortgagePlanRequest> mortgagePlans;
 
     private User user;
 }

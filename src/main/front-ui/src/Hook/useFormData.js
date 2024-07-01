@@ -1,4 +1,6 @@
 import {useState, useCallback, useEffect} from 'react';
+import {usePost, usePut} from "../Classes/RequestHooks";
+import {useNotifications} from "../Provider/NotificationProvider";
 
 const setNestedProperty = (path, value, obj) => {
     const keys = path.split('.');
@@ -11,26 +13,70 @@ const setNestedProperty = (path, value, obj) => {
     return {...obj};
 };
 
-const useFormData = (initialData, setUpdated) => {
+const defaultSuccessMessage = {
+    header: 'שמירה בוצעה בהצלחה',
+    message: 'הנתונים נשמרו בהצלחה'
+}
+
+const defaultErrorMessage = {
+    header: 'שגיאה בשמירת נתונים',
+    message: 'שמירת הנתונים נכשלה, אנא נסה שנית'
+}
+
+const useFormData = (initialData, updateGlobalData, apiPath, messagesOption) => {
     const [data, setData] = useState(initialData);
+    const {addNotification} = useNotifications();
+    const {fetchApi: postData, isOK: postIsOK, error: postError} = usePost();
+    const {fetchApi: putData, isOK: putIsOK, error: putError} = usePut();
+    const [isDataSaved, setIsDataSaved] = useState(false);
 
     const updateData = useCallback((path, value) => {
         setData(prev => setNestedProperty(path, value, prev));
     }, []);
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
+
+    const saveData = useCallback(() => {
+        if (data?.isNew) {
+            postData(apiPath, data);
+        } else {
+            putData(apiPath.addPath(data.id), data);
+        }
+        setIsDataSaved(true);
+    }, [postData, putData, apiPath]);
+
+    const onChange = useCallback((event) => {
+        const {name, value} = event.target;
         updateData(name, value);
-    };
+    }, [updateData]);
+
 
     useEffect(() => {
-        setUpdated(data);
-    }, [data]);
+        const notification =  (type) => {
+            addNotification({
+                type: type,
+                ...messagesOption ||
+                (type === 'success' ? defaultSuccessMessage : defaultErrorMessage)
+            });
+        }
+        if ((postIsOK || putIsOK) && isDataSaved) {
+            updateGlobalData(data);
+            notification('success');
+            setIsDataSaved(false);
+        }
+        if ((postError === true || putError === true) && isDataSaved) {
+            notification('error');
+            setIsDataSaved(false);
+        }
+
+
+    }, [postError, putError, postIsOK, putIsOK]);
+
 
     return {
         data,
         updateData,
-        handleChange
+        onChange,
+        saveData
     };
 };
 

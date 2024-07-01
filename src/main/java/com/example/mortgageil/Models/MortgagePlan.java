@@ -58,4 +58,9 @@ public class MortgagePlan implements ManageableJpa {
     public void deleteRelatedEntities() {
 
     }
+
+    @Override
+    public void saveRelatedEntities() {
+
+    }
 }

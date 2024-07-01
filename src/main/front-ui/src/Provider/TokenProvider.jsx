@@ -1,16 +1,17 @@
-import {createContext, useEffect, useState} from "react";
+import {createContext, useEffect, useMemo, useState} from "react";
 import {useGet} from "../Classes/RequestHooks";
 import Endpoints from "../Classes/Endpoints";
 
 
 export const TokenContext = createContext({
-    token: null,
+    token: { token: null, headerName: null },
     setToken: () => {},
 });
 
 
+
 export const TokenProvider = ({children}) => {
-    const [token, setToken] = useState({});
+    const [token, setToken] = useState({ token: null, headerName: null });
     const {data, fetchApi} = useGet();
 
     useEffect(() => {
@@ -18,14 +19,16 @@ export const TokenProvider = ({children}) => {
     }, []);
 
     useEffect(() => {
-        setToken({
-            token: data?.token,
-            headerName: data?.headerName,
-        })
+        if (data?.token && data?.headerName) {
+            setToken({ token: data.token, headerName: data.headerName });
+        }
     }, [data]);
 
+    const contextValue = useMemo(() => ({ token, setToken }), [token]);
+
+
     return (
-        <TokenContext.Provider value={{token, setToken}}>
+        <TokenContext.Provider value={contextValue}>
             {children}
         </TokenContext.Provider>
     );

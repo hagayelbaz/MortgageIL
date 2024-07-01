@@ -27,91 +27,64 @@ class RequestHooks {
                 setData(data);
                 setIsOK(true);
             })
-            .catch(setError)
+            .catch((error) => {
+                setError(error);
+                setIsOK(false);
+            })
             .finally(() => setIsLoading(false));
     }
 
-    static use = (urlOptions) => {
+    static use = (method) => {
         const [isLoading, setIsLoading] = useState(false);
         const [data, setData] = useState(null);
-        const [error, setError] = useState({});
+        const [error, setError] = useState(null);
         const [isOK, setIsOK] = useState(false);
+        const { token } = useContext(TokenContext);
+
 
         const fetchApi = useCallback((endpoint, body) => {
-            const newUrlOptions = {...urlOptions};
-            if (body) {
-                newUrlOptions.body = JSON.stringify(body);
-            }
+            const urlOptions = {
+                method: method,
+                headers: {
+                    [token?.headerName]: token?.token,
+                    "charset": "UTF-8",
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: body ? JSON.stringify(body) : undefined
+            };
 
-            this.#fetchWithHook(newUrlOptions,
-                endpoint,
-                setIsLoading,
-                setData,
-                setError,
-                setIsOK);
-        },[]);
+            this.#fetchWithHook(urlOptions, endpoint, setIsLoading, setData, setError, setIsOK);
+        },[method, token]);
 
-        return {
-            isLoading,
-            data,
-            error,
-            fetchApi,
-            isOK};
+        return {isLoading, data, error, fetchApi, isOK};
     }
 }
 //</editor-fold>
 
-const useDefaultHeaders = () => {
-    const {token} = useContext(TokenContext);
 
-    return {
-        [token?.headerName]: token?.token,
-        "charset": "UTF-8",
-        'Content-Type': 'application/json',
-    }
-}
 
 //<editor-fold desc="RequestHooks.useGet">
 const useGet = () => {
-    const urlOptions = {
-        method: 'GET',
-        headers: useDefaultHeaders(),
-        credentials: 'include'
-    }
-    return RequestHooks.use(urlOptions);
+    return RequestHooks.use('GET');
 }
 //</editor-fold>
 
 //<editor-fold desc="RequestHooks.usePost">
 const usePost = () => {
-    const urlOptions = {
-        method: 'POST',
-        headers: useDefaultHeaders(),
-        credentials: 'include',
-    }
-    return RequestHooks.use(urlOptions);
+    return RequestHooks.use('POST');
 };
 //</editor-fold>
 
 //<editor-fold desc="RequestHooks.usePut">
 const usePut = () => {
-    const urlOptions = {
-        method: 'PUT',
-        headers: useDefaultHeaders(),
-        credentials: 'include'
-    }
-    return RequestHooks.use(urlOptions);
+    return RequestHooks.use('PUT');
 };
 //</editor-fold>
 
 //<editor-fold desc="RequestHooks.useDelete">
 const useDelete = () => {
-    const urlOptions = {
-        method: 'DELETE',
-        headers: useDefaultHeaders(),
-        credentials: 'include'
-    }
-    return RequestHooks.use(urlOptions);
+    return RequestHooks.use('DELETE');
 };
 //</editor-fold>
 

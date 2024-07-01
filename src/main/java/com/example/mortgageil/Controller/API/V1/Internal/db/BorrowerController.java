@@ -1,7 +1,9 @@
 package com.example.mortgageil.Controller.API.V1.Internal.db;
 
 
+import com.example.mortgageil.Classes.HttpResponse;
 import com.example.mortgageil.Models.Request.BorrowerRequest;
+import com.example.mortgageil.Models.User.User;
 import com.example.mortgageil.Service.db.BorrowerService;
 import com.example.mortgageil.Service.db.UserService;
 import jakarta.annotation.Resource;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.logging.Logger;
 
 
 @RestController
@@ -34,8 +37,7 @@ public class BorrowerController {
     @GetMapping("")
     public ResponseEntity<?> getAll(Principal principal) {
         Long userId = userService.findByEmail(principal.getName()).get().getId();
-        var a =  ResponseEntity.ok(borrowerService.getAllByUserId(userId));
-        return a;
+        return  ResponseEntity.ok(borrowerService.getAllByUserId(userId));
     }
 
     @GetMapping("/{id}")
@@ -46,7 +48,9 @@ public class BorrowerController {
 
     //<editor-fold desc="update">
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody BorrowerRequest borrowerRequest) {
+    public ResponseEntity<?> update(Principal principal,@PathVariable Long id, @RequestBody BorrowerRequest borrowerRequest) {
+        User user = userService.findByEmail(principal.getName()).get();
+        borrowerRequest.setUser(user);
         return ResponseEntity.ok(borrowerService.update(id, borrowerRequest));
     }
     //</editor-fold>
@@ -55,7 +59,11 @@ public class BorrowerController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         borrowerService.deleteById(id);
-        return ResponseEntity.ok().build();
+        var response = HttpResponse
+                .builder()
+                .status(200)
+                .message("Borrower deleted successfully");
+        return ResponseEntity.ok(response.build());
     }
     //</editor-fold>
 }

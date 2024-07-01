@@ -71,6 +71,7 @@ public class User extends Person implements ManageableJpa, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(roleName == null) return Collections.emptyList();
         return roleName.getAuthorities();
     }
 

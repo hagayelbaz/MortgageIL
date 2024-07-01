@@ -6,22 +6,30 @@ import SmartphoneIcon from "@mui/icons-material/Smartphone";
 import EmailIcon from "@mui/icons-material/Email";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import useFormData from "../../../Hook/useFormData";
+import {usePut} from "../../../Classes/RequestHooks";
+import Endpoints from "../../../Classes/Endpoints";
+import {forwardRef, useImperativeHandle} from "react";
 
 
-const EditBorrower = ({borrower, setBorrower}) => {
+const EditBorrower = forwardRef(({ borrower, setBorrower }, ref) => {
     const {
         data: borrowerData,
         updateData: setBorrowerForm,
-        handleChange: changesHandler
-    } = useFormData(borrower, setBorrower);
+        onChange,
+        saveData: saveBorrower
+    } = useFormData(borrower, setBorrower, Endpoints.BORROWER_ENDPOINT);
 
+    useImperativeHandle(ref, () => ({
+        saveBorrower
+    }));
 
     const addSalary = () => {
         const newSalary = {
             employer: '',
             description: '',
             startDate: '',
-            salary: ''
+            salary: '',
+            isNew: true
         };
         setBorrowerForm(`salaries.${borrowerData?.salaries?.length}`, newSalary);
     };
@@ -38,14 +46,14 @@ const EditBorrower = ({borrower, setBorrower}) => {
                                  value={borrowerData?.firstName}
                                  icon={Person}
                                  name="firstName"
-                                 onChange={changesHandler}/>
+                                 onChange={onChange}/>
                 </Col>
                 <Col>
                     <CustomInput placeholder="שם משפחה"
                                  value={borrowerData?.lastName}
                                  icon={Person}
                                  name="lastName"
-                                 onChange={changesHandler}/>
+                                 onChange={onChange}/>
                 </Col>
             </Row>
             <Row className="mt-4">
@@ -55,14 +63,14 @@ const EditBorrower = ({borrower, setBorrower}) => {
                                  disabled
                                  icon={Person}
                                  name="id"
-                                 onChange={changesHandler}/>
+                                 onChange={onChange}/>
                 </Col>
                 <Col>
                     <CustomInput placeholder="טלפון"
                                  value={borrowerData?.phoneNumber}
                                  icon={SmartphoneIcon}
                                  name="phoneNumber"
-                                 onChange={changesHandler}/>
+                                 onChange={onChange}/>
                 </Col>
             </Row>
             <Row className="mt-4">
@@ -71,7 +79,7 @@ const EditBorrower = ({borrower, setBorrower}) => {
                                  value={borrowerData?.email}
                                  icon={EmailIcon}
                                  name="email"
-                                 onChange={changesHandler}/>
+                                 onChange={onChange}/>
                 </Col>
             </Row>
 
@@ -96,24 +104,25 @@ const EditBorrower = ({borrower, setBorrower}) => {
                                 <Col>
                                     <CustomInput placeholder="תיאור" value={salary?.description}
                                                  name={`salaries.${index}.description`}
-                                                 icon={Person} onChange={changesHandler}/>
+                                                 icon={Person} onChange={onChange}/>
                                 </Col>
                                 <Col>
                                     <CustomInput placeholder="תחילת עבודה" value={salary?.startDate}
                                                  name={`salaries.${index}.startDate`}
-                                                 icon={Person} onChange={changesHandler}/>
+                                                 type="date"
+                                                 icon={Person} onChange={onChange}/>
                                 </Col>
                             </Row>
                             <Row className="mt-4">
                                 <Col>
                                     <CustomInput placeholder="מעסיק" value={salary?.employer}
                                                  name={`salaries.${index}.employer`}
-                                                 icon={Person} onChange={changesHandler}/>
+                                                 icon={Person} onChange={onChange}/>
                                 </Col>
                                 <Col>
                                     <CustomInput placeholder="סכום" value={salary?.salary}
                                                  name={`salaries.${index}.salary`}
-                                                 icon={Person} onChange={changesHandler}/>
+                                                 icon={Person} onChange={onChange}/>
                                 </Col>
                             </Row>
                         </Accordion.Body>
@@ -122,6 +131,6 @@ const EditBorrower = ({borrower, setBorrower}) => {
             </Accordion>
         </div>
     );
-}
+})
 
 export default EditBorrower;

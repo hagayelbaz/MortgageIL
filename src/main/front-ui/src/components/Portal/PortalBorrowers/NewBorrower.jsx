@@ -1,10 +1,9 @@
 import {Button, Modal} from "react-bootstrap";
 import CustomInput from "../../CustomInput/CustomInput";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Person} from "@mui/icons-material";
-import {useGet, usePost} from "../../../Classes/RequestHooks";
 import Endpoints from "../../../Classes/Endpoints";
-import {useNotifications} from "../../../Provider/NotificationProvider";
+import useFormData from "../../../Hook/useFormData";
 
 
 const NewBorrower = ({show, setShow}) => {
@@ -13,56 +12,24 @@ const NewBorrower = ({show, setShow}) => {
         firstName: '',
         lastName: '',
         email: '',
-        phoneNumber: ''
+        phoneNumber: '',
+        isNew: true
     });
     const {
-        fetchApi : postBorrower,
         data: borrowerData,
-        error: borrowerError,
-        isOK: borrowerIsOK
-    } = usePost();
+        updateData: setBorrowerForm,
+        onChange: changesHandler,
+        saveData: saveBorrower
+    } = useFormData(formData, setFormData, Endpoints.BORROWER_ENDPOINT);
 
-    const { addNotification } = useNotifications();
-    const handleClose = () => setShow(false);
     //</editor-fold>
 
-    //<editor-fold desc="Data Handlers">
+    const handleClose = () => setShow(false);
+
     const handleSave = (e) => {
         e.preventDefault();
-        postBorrower(Endpoints.BORROWER_ENDPOINT, formData);
+        saveBorrower();
     }
-
-    const changesHandler = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    }
-    //</editor-fold>
-
-    //<editor-fold desc="Handle Messages">
-    useEffect(() => {
-        if (borrowerIsOK) {
-            addNotification({
-                type: 'success',
-                header: 'לווה נוסף בהצלחה!',
-                message: `הוספנו את ${formData.firstName} ${formData.lastName} לרשימת הלווים!`
-            });
-            handleClose();
-        }
-    }, [borrowerIsOK]);
-
-    useEffect(() => {
-        if (borrowerError?.message) {
-            addNotification({
-                type: 'error',
-                header: 'שגיאה בהוספת לווה',
-                message: `חלה שגיאה בהוספת הלווה ${formData.firstName} ${formData.lastName}אנא נסה שנית`
-            });
-            handleClose();
-        }
-    }, [borrowerError]);
-    //</editor-fold>
 
 
 
@@ -79,26 +46,26 @@ const NewBorrower = ({show, setShow}) => {
                 <form className="p-3 container-fluid">
                     <div className="row my-2">
                         <div className="col">
-                            <CustomInput placeholder="שם פרטי" value={formData.firstName}
+                            <CustomInput placeholder="שם פרטי" value={borrowerData.firstName}
                                          required={true}
                                          icon={Person} name="firstName" onChange={changesHandler}/>
                         </div>
                         <div className="col">
-                            <CustomInput placeholder="שם משפחה" value={formData.lastName}
+                            <CustomInput placeholder="שם משפחה" value={borrowerData.lastName}
                                          required={true}
                                          icon={Person} name="lastName" onChange={changesHandler}/>
                         </div>
                     </div>
                     <div className="row my-2">
                         <div className="col">
-                            <CustomInput placeholder="אימייל" value={formData.email}
+                            <CustomInput placeholder="אימייל" value={borrowerData.email}
                                          type={'email'} required={true}
                                          icon={Person} name="email" onChange={changesHandler}/>
                         </div>
                     </div>
                     <div className="row my-2">
                         <div className="col">
-                            <CustomInput placeholder="טלפון" value={formData.phoneNumber}
+                            <CustomInput placeholder="טלפון" value={borrowerData.phoneNumber}
                                          type={'tel'} required={true}
                                          icon={Person} name="phoneNumber" onChange={changesHandler}/>
                         </div>

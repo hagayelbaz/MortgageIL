@@ -5,10 +5,12 @@ import com.example.mortgageil.Models.MortgagePlan;
 import com.example.mortgageil.Models.Request.MortgagePlanRequest;
 import com.example.mortgageil.Service.db.UserService;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
-@Service
+@Component
 public class MortgagePlanRequestToEntityConverter
         implements RequestToEntityConverter<MortgagePlanRequest, MortgagePlan> {
 
