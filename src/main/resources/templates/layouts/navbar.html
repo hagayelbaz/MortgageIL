@@ -1,0 +1,53 @@
+<div th:fragment="navbar">
+    <nav class="navbar navbar-expand-lg shadow-sm navbar-light bg-white fixed-top mb-5">
+        <div class="justify-content-end">
+            <a class="navbar-brand" href="/">
+                <img src="/images/blackLogo.png" alt="mortgageIL" class="width-250">
+            </a>
+            <!--<a href="/" class="btn ml-3 i-75"><i class="bi bi-house-door-fill"></i></a>-->
+            <a href="/login" class="btn ml-l-5 btn-accent"><i class="bi bi-arrow-left"></i> להתחלת התהליך </a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto justify-content-start rtl">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">איזור אישי</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/dataMarket">נתוני השוק</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/calculator">מחשבונים</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">אודות</a>
+                </li>
+
+                <li class="nav-item dropdown rtl">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownData" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        קישורים חיצוניים
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownData">
+                        <a class="dropdown-item" href="https://www.boi.org.il/information/interestrates/compareint/"
+                           target="_blank">בנק ישראל - השוואת ריביות למגורים</a>
+                        <a class="dropdown-item"
+                           href="https://www.boi.org.il/roles/statistics/banking/housing_cred/monthly-report-on-housing-loans/"
+                           target="_blank">בנק ישראל - דוחות חודשיים לדיור</a>
+                        <a class="dropdown-item" href="https://www.boi.org.il/information/interestrates/primerates/"
+                           target="_blank">בנק ישראל - ריבית פריים</a>
+                        <a class="dropdown-item" href="https://www.creditdata.org.il/articles/score-changes/"
+                           target="_blank">בנק ישראל - מה משפיע על דירוג האשראי</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

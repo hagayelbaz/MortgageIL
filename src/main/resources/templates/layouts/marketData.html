@@ -1,0 +1,33 @@
+<div th:fragment="marketData(interestMap)">
+
+    <div class="text-center brd-outline-accent p-5">
+        <h1 class="text-color-accent mb-5"> נתוני השוק </h1>
+
+        <table class="table">
+            <tbody>
+            <tr th:each="entry : ${interestMap}">
+                <td class="text-center font-600" th:text="${entry.value}"></td>
+                <td class="text-right font-600" th:text="${entry.key}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--
+<div th:fragment="marketData(interestMap)" class="card border-primary m-5 shadow-lg bg-transparent">
+    <div class="card-header text-center">
+        <h4>קצת נתונים מהשוק</h4>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tbody>
+            <tr th:each="entry : ${interestMap}">
+                <td class="text-center bold" th:text="${entry.value}"></td>
+                <td class="text-right" th:text="${entry.key}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+-->

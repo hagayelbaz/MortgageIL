@@ -1,0 +1,112 @@
+<div th:fragment="calculator" xmlns="http://www.w3.org/1999/html">
+
+    <div class="container mt-5 rtl">
+        <div class=" row d-flex justify-content-around m-5">
+            <a class="btn btn-accent" type="button" data-toggle="collapse" id="btn-calc-1">
+                גובה משכנתא לפי הון
+            </a>
+            <button class="btn btn-accent" type="button" data-toggle="collapse" id="btn-calc-2">
+                גובה משכתא לפי החזר
+            </button>
+            <button class="btn btn-accent" type="button" id="btn-calc-3">
+                החזר חודשי וריבית
+            </button>
+        </div>
+
+        <div class=" row d-flex justify-content-center">
+            <div id="calc-1" class="collapse show brd-outline-accent text-right mt-5 p-5">
+                <h5 class="text-center"> חישוב גובה המשכנתא האפשרית לפי הון העצמי וההכנסה פנויה </h5>
+                <form class="p-5" id="form1" onsubmit="return false;">
+                    <div class="row justify-content-center">
+                        <div class="col form-group">
+                            <label for="equity1" class="font-300"> הון עצמי </label>
+                            <input type="text" class="form-control" id="equity1" placeholder="100,000">
+                        </div>
+                        <div class="col form-group">
+                            <label for="revenues1"> הכנסות </label>
+                            <input type="text" class="form-control" id="revenues1" placeholder="15,000">
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <button class="btn m-3 btn-accent" onclick="calculate1()">חישוב</button>
+                    </div>
+
+                    <div class="row form-group">
+                        <label for="result1"> גובה משכנתא אפשרי </label>
+                        <input type="text" class="form-control" id="result1">
+                    </div>
+                </form>
+            </div>
+
+            <div id="calc-2" class="collapse brd-outline-accent text-right mt-5 p-5">
+                <h5 class="text-center"> חישוב גובה המשכנתא האפשרית לפי החזר חודשי רצוי </h5>
+                <form class="p-5" id="form2" onsubmit="return false;">
+                    <div class="row justify-content-center">
+
+                        <div class="col form-group">
+                            <label for="equity2" class="font-300"> הון עצמי </label>
+                            <input type="text" class="form-control" id="equity2" placeholder="100,000">
+                        </div>
+                        <div class="col form-group">
+                            <label for="periodY2"> החזר חודשי רצוי </label>
+                            <input type="text" class="form-control" id="periodY2" placeholder="30">
+                        </div>
+                        <div class="col form-group">
+                            <label for="refund2"> החזר חודשי רצוי </label>
+                            <input type="text" class="form-control" id="refund2" placeholder="5,500">
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <button type="button" class="btn m-3 btn-accent" onclick="calculate2()">חישוב</button>
+                    </div>
+
+                    <div class="row form-group">
+                        <label for="result2"> גובה משכנתא לפי ההחזר הנתון </label>
+                        <input type="text" class="form-control" id="result2">
+                    </div>
+                </form>
+            </div>
+
+            <div id="calc-3" class="collapse brd-outline-accent text-right mt-5 p-5">
+                <h5 class="text-center"> חישוב החזר חודשי ממוצע וריבית כוללת של המשכנתא </h5>
+                <form class="p-5" id="form3" onsubmit="return false;">
+                    <div class="row justify-content-center">
+                        <div class="col form-group">
+                            <label for="loan3" class="font-300"> גובה ההלוואה </label>
+                            <input type="text" class="form-control" id="loan3" placeholder="1,150,000">
+                        </div>
+                        <div class="col form-group">
+                            <label for="periodY3"> תקופה בשנים </label>
+                            <input type="text" class="form-control" id="periodY3" placeholder="30">
+                        </div>
+                        <div class="col form-group">
+                            <label for="interest3"> ריבית </label>
+                            <input type="text" class="form-control" id="interest3" placeholder="4.65">
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <button type="button" class="btn m-3 btn-accent" onclick="calculate3()">חישוב</button>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col form-group">
+                            <label for="resultM3"> ממוצע החזר חודשי </label>
+                            <input type="text" class="form-control" id="resultM3">
+                        </div>
+                        <div class="col form-group">
+                            <label for="resultI3"> ריבית כוללת </label>
+                            <input type="text" class="form-control" id="resultI3">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class=" row text-center mt-5">
+            <h1> היכנסו לאיזור האישי ותוכלו להנות מעוד הרבה מחשבונים מעניינים </h1>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>קצת עלינו</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style/shared.css">
+
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div th:insert="~{layouts/navbar :: navbar}"></div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="card mt-5 bg-transparent border-0">
+            <div class="row mt-5">
+                <div class="col-md-5">
+                    <img src="/images/img-about.jpg" class="img-fluid rounded-start mb-3" alt="">
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body h-100 d-flex flex-column p-5 card-about">
+                        <h1> קצת עלינו: </h1>
+                        <p>
+                            אנו כל הזמן חווים את התחושה שאנשים חוששים מתהליך לקיחת המשכנתא שאכן מהווה החלטה חשובה
+                            ביותר
+                            המשפיעה
+                            על חיינו לטווח זמן ארוך
+                            <br>
+                            חשש זה נובע הרבה מתוך חוסר היכרות עם תהליך לקיחת המשכתא וחוסר של מידע חשוב שאינו מונגש
+                            בצורה
+                            פשוטה
+                            לקהל הרחב
+                            <br>
+                            אנו מציעים לכם את כל הנתונים החשובים בצורה הפשוטה והמונגשת ביותר כשהמטרה שלנו היא לתת
+                            לכם את
+                            מירב
+                            הכלים לקבל בעצמכם את ההחלטה הנבונה ביותר
+                            <br>
+                            אנו ננגיש לכם את ממוצעי מחירי המשכנתאות לפי בנקים ולפי תמהיל משכנתא או מסלול ספציפי
+                            ונתוני
+                            הריביות
+                            המעודכנים ונאפשר לכם לבצע חישובים לפי העדפות הפיננסיות שלכם
+                        </p>
+
+                        <h3> איזור אישי: </h3>
+                        <p>
+                            באיזור האישי תוכלו לשמור את הנתונים שלכם בצורה בטוחה וכך תוכלו לשמור ולערוך לווים,
+                            מסלולים,
+                            הכנסות
+                            והוצאות, העדפות אישיות ועוד כל זאת כדי שנדע להתאים את המשכנתא לצרכים במדוייקים שלכם
+                        </p>
+
+                        <h3> מחשבונים: </h3>
+                        <p>
+                            אנו מציעים לכם כמה מחשבונים שיעזרו לכם במהלך כל התהליך מתחיל במחשבון בסיסי של גובה
+                            משכנתא
+                            אפשרית
+                            לפי
+                            ההון העצמי שלכם ועד מחשבונים שיתנו לכם גובה המשכנתא לפי גובה החזר רצוי ומחשבונים </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="container-fluid">
+        <div th:replace="~{layouts/footer :: footer}"></div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<div th:fragment="loginForm(error)">
+
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <span th:text="${error}"></span>
+    </div>
+
+    <div class="h-100 d-flex flex-column text-center p-5 brd-outline-accent">
+        <h1>התחברות</h1>
+
+        <form action="/login" method="POST">
+
+            <div class="form-group">
+                <label for="userName" class="font-300">שם משתמש</label>
+                <input type="text" class="form-control text-right" id="userName" name="userName" placeholder="שם משתמש">
+            </div>
+            <div class="form-group">
+                <label for="password">סיסמה</label>
+                <input type="password" class="form-control text-right" id="password" name="password"
+                       placeholder="סיסמה">
+            </div>
+            <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" name="savePassword" id="savePassword">
+                <label class="form-check-label" for="savePassword">זכור אותי</label>
+            </div>
+
+            <div class="row justify-content-center">
+                <button type="submit" class="btn m-3 btn-accent"><i class="bi bi-arrow-left"></i> כניסה לאיזור האישי
+                </button>
+            </div>
+            <!--
+            <div class="row justify-content-center">
+                <a href="/signWithGoogle" class="btn m-3 btn-accent"><i class="bi bi-arrow-left"></i> כניסה עם google </a>
+            </div>
+            -->
+            <div class="row justify-content-center">
+                <a href="/sign" class="btn m-3 btn-accent"><i class="bi bi-arrow-left"></i> עוד לא רשום - הירשם עכשיו
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
