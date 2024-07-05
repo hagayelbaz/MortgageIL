@@ -22,5 +22,8 @@ public class BorrowerLiabilitiesRequest {
     @NotEmpty(message = "end date is required")
     private Date endDate;
 
+    @NotEmpty(message = "description is required")
+    private String description;
+
     private Person person;
 }

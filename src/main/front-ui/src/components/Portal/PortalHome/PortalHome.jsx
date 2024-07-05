@@ -1,5 +1,5 @@
-import React from "react";
-import {Col, Row} from "react-bootstrap";
+import React, {useContext, useEffect} from "react";
+import {Button, Col, Row} from "react-bootstrap";
 import "./PortalHome.css";
 import BoiCurrentInterestCard from "./Cards/BoiCurrentInterestCard/BoiCurrentInterestCard";
 import CurrentCpiCard from "./Cards/CurrentCpiCard/CurrentCpiCard";
@@ -12,17 +12,21 @@ import withFetch from "../../HOC/withFetch";
 import Endpoints from "../../../Classes/Endpoints";
 import TableBanksInterest from "./Cards/TableBanksInterest/TableBanksInterest";
 import BanksCard from "./Cards/BanksCard/BanksCard";
+import {useGet} from "../../../Classes/RequestHooks";
+import {UserDataContext} from "../../../Provider/UserDataProvider";
 
 const PortalHome = () => {
     const BankAverageInterest = withFetch(BankAverageInterestCard);
     const BanksInterest = withFetch(TableBanksInterest);
     const BanksCards = withFetch(BanksCard);
+
     // <editor-fold defaultstate="collapsed desc="Today">
     const getDate = () => {
         const date = new Date();
         return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
     }
     // </editor-fold>
+
 
     return (
         <div className="container-fluid overflow-x-hidden secondary-bg-dark text-light">

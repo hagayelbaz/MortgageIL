@@ -3,7 +3,10 @@ package com.example.mortgageil.Models.Converters;
 import com.example.mortgageil.Core.contracts.EntityToResponseConverter;
 import com.example.mortgageil.Models.BorrowerLiabilities;
 import com.example.mortgageil.Models.Response.BorrowerLiabilitiesResponse;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BorrowerLiabilitiesEntityToResponseConverter implements
         EntityToResponseConverter<BorrowerLiabilities, BorrowerLiabilitiesResponse> {
 

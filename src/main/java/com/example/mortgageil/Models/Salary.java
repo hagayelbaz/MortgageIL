@@ -41,6 +41,8 @@ public class Salary implements ManageableJpa {
 
     private String jobTitle;
 
+    private String description;
+
 
     public Person getPerson() {
         return Person.builder()
@@ -54,6 +56,11 @@ public class Salary implements ManageableJpa {
 
     @Override
     public void deleteRelatedEntities() {
+
+    }
+
+    @Override
+    public void saveRelatedEntities() {
 
     }
 }

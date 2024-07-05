@@ -1,8 +1,9 @@
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import {Badge, Dropdown} from "react-bootstrap";
+import {UserDataContext} from "../../../../Provider/UserDataProvider";
 
 const CustomToggle = React.forwardRef(({children, onClick}, ref) => (
     <ExpandMoreIcon ref={ref}
@@ -19,10 +20,12 @@ const CustomToggle = React.forwardRef(({children, onClick}, ref) => (
 const PortalHomeHeader = () => {
     const [dropdownOpen, setDropdownOpen] = React.useState(false);
     const toggle = () => setDropdownOpen(prevState => !prevState);
+    const {user} = useContext(UserDataContext);
+
 
     return (
         <div className="d-flex justify-content-between p-3 secondary-bg">
-            <p className="fs-5">צהריים טובים חגי</p>
+            <p className="fs-5">צהריים טובים {`${user?.firstName} ${user?.lastName}`}</p>
             <div className="">
                 <div className="container-fluid">
                     <div className="row align-items-center">
@@ -44,7 +47,7 @@ const PortalHomeHeader = () => {
                             <img src="https://www.w3schools.com/howto/img_avatar.png" alt="profile"
                                  className="rounded-circle" width="40" height="40"/>
                             <div className="mx-2 lh-1">
-                                <p className="font-500 fs-6 p-0 m-0">חגי אלבז</p>
+                                <p className="font-500 fs-6 p-0 m-0">{`${user?.firstName} ${user?.lastName}`}</p>
                                 <small className="">משתמש</small>
                             </div>
                             <Dropdown>

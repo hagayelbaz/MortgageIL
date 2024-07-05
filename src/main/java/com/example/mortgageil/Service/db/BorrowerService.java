@@ -8,6 +8,8 @@ import com.example.mortgageil.Models.Request.BorrowerRequest;
 import com.example.mortgageil.Models.Response.BorrowerResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BorrowerService extends DBService<
         Borrower,
@@ -15,9 +17,18 @@ public class BorrowerService extends DBService<
         BorrowerResponse,
         BorrowerRepository> {
 
-    public BorrowerService(BorrowerRepository repository) {
-        super(new BorrowerRequestToEntityConverter(),
-                new BorrowerEntityToResponseConverter(),
-                repository);
+    private final BorrowerRequestToEntityConverter borrowerRequestToEntityConverter;
+    private final BorrowerEntityToResponseConverter borrowerEntityToResponseConverter;
+
+    public BorrowerService(BorrowerRepository repository,
+                           BorrowerRequestToEntityConverter borrowerRequestToEntityConverter,
+                           BorrowerEntityToResponseConverter borrowerEntityToResponseConverter) {
+        super(borrowerRequestToEntityConverter, borrowerEntityToResponseConverter, repository);
+        this.borrowerRequestToEntityConverter = borrowerRequestToEntityConverter;
+        this.borrowerEntityToResponseConverter = borrowerEntityToResponseConverter;
+    }
+
+    public List<Borrower> getAllByUserId(Long userId) {
+        return repository.findAllByUserId(userId);
     }
 }

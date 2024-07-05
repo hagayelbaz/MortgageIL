@@ -65,4 +65,11 @@ public class Person implements ManageableJpa {
         this.borrowerLiabilities.clear();
         this.mortgagePlans.clear();
     }
+
+    @Override
+    public void saveRelatedEntities() {
+        this.salaries.forEach(salary -> salary.setPerson(this));
+        this.borrowerLiabilities.forEach(borrowerLiabilities -> borrowerLiabilities.setPerson(this));
+        this.mortgagePlans.forEach(mortgagePlan -> mortgagePlan.setPerson(this));
+    }
 }

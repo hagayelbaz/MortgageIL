@@ -31,16 +31,19 @@ public abstract class DBService<
     //<editor-fold desc="create">
     public Rs create(Rq request) {
         T entity = requestConverter.convert(request);
+        entity.saveRelatedEntities();
         T savedEntity = repository.save(entity);
         return responseConverter.convert(savedEntity);
     }
 
     public T createEntity(Rq request) {
         T entity = requestConverter.convert(request);
+        entity.saveRelatedEntities();
         return repository.save(entity);
     }
 
     public T createEntity(T entity) {
+        entity.saveRelatedEntities();
         return repository.save(entity);
     }
     //</editor-fold>
@@ -72,24 +75,32 @@ public abstract class DBService<
     //</editor-fold>
 
     //<editor-fold desc="update">
+    @Transactional
     public Rs update(Long id, Rq request) {
-        T entity = repository.findById(id).orElse(null);
-        if (entity != null) {
-            T savedEntity = repository.save(entity);
-            return responseConverter.convert(savedEntity);
+        T existingEntity = repository.findById(id).orElse(null);
+        if (existingEntity == null) {
+            return null;
         }
-        return null;
+        requestConverter.applyChanges(request, existingEntity);
+        existingEntity.saveRelatedEntities();
+        T savedEntity = repository.save(existingEntity);
+        return responseConverter.convert(savedEntity);
     }
 
+
+    @Transactional
     public T updateEntity(Long id, Rq request) {
-        T entity = repository.findById(id).orElse(null);
-        if (entity != null) {
-            return repository.save(entity);
+        T existingEntity = repository.findById(id).orElse(null);
+        if (existingEntity == null) {
+            return null;
         }
-        return null;
+        requestConverter.applyChanges(request, existingEntity);
+        existingEntity.saveRelatedEntities();
+        return repository.save(existingEntity);
     }
 
     public T updateEntity(Long id, T entity) {
+        entity.saveRelatedEntities();
         return repository.save(entity);
     }
 

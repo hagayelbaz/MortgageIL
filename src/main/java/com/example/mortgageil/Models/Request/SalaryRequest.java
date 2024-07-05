@@ -15,6 +15,7 @@ public class SalaryRequest {
     private double salary;
     private String employer;
     private Date startDate;
+    private String description;
     private String jobTitle;
 
 

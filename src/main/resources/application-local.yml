@@ -213,23 +213,23 @@ mortgageil:
   security: #TODO: change it so the use will be with prefix
     paths:
       guest:
-        - /**
         - auth/login
-        - about
         - contact
       all:
         - home
       user:
         - api/data/**
-        - portal/**
       admin:
         - auth/create-user
       shared:
+        - /**
         - account/**
+        - portal/**
+        - about
   auth:
     login:
       page-url: /auth/login
-      success-url: /create-delivery
+      success-url: /portal
       failure-url: /auth/login?error=true
     logout:
       page-url: /logout

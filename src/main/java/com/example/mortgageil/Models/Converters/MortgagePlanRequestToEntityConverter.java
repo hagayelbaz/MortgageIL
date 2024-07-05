@@ -5,10 +5,12 @@ import com.example.mortgageil.Models.MortgagePlan;
 import com.example.mortgageil.Models.Request.MortgagePlanRequest;
 import com.example.mortgageil.Service.db.UserService;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
-@Service
+@Component
 public class MortgagePlanRequestToEntityConverter
         implements RequestToEntityConverter<MortgagePlanRequest, MortgagePlan> {
 
@@ -26,5 +28,15 @@ public class MortgagePlanRequestToEntityConverter
                 .balloonDuration(request.getBalloonDuration())
                 .build();
 
+    }
+
+    @Override
+    public void applyChanges(MortgagePlanRequest request, MortgagePlan entity) {
+        entity.setPerson(userService.getEntityById(request.getPersonId()));
+        entity.setType(request.getType());
+        entity.setAmount(request.getAmount());
+        entity.setInterestRate(request.getInterestRate());
+        entity.setDuration(request.getDuration());
+        entity.setBalloonDuration(request.getBalloonDuration());
     }
 }

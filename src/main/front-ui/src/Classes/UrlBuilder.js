@@ -7,10 +7,11 @@ class UrlBuilder {
 
 
     addPath(part) {
-        if (this.path.endsWith('/') || part.startsWith('/')) {
-            this.path += part;
+        const partStr = part.toString();
+        if (this.path.endsWith('/') || partStr.startsWith('/')) {
+            this.path += partStr;
         } else {
-            this.path += `/${part}`;
+            this.path += `/${partStr}`;
         }
         return new UrlBuilder(this.baseUrl, this.path, this.queryString);
     }

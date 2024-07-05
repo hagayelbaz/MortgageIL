@@ -50,4 +50,9 @@ public class BorrowerLiabilities implements ManageableJpa {
     public void deleteRelatedEntities() {
 
     }
+
+    @Override
+    public void saveRelatedEntities() {
+
+    }
 }
