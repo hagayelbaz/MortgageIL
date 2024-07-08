@@ -8,7 +8,8 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import useFormData from "../../../Hook/useFormData";
 import {usePut} from "../../../Classes/RequestHooks";
 import Endpoints from "../../../Classes/Endpoints";
-import {forwardRef, useImperativeHandle} from "react";
+import {forwardRef, useContext, useImperativeHandle} from "react";
+import {UserDataContext} from "../../../Provider/UserDataProvider";
 
 
 const EditBorrower = forwardRef(({ borrower, setBorrower }, ref) => {
@@ -18,6 +19,7 @@ const EditBorrower = forwardRef(({ borrower, setBorrower }, ref) => {
         onChange,
         saveData: saveBorrower
     } = useFormData(borrower, setBorrower, Endpoints.BORROWER_ENDPOINT);
+    const {user} = useContext(UserDataContext);
 
     useImperativeHandle(ref, () => ({
         saveBorrower
@@ -25,6 +27,9 @@ const EditBorrower = forwardRef(({ borrower, setBorrower }, ref) => {
 
     const addSalary = () => {
         const newSalary = {
+            person: {
+                id:  borrowerData?.id,
+            },
             employer: '',
             description: '',
             startDate: '',

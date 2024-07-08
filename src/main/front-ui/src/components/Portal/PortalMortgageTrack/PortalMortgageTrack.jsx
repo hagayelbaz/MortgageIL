@@ -3,13 +3,11 @@ import {useEffect, useState} from "react";
 import './PortalMortgageTrack.css';
 import TabMortgageTrack from "./TabMortgageTrack/TabMortgageTrack";
 import {mortgageTracks} from "../../../Classes/TestData";
+import TabAmortizationSchedule from "./TabAmortizationSchedule/TabAmortizationSchedule";
 
 const PortalMortgageTrack = () => {
     const [key, setKey] = useState('home');
 
-    useEffect(() => {
-
-    }, []);
 
     return (
         <div className="container-fluid secondary-bg-dark p-0 py-1 m-0 overflow-x-hidden">
@@ -20,10 +18,10 @@ const PortalMortgageTrack = () => {
                 fill
             >
                 <Tab eventKey="home" title="מסלולים">
-                    <TabMortgageTrack mortgageTracks={mortgageTracks}/>
+                    <TabMortgageTrack/>
                 </Tab>
                 <Tab eventKey="borad" title="לוח תשלומים">
-                    Tab content for Profile
+                    <TabAmortizationSchedule key={key}/>
                 </Tab>
                 <Tab eventKey="analist" title="ניתוח תיק">
                     Tab content for Profile

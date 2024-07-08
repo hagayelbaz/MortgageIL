@@ -1,7 +1,7 @@
 package com.example.mortgageil;
 
 import com.example.mortgageil.Models.User.User;
-import com.example.mortgageil.Service.AuthenticationService;
+import com.example.mortgageil.Service.auth.AuthenticationService;
 import jakarta.annotation.Resource;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -36,7 +36,7 @@ public class MortgageIlApplication {
                     .roleName(ADMIN)
                     .build();
 
-            if(userService.findByEmail(admin.getEmail()).isEmpty()){
+            if(userService.findByEmail(admin.getEmail()) == null){
                 service.register(admin);
             }
         };

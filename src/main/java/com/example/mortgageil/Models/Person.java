@@ -46,30 +46,15 @@ public class Person implements ManageableJpa {
             orphanRemoval = true)
     private Set<Salary> salaries = new HashSet<>();
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "person",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private Set<BorrowerLiabilities> borrowerLiabilities = new HashSet<>();
 
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "person",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private Set<MortgagePlan> mortgagePlans = new HashSet<>();
 
     @Override
     public void deleteRelatedEntities() {
         this.salaries.clear();
-        this.borrowerLiabilities.clear();
-        this.mortgagePlans.clear();
     }
 
     @Override
     public void saveRelatedEntities() {
         this.salaries.forEach(salary -> salary.setPerson(this));
-        this.borrowerLiabilities.forEach(borrowerLiabilities -> borrowerLiabilities.setPerson(this));
-        this.mortgagePlans.forEach(mortgagePlan -> mortgagePlan.setPerson(this));
     }
 }

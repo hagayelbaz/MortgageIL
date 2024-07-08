@@ -1,6 +1,12 @@
 package com.example.mortgageil.Controller.API.V1.Internal.db;
 
-import com.example.mortgageil.Models.Request.SalaryRequest;
+import com.example.mortgageil.Models.DTO.PersonDTO;
+import com.example.mortgageil.Models.DTO.SalaryDTO;
+import com.example.mortgageil.Models.Mapper.PersonMapper;
+import com.example.mortgageil.Models.Mapper.SalaryMapper;
+import com.example.mortgageil.Models.Person;
+import com.example.mortgageil.Models.Salary;
+import com.example.mortgageil.Service.db.DtoMapper;
 import com.example.mortgageil.Service.db.PersonService;
 import com.example.mortgageil.Service.db.SalaryService;
 import jakarta.annotation.Resource;
@@ -18,12 +24,18 @@ public class SalaryController {
     private PersonService personService;
 
 
+    @Resource(name = "salaryMapper")
+    private SalaryMapper mapper;
+
+    @Resource(name = "personMapper")
+    private PersonMapper personMapper;
+
     //<editor-fold desc="create">
     @PostMapping("")
-    public ResponseEntity<?> create(@RequestBody SalaryRequest salaryRequest) {
-        Long userId = salaryRequest.getPersonId();
-        salaryRequest.setPerson(personService.getById(userId));
-        return ResponseEntity.ok(salaryService.create(salaryRequest));
+    public ResponseEntity<?> create(@RequestBody SalaryDTO salaryDTO) {
+        Long personId = salaryDTO.getPersonId();
+        salaryDTO.setPersonId(personId);
+        return ResponseEntity.ok(salaryService.save(mapper.toEntity(salaryDTO)));
     }
     //</editor-fold>
 
@@ -46,8 +58,8 @@ public class SalaryController {
 
     //<editor-fold desc="update">
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody SalaryRequest salaryRequest) {
-        return ResponseEntity.ok(salaryService.update(id, salaryRequest));
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody SalaryDTO salaryRequest) {
+        return ResponseEntity.ok(salaryService.update(id, mapper.toEntity(salaryRequest)));
     }
     //</editor-fold>
 

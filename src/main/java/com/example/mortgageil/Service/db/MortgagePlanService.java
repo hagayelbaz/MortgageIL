@@ -1,35 +1,25 @@
 package com.example.mortgageil.Service.db;
 
-import com.example.mortgageil.Models.Converters.MortgagePlanEntityToResponseConverter;
-import com.example.mortgageil.Models.Converters.MortgagePlanRequestToEntityConverter;
 import com.example.mortgageil.Models.MortgagePlan;
 import com.example.mortgageil.Models.Repositories.MortgagePlanRepository;
-import com.example.mortgageil.Models.Request.MortgagePlanRequest;
-import com.example.mortgageil.Models.Response.MortgagePlanResponse;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MortgagePlanService extends DBService<
-        MortgagePlan,
-        MortgagePlanRequest,
-        MortgagePlanResponse,
-        MortgagePlanRepository>{
+public class MortgagePlanService extends DBService<MortgagePlan, MortgagePlanRepository>{
 
 
     public MortgagePlanService(MortgagePlanRepository repository) {
-        super(new MortgagePlanRequestToEntityConverter(),
-                new MortgagePlanEntityToResponseConverter(),
-                repository);
+        super(repository);
     }
 
-    public MortgagePlan getByPersonId(Long id) {
-        return repository.findByPersonId(id)
+    /*public MortgagePlan getByPersonId(Long id) {
+        return repository.findByUserId(id)
                 .stream()
                 .findFirst()
                 .orElse(null);
-    }
+    }*/
 
     public void deleteAllByPersonId(Long id) {
-        repository.deleteAllByPersonId(id);
+        //repository.deleteAllByUserId(id);
     }
 }

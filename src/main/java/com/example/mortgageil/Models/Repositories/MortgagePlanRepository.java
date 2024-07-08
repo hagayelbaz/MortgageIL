@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface MortgagePlanRepository extends JpaRepository<MortgagePlan, Long> {
 
-    List<MortgagePlan> findByPersonId(Long id);
+    //List<MortgagePlan> findByUserId(Long id);
 
-    void deleteAllByPersonId(Long id);
+    //void deleteAllByUserId(Long id);
 }

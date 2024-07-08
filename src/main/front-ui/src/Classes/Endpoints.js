@@ -4,11 +4,16 @@ class Endpoints {
 
     static BASE_URL = "http://localhost:8080";
     static API_VERSION = "api/v1";
+    static INTERNAL = "internal";
+    static EXTERNAL = "external";
     static DATA = "data";
+    static CALCULATOR = "calc/mortgage";
     static AUTH = "auth";
     static TOKEN = "csrf-token";
     static USER = "user";
     static BORROWER = "borrower";
+    static MORTGAGE_GROUP = "mortgage-group";
+    static MORTGAGE_PLAN = "mortgage-plan";
 
     //TODO: Change to production URL
     static get BASE_URL_END_POINT() {
@@ -23,6 +28,22 @@ class Endpoints {
         return this.BASE_URL_END_POINT.addPath(this.API_VERSION);
     }
 
+    static get INTERNAL_API_VERSION_END_POINT() {
+        return this.API_VERSION_END_POINT.addPath(this.INTERNAL);
+    }
+
+    static get EXTERNAL_API_VERSION_END_POINT() {
+        return this.API_VERSION_END_POINT.addPath(this.EXTERNAL);
+    }
+
+    static get CALCULATOR_ENDPOINT() {
+        return this.INTERNAL_API_VERSION_END_POINT.addPath(this.CALCULATOR);
+    }
+
+    static get AMORTIZATION_SCHEDULE_ENDPOINT() {
+        return this.CALCULATOR_ENDPOINT.addPath("amortization-schedule");
+    }
+
     static get DATA_ENDPOINT() {
         return this.API_VERSION_END_POINT.addPath(this.DATA);
     }
@@ -33,6 +54,14 @@ class Endpoints {
 
     static get BORROWER_ENDPOINT() {
         return this.API_VERSION_END_POINT.addPath(this.BORROWER);
+    }
+
+    static get MORTGAGE_GROUP_ENDPOINT() {
+        return this.API_VERSION_END_POINT.addPath(this.MORTGAGE_GROUP);
+    }
+
+    static get MORTGAGE_PLAN_ENDPOINT() {
+        return this.API_VERSION_END_POINT.addPath(this.MORTGAGE_PLAN);
     }
 
     static get USER_DATA_ENDPOINT() {

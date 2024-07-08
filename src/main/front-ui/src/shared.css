@@ -35,6 +35,32 @@
     margin: 0;
 }
 
+.button{
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: .17s ease-in-out;
+    border: none;
+}
+
+.button-outline{
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: transparent;
+}
+
+.button:hover{
+    filter: brightness(.9);
+}
+
+.button-outline:hover{
+    filter: brightness(.9);
+}
+
+
+
 .help-bg {
     background-color: var(--help-bubble-background-color);
 }
@@ -87,6 +113,10 @@
 
 .muted-color {
     color: var(--mute-color) !important;
+}
+
+.text-color {
+    color: var(--text-color) !important;
 }
 
 /* background colors as classes */
@@ -223,3 +253,15 @@
     font-weight: 900 !important;
 }
 
+/* hide arrows from number */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}

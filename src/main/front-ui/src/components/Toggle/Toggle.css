@@ -1,0 +1,16 @@
+
+.custom-menu.dropdown-menu{
+    background-color: var(--secondary-color-light);
+    color: var(--text-color);
+    text-align: right;
+}
+.custom-menu.dropdown-menu div{
+    color: var(--text-color);
+}
+.custom-menu.dropdown-menu div:hover{
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    transform: scale(1.05);
+    transition: 0.3s;
+}

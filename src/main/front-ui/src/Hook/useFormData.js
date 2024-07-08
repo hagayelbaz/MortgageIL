@@ -42,12 +42,16 @@ const useFormData = (initialData, updateGlobalData, apiPath, messagesOption) => 
             putData(apiPath.addPath(data.id), data);
         }
         setIsDataSaved(true);
-    }, [postData, putData, apiPath]);
+    }, [postData, putData, apiPath, data]);
 
     const onChange = useCallback((event) => {
         const {name, value} = event.target;
         updateData(name, value);
     }, [updateData]);
+
+    const setDataFromProps = useCallback((props) => {
+        setData(props);
+    }, []);
 
 
     useEffect(() => {
@@ -76,7 +80,8 @@ const useFormData = (initialData, updateGlobalData, apiPath, messagesOption) => 
         data,
         updateData,
         onChange,
-        saveData
+        saveData,
+        setDataFromProps
     };
 };
 

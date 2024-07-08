@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface BorrowerRepository extends JpaRepository<Borrower, Long> {
     List<Borrower> findAllByUserId(Long userId);
+    Borrower findByEmail(String email);
 }

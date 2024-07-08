@@ -6,104 +6,54 @@ import com.example.mortgageil.Core.contracts.RequestToEntityConverter;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public abstract class DBService<
         T extends ManageableJpa,
-        Rq,
-        Rs,
         Repository extends JpaRepository<T, Long>> {
+    //TODO: check about the saveRelatedEntities and deleteRelatedEntities
 
     protected final Repository repository;
-    private final RequestToEntityConverter<Rq, T> requestConverter;
-    private final EntityToResponseConverter<T, Rs> responseConverter;
 
-    public DBService(RequestToEntityConverter<Rq, T> requestConverter,
-                     EntityToResponseConverter<T, Rs> responseConverter,
-                     Repository repository) {
-
+    public DBService(Repository repository) {
         this.repository = repository;
-        this.requestConverter = requestConverter;
-        this.responseConverter = responseConverter;
     }
 
     //<editor-fold desc="create">
-    public Rs create(Rq request) {
-        T entity = requestConverter.convert(request);
-        entity.saveRelatedEntities();
-        T savedEntity = repository.save(entity);
-        return responseConverter.convert(savedEntity);
-    }
-
-    public T createEntity(Rq request) {
-        T entity = requestConverter.convert(request);
-        entity.saveRelatedEntities();
-        return repository.save(entity);
-    }
-
-    public T createEntity(T entity) {
-        entity.saveRelatedEntities();
-        return repository.save(entity);
+    public T save(T entity) {
+        return Optional.of(repository.save(entity)).orElse(null);
     }
     //</editor-fold>
 
     //<editor-fold desc="get">
-    public Rs getById(Long id) {
-        T entity = repository.findById(id).orElse(null);
-        if (entity != null) {
-            return responseConverter.convert(entity);
-        }
-        return null;
-    }
 
-    public T getEntityById(Long id) {
+    public T getById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
-
-    public Iterable<Rs> getAll() {
-        Iterable<T> entities = repository.findAll();
-        return StreamSupport.stream(entities.spliterator(), false)
-                .map(responseConverter::convert)
-                .collect(Collectors.toList());
-    }
-
-    public Iterable<T> getAllEntities() {
+    public Iterable<T> getAll() {
         return repository.findAll();
     }
+
+    public List<T> getAllList() {
+        return new ArrayList<>(repository.findAll());
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="update">
     @Transactional
-    public Rs update(Long id, Rq request) {
+    public T update(Long id, T entity) {
         T existingEntity = repository.findById(id).orElse(null);
         if (existingEntity == null) {
             return null;
         }
-        requestConverter.applyChanges(request, existingEntity);
-        existingEntity.saveRelatedEntities();
-        T savedEntity = repository.save(existingEntity);
-        return responseConverter.convert(savedEntity);
-    }
-
-
-    @Transactional
-    public T updateEntity(Long id, Rq request) {
-        T existingEntity = repository.findById(id).orElse(null);
-        if (existingEntity == null) {
-            return null;
-        }
-        requestConverter.applyChanges(request, existingEntity);
-        existingEntity.saveRelatedEntities();
-        return repository.save(existingEntity);
-    }
-
-    public T updateEntity(Long id, T entity) {
-        entity.saveRelatedEntities();
         return repository.save(entity);
     }
-
     //</editor-fold>
 
     //<editor-fold desc="delete">

@@ -29,6 +29,7 @@ const NewBorrower = ({show, setShow}) => {
     const handleSave = (e) => {
         e.preventDefault();
         saveBorrower();
+        handleClose();
     }
 
 

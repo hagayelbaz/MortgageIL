@@ -2,8 +2,11 @@ package com.example.mortgageil.Models.User;
 
 import com.example.mortgageil.Core.contracts.ManageableJpa;
 import com.example.mortgageil.Models.Borrower;
+import com.example.mortgageil.Models.UserLiability;
+import com.example.mortgageil.Models.MortgageGroup;
 import com.example.mortgageil.Models.Person;
 import com.example.mortgageil.validation.ValidationGroups;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -14,11 +17,9 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -46,13 +47,40 @@ public class User extends Person implements ManageableJpa, UserDetails {
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
+    private Set<UserLiability> userLiabilities = new HashSet<>();
+
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private Set<Borrower> borrowers = new HashSet<>();
+
+    //NOTE: is that OK?
+   /* @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "user_mortgage_group",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "mortgage_group_id"))
+    @JsonBackReference*/
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<MortgageGroup> mortgageGroups = new HashSet<>();
+
 
 
     @Override
     public void deleteRelatedEntities() {
         super.deleteRelatedEntities();
+        this.userLiabilities.clear();
         this.borrowers.clear();
+        this.mortgageGroups.clear();
+    }
+
+    @Override
+    public void saveRelatedEntities() {
+        super.saveRelatedEntities();
+        this.userLiabilities.forEach(userLiability -> userLiability.setUser(this));
+        this.borrowers.forEach(borrower -> borrower.setUser(this));
     }
 
     @Override

@@ -11,6 +11,10 @@ spring:
     suffix: .html
     cache: false  # Set to true in production
 
+  #TODO: Delete in production!
+  #main:
+    #allow-circular-references: true
+
   datasource:
     url: jdbc:postgresql://localhost:5432/MortgageIL
     username: postgres

@@ -1,11 +1,9 @@
 package com.example.mortgageil.Controller;
 
 import com.example.mortgageil.Models.User.User;
-import com.example.mortgageil.Service.AuthenticationService;
+import com.example.mortgageil.Service.auth.AuthenticationService;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/auth")

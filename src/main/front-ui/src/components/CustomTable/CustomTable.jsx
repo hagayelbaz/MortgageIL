@@ -7,6 +7,8 @@ import {ReactComponent as PdfIcon} from '../../assets/svgs/pdf.svg';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import ExcelExport from "../../Classes/ExcelExport";
 import Help from "../Help/Help";
+import Loading from "../Loading/Loading";
+
 /**
  * <b>Data Structure:</b>
  * <p>
@@ -74,7 +76,13 @@ import Help from "../Help/Help";
 
 //TODO: Add pagination (?), when rounded borders are added to the table, the table is not displayed correctly
 
-const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30dvh'}}) => {
+const CustomTable = ({
+                         columns,
+                         data,
+                         spacialIcon,
+                         tableStyle = {maxHeight: '30dvh'},
+                         isLoading = false
+                     }) => {
     const [dataToDisplay, setDataToDisplay] = useState(data);
     const [columnsToDisplay, setColumnsToDisplay] = useState(columns);
     const [sortConfig, setSortConfig] = useState({key: null, direction: 'ascending'});
@@ -141,7 +149,7 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
     const exportToExcel = () => {
         //delete the extra column
         const tmp = {...columnsToDisplay};
-        if(spacialIcon){
+        if (spacialIcon) {
             const index = tmp.names.indexOf('extra');
             if (index > -1) {
                 tmp.names.splice(index, 1);
@@ -165,7 +173,7 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
 
 
     return (
-        <>
+        <Loading isLoading={isLoading}>
             <div className="p-3 pb-1 container-fluid">
                 <div className="row">
                     <div className="col-12 col-md-6 col-xl-3 d-flex align-items-center position-relative">
@@ -173,7 +181,8 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
                         <SearchIcon className="search-icon"/>
                     </div>
                     <div className="d-none d-xl-block col-xl-6"></div>
-                    <div className="col-12 col-md-6 col-xl-3 d-flex justify-content-between justify-content-md-end mt-3 mt-xl-0">
+                    <div
+                        className="col-12 col-md-6 col-xl-3 d-flex justify-content-between justify-content-md-end mt-3 mt-xl-0">
                         <Help text="ייצוא לאקסל">
                             <ExcelIcon className="fs-3 mx-2" role='button' onClick={exportToExcel}/>
                         </Help>
@@ -210,14 +219,14 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
                     </tr>
                     </thead>
                     <tbody>
-                    {dataToDisplay?.length === 0 && (
+                    {(!dataToDisplay || dataToDisplay?.length === 0) && (
                         <tr>
                             <td colSpan={columnsToDisplay.names.length} className="text-center py-3 fw-bolder">
                                 לא נמצאו תוצאות
                             </td>
                         </tr>
                     )}
-                    {dataToDisplay?.map((row, index) => (
+                    {dataToDisplay && dataToDisplay?.map((row, index) => (
                         <tr key={index}>
                             {columnsToDisplay.names?.map((column, columnKey) => (
                                 column === 'extra' ? (
@@ -236,7 +245,7 @@ const CustomTable = ({columns, data, spacialIcon, tableStyle  = {maxHeight: '30d
                     </tbody>
                 </table>
             </div>
-        </>
+        </Loading>
     );
 }
 

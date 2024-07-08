@@ -42,4 +42,9 @@ public class Borrower extends Person implements ManageableJpa {
     public void deleteRelatedEntities() {
 
     }
+
+    @Override
+    public void saveRelatedEntities() {
+
+    }
 }
