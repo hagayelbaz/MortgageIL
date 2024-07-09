@@ -28,7 +28,7 @@ public class AuthenticationController {
     @GetMapping("/login")
     public String login(Principal principal, Model model) {
         if(principal != null)
-            return "redirect:http://localhost:3000/portal/details";
+            return "redirect:http://localhost:3000/portal";
             //return "redirect:/portal/details";
 
         model.addAttribute("user", new User());
