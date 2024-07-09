@@ -27,6 +27,6 @@ public class CustomErrorController implements ErrorController {
         model.addAttribute("error", errorAttributes.get("error"));
         model.addAttribute("errorMessage", errorAttributes.get("message"));
 
-        return "errorPage";
+        return "error";
     }
 }

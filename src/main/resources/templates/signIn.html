@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>התחברות</title>
+    <title>הרשמה</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="style/shared.css">
+    <link rel="stylesheet" href="/style/sharedWeb.css">
+
 </head>
 <body>
-
 <div class="container-fluid">
-    <div th:insert="~{layouts/navbar :: navbar}"></div>
+    <div th:replace="~{layouts/navbar :: navbar}"></div>
 </div>
 
 <div class="container-fluid">
     <div class="row justify-content-center img-light mt-5">
-        <div class="col-6 m-5 p-5">
-            <div th:insert="~{layouts/loginForm :: loginForm(${error})}"></div>
+        <div class="col-6 m-5 p-5" >
+            <div th:insert="~{layouts/signInForm :: signInForm}"></div>
         </div>
     </div>
 </div>
@@ -24,7 +24,6 @@
 <div class="container-fluid">
     <div th:replace="~{layouts/footer :: footer}"></div>
 </div>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 

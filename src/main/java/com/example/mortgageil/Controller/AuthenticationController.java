@@ -36,7 +36,7 @@ public class AuthenticationController {
             //return "redirect:/portal/details";
 
         model.addAttribute("user", new User());
-        return "OLDlogin";
+        return "login";
     }
 
 

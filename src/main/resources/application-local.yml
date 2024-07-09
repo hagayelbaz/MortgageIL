@@ -217,6 +217,8 @@ mortgageil:
         - contact
       all:
         - home
+        - calculator
+        - dataMarket
       user:
         - api/data/**
       admin:
