@@ -1,0 +1,71 @@
+###
+GET http://localhost:8080/api/v1/data/interest-rate/base-rate
+
+<> 2024-05-27T214433.200.json
+
+###
+GET http://localhost:8080/api/v1/data/interest-rate/current
+
+<> 2024-05-27T214504.200.json
+
+###
+GET http://localhost:8080/api/v1/data/interest-rate/base-rate/last-12-months
+
+<> 2024-05-27T214518.200.json
+
+###
+GET http://localhost:8080/api/v1/data/cpi/percentage-change
+
+<> 2024-05-27T214528.200.json
+
+###
+GET http://localhost:8080/api/v1/data/cpi/historic-points
+
+<> 2024-05-27T214536.200.json
+
+###
+GET http://localhost:8080/api/v1/data/cpi/last-year-change
+
+<> 2024-05-27T214547.200.json
+
+###
+GET http://localhost:8080/api/v1/data/inflation-expectations/next-year
+
+<> 2024-05-27T214557.200.json
+
+###
+GET http://localhost:8080/api/v1/data/inflation-expectations/next-next-year
+
+<> 2024-05-27T214611.200.json
+
+###
+GET http://localhost:8080/api/v1/data/inflation-expectations/five-years
+
+<> 2024-05-27T214619.200.json
+
+###
+GET http://localhost:8080/api/v1/data/inflation-expectations/average-twelve-months
+
+<> 2024-05-27T214627.200.json
+
+###
+GET http://localhost:8080/api/v1/data/inflation-expectations/third-year
+
+<> 2024-05-27T214634.200.json
+
+###
+GET http://localhost:8080/api/v1/data/inflation-expectations/five-to-three-years
+
+<> 2024-05-27T214639.200.json
+
+###
+GET http://localhost:8080/api/v1/data/inflation-expectations/ten-to-five-years
+
+<> 2024-05-27T214645.200.json
+
+###
+GET http://localhost:8080/api/v1/data/inflation-expectations/months/60
+
+<> 2024-05-27T214722.200.json
+<> 2024-05-27T214715.200.json
+<> 2024-05-27T214659.200.json

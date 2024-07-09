@@ -4,19 +4,20 @@ import Color from "../../Classes/Color";
 
 export const menuStyle = {
     [`.${sidebarClasses.container}`]: {
-        backgroundColor: Vars.PRIMARY_COLOR,
+        backgroundColor: Vars.SECONDARY_COLOR,
         color: Vars.TEXT_COLOR,
     },
     [`.${menuClasses.button}`]: {
         '&:hover': {
-            backgroundColor: Vars.SECONDARY_COLOR,
+            backgroundColor: `${Vars.SECONDARY_COLOR_LIGHT} !important`,
+            borderRadius: '.2rem',
         },
         '&:active': {
-            backgroundColor: Color.darkenColor(Vars.SECONDARY_COLOR, 20),
+            backgroundColor: `${Vars.SECONDARY_COLOR_LIGHT} !important`,
         },
     },
     [`.${menuClasses.subMenuContent}`]: {
-        backgroundColor: Vars.PRIMARY_COLOR_LIGHT,
+        backgroundColor: Vars.SECONDARY_COLOR_DARK,
     },
     [`.${menuClasses.icon}`]: {
         color: Vars.SECONDARY_COLOR_DARK,

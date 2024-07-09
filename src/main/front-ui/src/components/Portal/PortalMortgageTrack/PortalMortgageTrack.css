@@ -1,0 +1,23 @@
+.nav-tabs{
+    --bs-nav-tabs-border-color: var(--secondary-color-light) !important;
+    --bs-nav-tabs-link-active-bg: var(--secondary-color) !important;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+    border-color: var(--secondary-color-light) !important;
+}
+
+.nav-link {
+    color: white !important;
+    border-color: var(--secondary-color) !important;
+}
+
+.nav-link:hover {
+    border-color: var(--secondary-color-light) !important;
+    color: white !important;
+    background: rgba(200, 200, 200, 0.25) !important;
+}
+
+.nav-link.active {
+    color: white !important;
+}

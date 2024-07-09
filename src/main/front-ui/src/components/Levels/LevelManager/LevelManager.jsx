@@ -1,69 +1,51 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import './LevelManager.css';
-import LevelControlButtonContainer
-    from "../Controls/LevelButton/LevelControlButtonContainer/LevelControlButtonContainer";
-import HandleLevels from "./handleLevels";
-import {Button} from "react-bootstrap";
-import {MultiConditionalWrapper} from "../../Utils/ConditionalWrapper";
-import LevelControlInputContainer from "../Controls/LevelInput/LevelControlInputContainer/LevelControlInputContainer";
-import LevelControl from "./LevelControl/LevelControl";
+import validator from '@rjsf/validator-ajv8';
+import ProgressBar from "../../ProgressBar/ProgressBar";
+import CustomForm from "./CustomiseWidgets/CustomiseWidgets";
+import useSchema from "../../../Hook/useSchema";
+import transformErrors from "./errorMessages/transformErrors";
+import {Vars} from "../../../Vars";
 
 
-const wrapperVars = (level) => {
-    return {
-        conditions: [level.levelOrder === 'buttons', level.levelOrder === 'inputs'],
-        wrappers: [<LevelControlButtonContainer/>, <LevelControlInputContainer/>]
+const LevelManager = ({levels}) => {
+    const [formData, setFormData] = useState({
+        borrowers: [{firstName: ""}],//to show as default
+        borrowerLiabilities: [{description: ""}],
+    });
+    const {next, prev, getSchema} = useSchema(levels, 0);
+    const schema = getSchema();
+
+    const onNext = () => {
+        if (schema.currentIndex === schema.totalSteps)
+            console.log(formData);//TODO: send data to server
+        else
+            next(formData);
     }
-}
-
-const LevelManager = ({levelData}) => {
-    const [currentLevels, setCurrentLevels] = useState([levelData.levels[0]]);
-    const [history, setHistory] = useState([]);
-    const handleLevels = new HandleLevels(history, levelData, currentLevels)
-
-
-    const nextLevel = (level, item) => setHistory(handleLevels.updateHistory(level, item));
-    const previousLevel = () => setHistory(handleLevels.getPreviousLevel());
-
-    useEffect(() => setCurrentLevels(handleLevels.updateLevelFromHistory()), [history]);
-
-
-    const isToShow = (index, item) => {
-        const selected = history[history.length - 1]?.selected;
-        const allowed = handleLevels.getLastLevelFromHistory()?.items.find(i => i.id === selected)?.nextLevelInclude;
-
-        return allowed === undefined || (allowed.includes(item.id) || allowed.includes(0));
-    }
-
-    const determineIfSelected = (item) => {
-        const selected = history[history.length - 1]?.selected;
-        return selected === item.id;
-    };
+    const onPrevious = () => prev(formData);
 
     return (
-        <div className="position-relative primary-bg p-3 rounded-2">
-            {currentLevels.map((level, levelIndex) => (
-                <Fragment key={levelIndex}>
-                    <h1 className="text-center py-2 fw-bold">{level.name}</h1>
-                    <i role="button" className="position-absolute secondary-color fs-1 top-0 mt-3"/>
+        <div className="secondary-bg p-3 m-0 text-light rounded-2">
+            <ProgressBar totalSteps={schema.totalSteps} className="mb-3"
+                         color={Vars.ACCENT_COLOR_DARK}
+                         currentStep={schema.currentIndex}/>
 
-                    <div>
-                        <MultiConditionalWrapper {...wrapperVars(level)}>
-                            {level.items.map((item, index) =>
-                                isToShow(index, item) && (
-                                    <LevelControl key={index} level={level}
-                                                  isSelected={determineIfSelected(item)}
-                                                  levelType={level.levelOrder}
-                                                  item={item} nextLevelClicked={nextLevel}/>))}
-                        </MultiConditionalWrapper>
-                    </div>
-                </Fragment>
-            ))}
+            <CustomForm schema={schema.level} formData={formData}
+                        transformErrors={transformErrors}
+                        onSubmit={onNext} validator={validator}
+                        onChange={(e) => setFormData(e.formData)}>
 
-            <div className="my-3 mt-5 d-flex justify-content-between px-3">
-                <button className="btn btn-link px-5" onClick={previousLevel}>הקודם</button>
-                <Button className="px-5 disabled" onClick={previousLevel}>הבא</Button>
-            </div>
+                <div className="d-flex justify-content-between mt-3">
+                    <button type="button" className="btn secondary-bg-light text-light px-4"
+                            onClick={onPrevious} disabled={schema.currentIndex === 0}>
+                        הקודם
+                    </button>
+                    <button type="submit" className="btn secondary-bg-light text-light px-4">
+                        {schema.currentIndex === schema.totalSteps ? 'שליחה' : 'הבא'}
+                    </button>
+                </div>
+
+            </CustomForm>
         </div>
     );
 };

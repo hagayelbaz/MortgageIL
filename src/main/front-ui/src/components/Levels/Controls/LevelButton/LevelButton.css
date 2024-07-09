@@ -1,0 +1,14 @@
+.custom-radio-button {
+    border: 1px solid var(--secondary-color-dark);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.custom-radio-button:hover {
+    border-color: var(--secondary-color);
+    background-color: var(--secondary-color) !important;
+}
+
+.custom-radio-button.active {
+    background-color: var(--secondary-color-dark) !important;
+    color: white;
+}

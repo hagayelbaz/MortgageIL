@@ -1,0 +1,240 @@
+# Please check the doc before running the application
+
+server:
+  compression:
+    enabled: true
+    mime-types: text/html,text/css,application/javascript,application/json
+
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false  # Set to true in production
+
+  #TODO: Delete in production!
+  #main:
+    #allow-circular-references: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/MortgageIL
+    username: postgres
+    password: gba581p
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+      static-path-pattern: /resources/**
+  cache:
+    type: redis
+    host: localhost
+    port: 6379
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      lettuce:
+        pool:
+          max-active: 10
+          max-idle: 5
+          min-idle: 0
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 732809784272-05bp2kl2d15qj28efqstt0qer4prcpag.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri: "{baseUrl}/login/oauth2/code/google"
+            client-authentication-method: client_secret_post
+            client-name: Google
+            scope:
+              - email
+              - profile
+            authorization-grant-type: authorization_code
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://www.googleapis.com/oauth2/v4/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            user-name-attribute: sub
+            issuer-uri: https://accounts.google.com
+            jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+            user-info-authentication-method: form
+
+
+api:
+  external:
+    boi:
+      base-url: https://edge.boi.gov.il/FusionEdgeServer/sdmx/v2/data/dataflow
+      agency: BOI.STATISTICS
+      filters:
+        LATEST: lastNObservations
+        START_DATE: startPeriod
+        END_DATE: endPeriod
+      format:
+        json: sdmx-json
+        csv: series-csv
+        xml: sdmx-ml
+      endpoints:
+        interest-rate:
+          agency: BR/1.0
+          sub-endpoints:
+            base-rate:
+              description: "ריבית בנק ישראל"
+              endpoint: MNT_RIB_BOI_D.D.RIB_BOI
+        cpi:
+          agency: PRI/1.0
+          sub-endpoints:
+            historic-points:
+              description: "מדד מחירים לצרכן היסטורי (נקודות)"
+              endpoint: CP.CPI.CPI_2_29.MAIN.M.N._Z._Z.I22_L._Z.A._Z._Z.CP
+            percentage-change:
+              description: "מדד מחירים לצרכן היסטורי (שינוי באחוזים)"
+              endpoint: CP_PCH.CPI.CPI_2_29.MAIN.M.N._Z._Z.PT._Z.A.G1._Z.CP
+            last-12-months:
+              description: "שינוי במדד מחירים לצרכן ב-12 חודשים האחרונים"
+              endpoint: CP_PCHYTY.CPI.CPI_2_29.MAIN.M.N._Z._Z.PT._Z.A.G12._Z.CP
+            as-group:
+              description: "כל הנתונים היסטוריים של מדד מחירים לצרכן"
+              endpoint: CP_PCHYTY.CPI.CPI_2_29.MAIN.M.N._Z._Z.PT._Z.A.G12._Z.CP,CP_PCH.CPI.CPI_2_29.MAIN.M.N._Z._Z.PT._Z.A.G1._Z.CP,BI_CPI_NO_ADMN_M.CPI.CPI_2_29_1.MAIN.M.N._Z._Z.I_JAN20_L._Z.A._Z._Z._Z
+        inflation-expectations:
+          agency: ZCM/1.0
+          sub-endpoints:
+            next-year:
+              description: "הציפיות משוק ההון לאינפלציה בשנה הקרובה"
+              endpoint: EXP_EXP_01Y_BI_MA.M._Z.CAL.INF_EXP.M_T.Y01T01.INF.CP
+            next-next-year:
+              description: "הציפיות פורוורד משוק ההון לאינפלציה לשנה השנייה"
+              endpoint: EXP_EXB_FRW_ZD_01Y_02Y_MA.M._Z.CAL.FRW_EXP.M_T.2Y.INF.CP
+            five-years:
+              description: "הציפיות משוק ההון לאינפלציה ל-5 שנים"
+              endpoint: EXP_EXB_ZD_5Y_MA.M._Z.CAL.INF_EXP.M_T.Y05T05.INF.CP
+            average-twelve-months:
+              description: "ממוצע תחזיות החזאים לאינפלציה ל-12 חודשים קדימה"
+              endpoint: EXP_HAZ_MAD_AVG_01Y_MA.M._Z.CAL.INF_EXP._Z.Y01T01.INF.FORC
+            third-year:
+              description: "הציפיות פורוורד משוק ההון לאינפלציה לשנה השלישית"
+              endpoint: EXP_EXB_FRW_ZD_02Y_03Y_MA.M._Z.CAL.FRW_EXP.M_T.3Y.INF.CP
+            five-to-three-years:
+              description: "הציפיות פורוורד משוק ההון לאינפלציה 5-3 שנים"
+              endpoint: EXP_EXB_FRW_ZD_03Y_05Y_MA.M._Z.CAL.FRW_EXP.M_T.Y03T5.INF.CP
+            ten-to-five-years:
+              description: "הציפיות פורוורד משוק ההון לאינפלציה 10-5 שנים"
+              endpoint: EXP_EXB_FRW_ZD_05Y_10Y_MA.M._Z.CAL.FRW_EXP.M_T.Y05T10.INF.CP
+            as-group:
+              description: "כל התחזיות לאינפלציה כקבוצה"
+              endpoint: EXP_EXB_FRW_ZD_05Y_10Y_MA.M._Z.CAL.FRW_EXP.M_T.Y05T10.INF.CP,EXP_EXB_FRW_ZD_03Y_05Y_MA.M._Z.CAL.FRW_EXP.M_T.Y03T5.INF.CP,EXP_EXB_FRW_ZD_02Y_03Y_MA.M._Z.CAL.FRW_EXP.M_T.3Y.INF.CP,EXP_HAZ_MAD_AVG_01Y_MA.M._Z.CAL.INF_EXP._Z.Y01T01.INF.FORC,EXP_EXB_ZD_5Y_MA.M._Z.CAL.INF_EXP.M_T.Y05T05.INF.CP,EXP_EXB_FRW_ZD_01Y_02Y_MA.M._Z.CAL.FRW_EXP.M_T.2Y.INF.CP,EXP_EXP_01Y_BI_MA.M._Z.CAL.INF_EXP.M_T.Y01T01.INF.CP
+        mortgage-interest-average:
+            agency: BNK/1.0
+            sub-endpoints:
+                linked-fixed:
+                  description: "ריבית ממוצעת למשכנתא קבועה צמודה"
+                  endpoint: BNK_99034_LC_BIR_MRTG_230
+    boi-mortgage:
+      # structure: {base-url}/{agency}/1.0/{base-code}_<bank-full-code>_<section>_{final-code}_<mortgage-code>
+      base-url: https://edge.boi.gov.il/FusionEdgeServer/sdmx/v2/data/dataflow
+      agency: BOI.BankingSupervision/WEB_M
+      base-code: BNK
+      final-code: BIR_MRTG
+
+
+
+mortgageil:
+  data:
+    banks:
+      - name: לאומי
+        code: 10
+        color: "#00b0f0"
+        full-code: 10001
+        logo-url: https://play-lh.googleusercontent.com/ifS3ZQkc31sCsO315uv25uGHNkdORi1TkYwkdr_6EoTu-cQypzZRoqT6KEwE7aNFYak=s48-rw
+        pre-approved-url: https://leumi.easysend.app/mortgage-request-new/
+      - name: דיסקונט
+        code: 11
+        color: "#62a93b"
+        full-code: 11001
+        logo-url: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkxihLZaxVFo8zuh8KyNMUke8e0YP1Yix_BQ&s
+        pre-approved-url: https://mortgage.discountbank.co.il/
+      - name: הפועלים
+        code: 12
+        color: "#ed1b2e"
+        full-code: 12001
+        logo-url: https://play-lh.googleusercontent.com/5aAU4pZJsYHTQhgVXkwT-L3ZDtCHK8nVtJxcfXmoj7rmmELX-85f78QRYd5VO2KyoA
+        pre-approved-url: https://mortgage.bankhapoalim.co.il/ng-portals/dm/he/all-purposes
+      - name: מרכנתיל
+        code: 17
+        color: "#409261"
+        full-code: 17001
+        logo-url: https://www.mercantile.co.il/media/4sinzl2k/logo_mer_yellow_ribbon-3.svg
+        pre-approved-url: https://mortgage.mercantile.co.il/
+      - name: מזרחי
+        code: 20
+        color: "#f5821f"
+        full-code: 20001
+        logo-url: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzm-X_utUQz5Jm7gkakDXX8XYHiVYmr9LYxQ&s
+        pre-approved-url: https://sc.mizrahi-tefahot.co.il/TofesMashkantaClient/
+      - name: הבינלאומי
+        code: 31
+        color: "#fdb726"
+        full-code: 31001
+        logo-url: https://www.fibi.co.il/media/uo1anbe3/logo-header.png
+        pre-approved-url: https://mortgage.fibi.co.il/digmo/
+      - name: ירושלים
+        code: 54
+        color: "#c1905a"
+        full-code: 54001
+        logo-url: https://cdn2.downdetector.com/static/uploads/c/300/581cd/download_6jD6tW2.png
+        pre-approved-url: https://www.bankjerusalem.co.il/mortgage/go_mortgage/target-details
+      - name: מערכת
+        code: 99
+        color: "#f7e017"
+        full-code: 99034
+        pre-approved-url: null
+    mortgages:
+      - name: קבועה צמודה
+        code: 230
+        section: LC
+      - name: משתנה צמודה
+        code: 236
+        section: LC
+      - name: קבועה לא צמודה
+        code: 240
+        section: LC
+      - name: פריים
+        code: 246
+        section: LC
+      - name: משתנה לא צמודה
+        code: 260
+        section: LC
+      - name: irr
+        code: 1
+        section: MA
+
+  security: #TODO: change it so the use will be with prefix
+    paths:
+      guest:
+        - auth/login
+        - contact
+      all:
+        - home
+      user:
+        - api/data/**
+      admin:
+        - auth/create-user
+      shared:
+        - /**
+        - account/**
+        - portal/**
+        - about
+  auth:
+    login:
+      page-url: /auth/login
+      success-url: /portal
+      failure-url: /auth/login?error=true
+    logout:
+      page-url: /logout
+      success-url: /

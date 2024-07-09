@@ -1,0 +1,47 @@
+.flex-container {
+    display: flex;
+}
+
+.flex-item {
+    flex: 0 0 50%;
+    position: relative;
+}
+
+.flex-item img {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+
+.flex-item-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+.flex-item-inner p:first-child {
+    margin-top: 0;
+}
+
+.spacial-news-divide {
+    padding-left: 0 !important;
+    height: 350px !important;
+}
+
+
+.custom-menu.dropdown-menu{
+    background-color: var(--secondary-color-light);
+    color: var(--text-color);
+    text-align: right;
+}
+.custom-menu.dropdown-menu a{
+    color: var(--text-color);
+}
+.custom-menu.dropdown-menu a:hover{
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
