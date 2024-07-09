@@ -1,0 +1,438 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 250;
+}
+
+:root{
+    --help-bubble-background-color: #f0f0f0;
+    --help-bubble-icon-size: 20px;
+
+    --primary-color: #f0f0f0;
+    --primary-color-light: #ffffff;
+    --primary-color-dark: #c0c0c0;
+
+   /* --secondary-color: #2b2d30; */
+    --secondary-color: #2e3d50;
+    --secondary-color-light: #5c5d5e;
+    --secondary-color-dark: #1e1f22;
+
+    /* --accent-color: #439d73; */
+    --accent-color: #6c8fbc;
+
+    --accent-color-light: #00c2a2;
+    --accent-color-dark: #007f5f;
+    --text-color: #ffffff;
+
+    --text-color-light: #ffffff;
+    --text-color-dark: #000000;
+    --text-color-accent: #6c8fbc;
+
+    --success-color: #519979;
+    --danger-color: #ff0000;
+    --mute-color: #6c757d;
+}
+
+.text-color-light {
+    color: var(--text-color-light);
+}
+
+.text-color-dark {
+    color: var(--text-color-dark);
+}
+
+.text-color-accent {
+    color: var(--text-color-accent);
+}
+
+
+.button-no-style {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.help-bg {
+    background-color: var(--help-bubble-background-color);
+}
+
+
+/* colors as classes */
+.success-color {
+    color: var(--success-color) !important;
+}
+
+.danger-color {
+    color: var(--danger-color) !important;
+}
+
+.primary-color {
+    color: var(--primary-color) !important;
+}
+
+.primary-color-light {
+    color: var(--primary-color-light) !important;
+}
+
+.primary-color-dark {
+    color: var(--primary-color-dark) !important;
+}
+
+.secondary-color {
+    color: var(--secondary-color) !important;
+}
+
+.secondary-color-light {
+    color: var(--secondary-color-light) !important;
+}
+
+.secondary-color-dark {
+    color: var(--secondary-color-dark) !important;
+}
+
+.accent-color {
+    color: var(--accent-color) !important;
+}
+
+.accent-color-light {
+    color: var(--accent-color-light) !important;
+}
+
+.accent-color-dark {
+    color: var(--accent-color-dark) !important;
+}
+
+.muted-color {
+    color: var(--mute-color) !important;
+}
+
+/* background colors as classes */
+.success-bg {
+    background-color: var(--success-color) !important;
+}
+
+.danger-bg {
+    background-color: var(--danger-color) !important;
+}
+
+.primary-bg {
+    background-color: var(--primary-color) !important;
+}
+
+.primary-bg-light {
+    background-color: var(--primary-color-light) !important;
+}
+
+.primary-bg-dark {
+    background-color: var(--primary-color-dark) !important;
+}
+
+.secondary-bg {
+    background-color: var(--secondary-color) !important;
+}
+
+.secondary-bg-light {
+    background-color: var(--secondary-color-light) !important;
+}
+
+.secondary-bg-dark {
+    background-color: var(--secondary-color-dark) !important;
+}
+
+.accent-bg {
+    background-color: var(--accent-color) !important;
+}
+
+.accent-bg-light {
+    background-color: var(--accent-color-light) !important;
+}
+
+.accent-bg-dark {
+    background-color: var(--accent-color-dark) !important;
+}
+
+/* border colors as classes */
+.border-1{
+    border-width: 1px !important;
+    border-style: solid;
+}
+
+.border-2{
+    border-width: 2px !important;
+    border-style: solid;
+}
+
+.border-3{
+    border-width: 3px !important;
+    border-style: solid;
+}
+
+.primary-border {
+    border-color: var(--primary-color) !important;
+}
+
+.primary-border-light {
+    border-color: var(--primary-color-light) !important;
+}
+
+.primary-border-dark {
+    border-color: var(--primary-color-dark) !important;
+}
+
+.secondary-border {
+    border-color: var(--secondary-color) !important;
+}
+
+.secondary-border-light {
+    border-color: var(--secondary-color-light) !important;
+}
+
+.secondary-border-dark {
+    border-color: var(--secondary-color-dark) !important;
+}
+
+.accent-border {
+    border-color: var(--accent-color) !important;
+}
+
+.accent-border-light {
+    border-color: var(--accent-color-light) !important;
+}
+
+.accent-border-dark {
+    border-color: var(--accent-color-dark) !important;
+}
+
+/* font width as classes */
+.font-100 {
+    font-weight: 100 !important;
+}
+
+.font-200 {
+    font-weight: 200 !important;
+}
+
+.font-300 {
+    font-weight: 300 !important;
+}
+
+.font-400 {
+    font-weight: 400 !important;
+}
+
+.font-500 {
+    font-weight: 500 !important;
+}
+
+.font-600 {
+    font-weight: 600 !important;
+}
+
+.font-700 {
+    font-weight: 700 !important;
+}
+
+.font-800 {
+    font-weight: 800 !important;
+}
+
+.font-900 {
+    font-weight: 900 !important;
+}
+
+/* icon size 75 */
+.i-75 i {
+    font-size: 75px;
+}
+/* max width 250 */
+.width-250 {
+    max-width: 250px;
+}
+
+.opacity-100{
+    opacity: 100%;
+}
+
+/* navbar */
+.nav-link {
+    font-weight: 500 !important;
+    border-radius: 25px;
+    text-align: right;
+    max-width: fit-content;
+}
+
+.nav-link:hover {
+    border: 2px solid var(--accent-color);
+}
+
+.dropdown-menu {
+    text-align: right;
+}
+
+.dropdown-item {
+    font-weight: 500 !important;
+    text-align: right;
+    border-radius: 25px;
+    max-width: fit-content;
+}
+
+.dropdown-item:hover {
+    border-bottom: 2px double var(--accent-color);
+}
+
+/* about */
+.card-about{
+    color: var(--text-color-dark);
+    text-align: right;
+    direction: rtl;
+}
+
+
+/* our features */
+.card-our-features{
+    color: var(--text-color-dark);
+    text-align: center;
+}
+
+.card-our-features i{
+    color: var(--accent-color);
+    font-size: 100px;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.ltr {
+    direction: ltr;
+}
+
+.footer-link:hover {
+    color: var(--text-color-light);
+    /* text-decoration: none; */
+}
+
+
+
+/* button accent outline , hover accent */
+.btn-accent {
+    border: 2px solid var(--accent-color);
+    border-radius: 50px;
+    color: var(--accent-color);;
+    font-size: x-large;
+}
+
+.btn-accent i {
+    font-size: x-large;
+    color: var(--accent-color);
+}
+
+.btn-accent:hover {
+    background:  var(--accent-color);
+    color: var(--text-color-light);
+}
+
+/* button secondary outline , hover secondary */
+.btn-secondary {
+    background: white;
+    border: 2px solid var(--secondary-color);
+    border-radius: 50px;
+    color: var(--secondary-color);;
+    font-size: x-large;
+}
+
+.btn-secondary i {
+    font-size: x-large;
+    color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background:  var(--secondary-color);
+    color: var(--text-color-light);
+}
+.btn-secondary:hover i {
+    color: var(--text-color-light);
+}
+
+
+/* button accent outline , hover accent */
+.btn-accent {
+    border: 2px solid var(--accent-color);
+    border-radius: 50px;
+    color: var(--accent-color);;
+    font-size: x-large;
+}
+
+.btn-accent i {
+    font-size: x-large;
+    color: var(--accent-color);
+}
+
+.btn-accent:hover {
+    background:  var(--accent-color);
+    color: var(--text-color-light);
+}
+.btn-accent:hover i {
+    color: var(--text-color-light);
+}
+
+
+/* button accent outline , hover accent */
+.btn-accent-text-light {
+    border: 2px solid var(--accent-color);
+    border-radius: 50px;
+    color: var(--text-color-light);;
+    font-size: x-large;
+}
+
+.btn-accent-text-light i {
+    font-size: x-large;
+    color: var(--text-color-light) !important;
+}
+
+.btn-accent-text-light:hover {
+    background:  var(--accent-color);
+    color: var(--text-color-light);
+}
+
+/* button fill accent */
+.btn-accent-fill {
+    background: var(--text-color-accent);
+    border-radius: 50px;
+    color: var(--text-color-light);
+    font-size: x-large;
+}
+
+.btn-accent-fill i {
+    font-size: x-large;
+    color: var(--text-color-light) !important;
+}
+
+.btn-accent-fill:hover {
+    color: var(--text-color-light);
+}
+
+/* border outline accent */
+.brd-outline-accent {
+    border: 2px solid var(--accent-color);
+    border-radius: 50px;
+}
+
+.brd-outline-accent i{
+    color: var(--accent-color);
+    text-align: center;
+    margin-top: inherit;
+}
+
+/* section 1 */
+.img-light {
+    background-image: url('../images/img-light.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+

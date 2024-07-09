@@ -30,6 +30,7 @@ import java.util.*;
 @Table(name = "users")
 public class User extends Person implements ManageableJpa, UserDetails {
 
+    private final String string = "Please enter your password";
     @Email(message = "Email is required")
     private String email;
 
@@ -37,7 +38,7 @@ public class User extends Person implements ManageableJpa, UserDetails {
     @NotEmpty(message = "Phone number is required", groups = ValidationGroups.StandardRegistration.class)
     private String phoneNumber;
 
-    @NotEmpty(message = "Please enter your password", groups = ValidationGroups.StandardRegistration.class)
+    @NotEmpty(message = string, groups = ValidationGroups.StandardRegistration.class)
     private String password;
 
     @Enumerated(EnumType.STRING)

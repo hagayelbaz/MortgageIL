@@ -18,7 +18,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/MortgageIL
     username: postgres
-    password: gba581p
+    password: Yehouda1997
   jpa:
     hibernate:
       ddl-auto: update
@@ -221,6 +221,8 @@ mortgageil:
         - contact
       all:
         - home
+        - calculator
+        - dataMarket
       user:
         - api/data/**
       admin:
