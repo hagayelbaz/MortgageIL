@@ -25,12 +25,6 @@ public class MortgageController {
     @Resource(name = "amortizationScheduleFactory")
     private AmortizationScheduleFactory amortizationScheduleFactory;
 
-    @Resource(name = "mortgagePlanMapper")
-    private MortgagePlanMapper mortgagePlanMapper;
-
-    @Resource(name = "mortgagePlanService")
-    private MortgagePlanService mortgagePlanService;
-
     @Resource(name = "mortgageGroupService")
     private MortgageGroupService mortgageGroupService;
 

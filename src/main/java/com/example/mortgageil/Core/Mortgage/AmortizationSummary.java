@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.util.List;
 
+
+//NOTE: this class should be fixed!
 @Getter
 @Setter
 public class AmortizationSummary {

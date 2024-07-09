@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.List;
 
+
+//NOTE: fix it carefully!!!!!!!!!!!!!!
 @Component
 public abstract class AmortizationScheduleService implements IPaymentStrategy {
 
