@@ -18,7 +18,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/MortgageIL
     username: postgres
-    password: gba581p
+    password: Yehouda1997
   jpa:
     hibernate:
       ddl-auto: update
@@ -217,12 +217,14 @@ mortgageil:
   security: #TODO: change it so the use will be with prefix
     paths:
       guest:
-        - auth/login
-        - contact
+        - auth/**
       all:
         - home
         - calculator
         - dataMarket
+        - sign
+        - auto/signUP
+        - /calc/**
         - style/**
         - images/**
         - js/**

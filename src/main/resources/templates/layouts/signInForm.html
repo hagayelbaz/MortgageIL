@@ -3,31 +3,35 @@
     <div class="h-100 d-flex flex-column text-center p-5 brd-outline-accent">
         <h1> הרשמה </h1>
 
-        <form action="/signInCheck" method="POST">
+        <form action="#" th:action="@{/auth/signUP}" method="post" th:object="${user}">
+            <!--
             <div class="form-group">
                 <label for="firstName">שם פרטי</label>
                 <input type="text" class="form-control text-right" id="firstName" name="firstName" placeholder="שם פרטי">
             </div>
             <div class="form-group">
                 <label for="lastName">שם משפחה</label>
-                <input type="text" class="form-control text-right" id="lastName" name="lastName" placeholder="שם משפחה">
+                <input type="text" class="form-control text-right" id="lastName" placeholder="שם משפחה">
             </div>
+            -->
             <div class="form-group">
                 <label for="phone">מספר טלפון</label>
-                <input type="text" class="form-control text-right" id="phone" name="phone" placeholder="מספר טלפון">
+                <input type="text" class="form-control text-right" id="phone" th:field="*{phone_number}" placeholder="מספר טלפון">
             </div>
             <div class="form-group">
                 <label for="email">אימייל</label>
-                <input type="email" class="form-control text-right" id="email" name="email" placeholder="אימייל" required>
+                <input type="email" class="form-control text-right" id="email" th:field="*{email}" placeholder="אימייל" required>
             </div>
             <div class="form-group">
                 <label for="password">סיסמה</label>
-                <input type="password" class="form-control text-right" id="password" name="password" placeholder="סיסמה" required>
+                <input type="password" class="form-control text-right" id="password" pattern=".+" th:field="*{password}" placeholder="סיסמה" required>
             </div>
+            <!--
             <div class="form-group">
                 <label for="password2">אימות סיסמה</label>
                 <input type="password" class="form-control text-right" id="password2" name="password2" placeholder="אימות סיסמה" required>
             </div>
+            -->
             <button type="submit" class="btn m-3 btn-accent"><i class="bi bi-arrow-left"></i> הרשמה </button>
         </form>
     </div>
