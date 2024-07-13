@@ -78,4 +78,47 @@ public class CacheManagementService {
     public void clearInflationExpectationsTenToFiveYearsCache() {
         LOGGER.info("Inflation expectations ten to five years cache cleared");
     }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "inflation-expectations.next-year.latest", allEntries = true)
+    public void clearInflationExpectationsNextYearLatestCache() {
+        LOGGER.info("Inflation expectations next year latest cache cleared");
+    }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "inflation-expectations.next-next-year.latest", allEntries = true)
+    public void clearInflationExpectationsNextNextYearLatestCache() {
+        LOGGER.info("Inflation expectations next next year latest cache cleared");
+    }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "inflation-expectations.five-years.latest", allEntries = true)
+    public void clearInflationExpectationsFiveYearsLatestCache() {
+        LOGGER.info("Inflation expectations five years latest cache cleared");
+    }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "inflation-expectations.average-twelve-months.latest", allEntries = true)
+    public void clearInflationExpectationsAverageTwelveMonthsLatestCache() {
+        LOGGER.info("Inflation expectations average twelve months latest cache cleared");
+    }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "inflation-expectations.third-year.latest", allEntries = true)
+    public void clearInflationExpectationsThirdYearLatestCache() {
+        LOGGER.info("Inflation expectations third year latest cache cleared");
+    }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "inflation-expectations.five-to-three-years.latest", allEntries = true)
+    public void clearInflationExpectationsFiveToThreeYearsLatestCache() {
+        LOGGER.info("Inflation expectations five to three years latest cache cleared");
+    }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    @CacheEvict(value = "inflation-expectations.ten-to-five-years.latest", allEntries = true)
+    public void clearInflationExpectationsTenToFiveYearsLatestCache() {
+        LOGGER.info("Inflation expectations ten to five years latest cache cleared");
+    }
+
 }

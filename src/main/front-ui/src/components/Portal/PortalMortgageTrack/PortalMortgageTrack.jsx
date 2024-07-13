@@ -2,7 +2,6 @@ import {Tab, Tabs} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import './PortalMortgageTrack.css';
 import TabMortgageTrack from "./TabMortgageTrack/TabMortgageTrack";
-import {mortgageTracks} from "../../../Classes/TestData";
 import TabAmortizationSchedule from "./TabAmortizationSchedule/TabAmortizationSchedule";
 
 const PortalMortgageTrack = () => {
@@ -23,7 +22,7 @@ const PortalMortgageTrack = () => {
                 <Tab eventKey="borad" title="לוח תשלומים">
                     <TabAmortizationSchedule key={key}/>
                 </Tab>
-                <Tab eventKey="analist" title="ניתוח תיק">
+                <Tab eventKey="analist" title="ניתוחים והשוואות">
                     Tab content for Profile
                 </Tab>
                 <Tab eventKey="docs" title="מסמכים">

@@ -171,23 +171,96 @@ public class BoiService {
         return DataFormatConverter.sdmxToJson(data);
     }
 
+    @Cacheable(value = "inflation-expectations.next-year.latest")
+    public JsonNode getInflationExpectationsNextYearLatest() throws Exception {
+        String data = SDMXApiService
+                .setEndpoint("inflation-expectations")
+                .setSubEndpoint("next-year")
+                .addFilter(FilterKey.LATEST, "1")
+                .fetch();
+        return DataFormatConverter.sdmxToJson(data);
+    }
+
+    @Cacheable(value = "inflation-expectations.next-next-year.latest")
+    public JsonNode getInflationExpectationsNextNextYearLatest() throws Exception {
+        String data = SDMXApiService
+                .setEndpoint("inflation-expectations")
+                .setSubEndpoint("next-next-year")
+                .addFilter(FilterKey.LATEST, "1")
+                .fetch();
+        return DataFormatConverter.sdmxToJson(data);
+    }
+
+    @Cacheable(value = "inflation-expectations.five-years.latest")
+    public JsonNode getInflationExpectationsFiveYearsLatest() throws Exception {
+        String data = SDMXApiService
+                .setEndpoint("inflation-expectations")
+                .setSubEndpoint("five-years")
+                .addFilter(FilterKey.LATEST, "1")
+                .fetch();
+        return DataFormatConverter.sdmxToJson(data);
+    }
+
+    @Cacheable(value = "inflation-expectations.average-twelve-months.latest")
+    public JsonNode getInflationExpectationsAverageTwelveMonthsLatest() throws Exception {
+        String data = SDMXApiService
+                .setEndpoint("inflation-expectations")
+                .setSubEndpoint("average-twelve-months")
+                .addFilter(FilterKey.LATEST, "1")
+                .fetch();
+        return DataFormatConverter.sdmxToJson(data);
+    }
+
+    @Cacheable(value = "inflation-expectations.third-year.latest")
+    public JsonNode getInflationExpectationsThirdYearLatest() throws Exception {
+        String data = SDMXApiService
+                .setEndpoint("inflation-expectations")
+                .setSubEndpoint("third-year")
+                .addFilter(FilterKey.LATEST, "1")
+                .fetch();
+        return DataFormatConverter.sdmxToJson(data);
+    }
+
+    @Cacheable(value = "inflation-expectations.five-to-three-years.latest")
+    public JsonNode getInflationExpectationsFiveToThreeYearsLatest() throws Exception {
+        String data = SDMXApiService
+                .setEndpoint("inflation-expectations")
+                .setSubEndpoint("five-to-three-years")
+                .addFilter(FilterKey.LATEST, "1")
+                .fetch();
+        return DataFormatConverter.sdmxToJson(data);
+    }
+
+    @Cacheable(value = "inflation-expectations.ten-to-five-years.latest")
+    public JsonNode getInflationExpectationsTenToFiveYearsLatest() throws Exception {
+        String data = SDMXApiService
+                .setEndpoint("inflation-expectations")
+                .setSubEndpoint("ten-to-five-years")
+                .addFilter(FilterKey.LATEST, "1")
+                .fetch();
+        return DataFormatConverter.sdmxToJson(data);
+    }
+
+    //</editor-fold>
+
+
     public JsonNode getInflationExpectationsByMonths(double months) throws Exception {
         BoiService self = getSelf();
 
         if (months < 12)
-            return self.getInflationExpectationsNextYear();
+            return self.getInflationExpectationsNextYearLatest();
         if (months < 24)
-            return self.getInflationExpectationsNextNextYear();
+            return self.getInflationExpectationsNextNextYearLatest();
         if (months < 36)
-            return self.getInflationExpectationsThirdYear();
+            return self.getInflationExpectationsThirdYearLatest();
         if (months < 60)
-            return self.getInflationExpectationsFiveToThreeYears();
-        if (months == 60)
-            return self.getInflationExpectationsFiveYears();
+            return self.getInflationExpectationsFiveToThreeYearsLatest();
+        if (months < 72)
+            return self.getInflationExpectationsFiveYearsLatest();
         if (months < 120)
-            return self.getInflationExpectationsTenToFiveYears();
+            return self.getInflationExpectationsTenToFiveYearsLatest();
 
-        throw new IllegalArgumentException("Invalid months value");
+        return self.getInflationExpectationsTenToFiveYearsLatest();
     }
 
     public JsonNode test(int month) throws Exception {

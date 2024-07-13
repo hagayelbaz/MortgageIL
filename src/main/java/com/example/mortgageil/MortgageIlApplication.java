@@ -29,8 +29,8 @@ public class MortgageIlApplication {
     public CommandLineRunner commandLineRunner(AuthenticationService service) {
         return args -> {
             admin = User.builder()
-                    .firstName("Admin")
-                    .lastName("Admin")
+                    .firstName("חגי")
+                    .lastName("אלבז")
                     .email("admin@mail.com")
                     .password("admin-pw")
                     .roleName(ADMIN)

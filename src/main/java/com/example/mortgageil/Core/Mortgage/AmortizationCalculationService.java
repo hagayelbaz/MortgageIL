@@ -26,7 +26,7 @@ public class AmortizationCalculationService {
         var plans = mortgageGroup.getMortgagePlans();
         for (MortgagePlan plan : plans) {
             var schedule = amortizationScheduleFactory
-                    .get(plan.getType())
+                    .get(plan.getScheduleType())
                     .setMortgagePlan(plan);
             schedules.add(schedule);
         }

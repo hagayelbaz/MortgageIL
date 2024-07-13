@@ -14,6 +14,7 @@ class Endpoints {
     static BORROWER = "borrower";
     static MORTGAGE_GROUP = "mortgage-group";
     static MORTGAGE_PLAN = "mortgage-plan";
+    static LOAN_DATA = "loan-data";
 
     //TODO: Change to production URL
     static get BASE_URL_END_POINT() {
@@ -54,6 +55,10 @@ class Endpoints {
 
     static get BORROWER_ENDPOINT() {
         return this.API_VERSION_END_POINT.addPath(this.BORROWER);
+    }
+
+    static get LOAN_DATA_ENDPOINT() {
+        return this.API_VERSION_END_POINT.addPath(this.LOAN_DATA);
     }
 
     static get MORTGAGE_GROUP_ENDPOINT() {

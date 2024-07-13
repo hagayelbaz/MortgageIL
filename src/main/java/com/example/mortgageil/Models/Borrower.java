@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.checkerframework.common.aliasing.qual.Unique;
 
 @Getter
 @Setter
@@ -18,6 +19,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Table(name = "borrowers")
 public class Borrower extends Person implements ManageableJpa {
+    @Unique
     private String email;
     private String phoneNumber;
 

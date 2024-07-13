@@ -31,6 +31,7 @@ const useFormData = (initialData, updateGlobalData, apiPath, messagesOption) => 
     const [isDataSaved, setIsDataSaved] = useState(false);
 
     const updateData = useCallback((path, value) => {
+        if(!path) return;
         setData(prev => setNestedProperty(path, value, prev));
     }, []);
 

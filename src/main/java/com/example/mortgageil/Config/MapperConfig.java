@@ -42,4 +42,9 @@ public class MapperConfig {
     public SalaryMapper salaryMapper() {
         return Mappers.getMapper(SalaryMapper.class);
     }
+
+    @Bean
+    public LoanDataMapper loanDataMapper() {
+        return Mappers.getMapper(LoanDataMapper.class);
+    }
 }

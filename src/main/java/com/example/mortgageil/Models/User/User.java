@@ -1,10 +1,7 @@
 package com.example.mortgageil.Models.User;
 
 import com.example.mortgageil.Core.contracts.ManageableJpa;
-import com.example.mortgageil.Models.Borrower;
-import com.example.mortgageil.Models.UserLiability;
-import com.example.mortgageil.Models.MortgageGroup;
-import com.example.mortgageil.Models.Person;
+import com.example.mortgageil.Models.*;
 import com.example.mortgageil.validation.ValidationGroups;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -15,6 +12,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.checkerframework.common.aliasing.qual.Unique;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,6 +30,7 @@ public class User extends Person implements ManageableJpa, UserDetails {
 
     private final String string = "Please enter your password";
     @Email(message = "Email is required")
+    @Unique
     private String email;
 
     //@Pattern(regexp = "^(\\+\\d{1,3}[- ]?)?\\d{7}$", message = "Phone number is required")
@@ -43,6 +42,7 @@ public class User extends Person implements ManageableJpa, UserDetails {
 
     @Enumerated(EnumType.STRING)
     private RoleName roleName;
+
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user",
@@ -57,17 +57,11 @@ public class User extends Person implements ManageableJpa, UserDetails {
             orphanRemoval = true)
     private Set<Borrower> borrowers = new HashSet<>();
 
-    //NOTE: is that OK?
-   /* @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "user_mortgage_group",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "mortgage_group_id"))
-    @JsonBackReference*/
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MortgageGroup> mortgageGroups = new HashSet<>();
 
-
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private LoanData loanData;
 
     @Override
     public void deleteRelatedEntities() {

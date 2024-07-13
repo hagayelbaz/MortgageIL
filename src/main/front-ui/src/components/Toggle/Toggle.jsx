@@ -17,13 +17,19 @@ const CustomToggle = React.forwardRef(({children, onClick}, ref) => (
 ));
 
 
-const Toggle = ({items = [], className, onChange, defaultHeader, style, name}) => {
+const Toggle = ({items = [], className, onChange, defaultHeader, style, name, value}) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(defaultHeader);
 
     const toggleDropdown = () => {
         setDropdownOpen(!dropdownOpen);
     };
+
+    useEffect(() => {
+        if (value !== undefined) {
+            setSelectedItem(value);
+        }
+    },[value]);
 
     const handleItemSelect = (e, item, index) => {
         setSelectedItem(item);
@@ -45,8 +51,10 @@ const Toggle = ({items = [], className, onChange, defaultHeader, style, name}) =
             {!isEmpty() &&
                 <Dropdown.Menu className="custom-menu" variant="dark">
                     {items.map((item, index) => (
-                        <div role="button" className="text-color dropdown-item custom-toggle-item"
-                             key={index} onClick={(e) => handleItemSelect(e, item, index)}>
+                        <div role="button"
+                             className="text-color dropdown-item custom-toggle-item"
+                             key={index}
+                             onClick={(e) => handleItemSelect(e, item, index)}>
                             {item}
                         </div>
                     ))}

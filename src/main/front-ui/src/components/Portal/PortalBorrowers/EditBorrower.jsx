@@ -19,7 +19,6 @@ const EditBorrower = forwardRef(({ borrower, setBorrower }, ref) => {
         onChange,
         saveData: saveBorrower
     } = useFormData(borrower, setBorrower, Endpoints.BORROWER_ENDPOINT);
-    const {user} = useContext(UserDataContext);
 
     useImperativeHandle(ref, () => ({
         saveBorrower

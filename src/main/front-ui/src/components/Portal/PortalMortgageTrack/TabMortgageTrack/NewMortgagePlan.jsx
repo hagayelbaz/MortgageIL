@@ -6,7 +6,7 @@ import {useEffect} from "react";
 
 const NewMortgagePlan = ({show, setShow, groupId}) => {
 
-    const items = [
+    const types = [
         {value: '1', label: 'קבועה לא צמודה'},
         {value: '2', label: 'קבועה צמודה'},
         {value: '3', label: 'פריים'},
@@ -20,14 +20,21 @@ const NewMortgagePlan = ({show, setShow, groupId}) => {
         {value: '11', label: 'יורו'},
     ]
 
-    const itemsStr = items.map(item => item.label);
+    const scheduleType = [
+        {value: '1', label: 'שפיצר'},
+        {value: '2', label: 'קרן שווה'}
+    ]
+
+    const typesStr = types.map(item => item.label);
+    const scheduleTypeStr = scheduleType.map(item => item.label);
 
     const fields = {
         title: "הוסף מסלול משכנתא חדש",
         buttonText: "שמור",
         data: [
             [
-                {name: 'type', placeholder: 'שם המסלול', type: 'select', required: true, icon: Person2, items: itemsStr},
+                {name: 'type', placeholder: 'שם המסלול', type: 'select', required: true, icon: Person2, items: typesStr},
+                {name: 'scheduleType', placeholder: 'לוח תשלומים', type: 'select', required: true, icon: Person2, items: scheduleTypeStr},
             ],
             [
                 {name: 'amount', placeholder: 'סכום המשכנתא', type: 'number', required: true, icon: Person2},
@@ -38,7 +45,7 @@ const NewMortgagePlan = ({show, setShow, groupId}) => {
             ],
             [
                 {name: 'balloonDuration', placeholder: 'תקופת בלון (אם יש)', type: 'number', required: false, icon: Person2},
-                {name: 'startDate', placeholder: 'תאריך התחלה', type: 'date', required: true, icon: Person2},
+                {name: 'startDate', placeholder: 'תאריך התחלה', type: 'date', required: true, icon: Person2, disabled: true},
             ]
         ]
     }
@@ -47,6 +54,7 @@ const NewMortgagePlan = ({show, setShow, groupId}) => {
         isNew: true,
         mortgageGroupId: groupId,
         type: '',
+        scheduleType: '',
         amount: 0,
         duration: 0,
         interestRate: 0,

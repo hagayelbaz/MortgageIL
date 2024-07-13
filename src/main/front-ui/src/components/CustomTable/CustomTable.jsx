@@ -81,7 +81,7 @@ const CustomTable = ({
                          data,
                          spacialIcon,
                          tableStyle = {maxHeight: '30dvh'},
-                         isLoading = false
+                         isLoading = false,
                      }) => {
     const [dataToDisplay, setDataToDisplay] = useState(data);
     const [columnsToDisplay, setColumnsToDisplay] = useState(columns);
@@ -206,7 +206,7 @@ const CustomTable = ({
                     <thead>
                     <tr>
                         {columnsToDisplay?.display?.map((column, index) => (
-                            <th key={index} className="d-none d-md-table-cell">{/*??*/}
+                            <th key={index} className="d-none d-md-table-cell">
                                 <div className="d-flex justify-content-between p-2 align-items-center">
                                     <h6>{column}</h6>
                                     {column && (
