@@ -13,6 +13,7 @@ const CustomInput = ({
                          disabled = false,
                          type,
                          example = "",
+                         className,
                          ...rest
                      }) => {
 
@@ -57,14 +58,14 @@ const CustomInput = ({
     }
 
     const whenChange = (event) => {
-        if(type === 'checkbox' || type === 'radio') {
+        if (type === 'checkbox' || type === 'radio') {
             event.target.value = event.target.checked;
         }
         onChange(event);
     }
 
     return (
-        <div className={specialContainer()}>
+        <div className={`${specialContainer()} ${className}`}>
             {Icon && type !== 'select' && <Icon className="custom-input-icon"/>}
             {type !== 'select' &&
                 <input type={type ? type : 'text'}

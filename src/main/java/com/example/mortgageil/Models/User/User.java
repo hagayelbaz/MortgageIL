@@ -43,6 +43,8 @@ public class User extends Person implements ManageableJpa, UserDetails {
     @Enumerated(EnumType.STRING)
     private RoleName roleName;
 
+    private boolean isFirstLogin = true;
+
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user",

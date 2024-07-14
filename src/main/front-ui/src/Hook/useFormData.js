@@ -32,6 +32,9 @@ const useFormData = (initialData, updateGlobalData, apiPath, messagesOption) => 
 
     const updateData = useCallback((path, value) => {
         if(!path) return;
+        if (value === 'true') value = true;
+        if (value === 'false') value = false;
+        if (!isNaN(value)) value = Number(value);
         setData(prev => setNestedProperty(path, value, prev));
     }, []);
 

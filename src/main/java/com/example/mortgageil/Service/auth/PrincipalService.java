@@ -43,4 +43,18 @@ public class PrincipalService {
     public boolean isUser(Principal principal) {
         return getUser(principal).getRoleName() == RoleName.USER;
     }
+
+    public void setLoginStatus(Principal principal) {
+        var user = getUser(principal);
+        user.setFirstLogin(false);
+        userService.save(user);
+    }
+
+    public boolean getStatusAndSet(Principal principal) {
+        var user = getUser(principal);
+        var status = user.isFirstLogin();
+        user.setFirstLogin(false);
+        userService.save(user);
+        return status;
+    }
 }

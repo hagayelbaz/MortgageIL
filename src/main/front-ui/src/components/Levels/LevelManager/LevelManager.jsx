@@ -11,7 +11,7 @@ import {Vars} from "../../../Vars";
 const LevelManager = ({levels}) => {
     const [formData, setFormData] = useState({
         borrowers: [{firstName: ""}],//to show as default
-        borrowerLiabilities: [{description: ""}],
+        borrowerLiabilities: [{description: undefined}],
     });
     const {next, prev, getSchema} = useSchema(levels, 0);
     const schema = getSchema();
@@ -25,7 +25,7 @@ const LevelManager = ({levels}) => {
     const onPrevious = () => prev(formData);
 
     return (
-        <div className="secondary-bg p-3 m-0 text-light rounded-2">
+        <div className="secondary-bg p-3 m-0 text-light rounded-2 shadow-lg">
             <ProgressBar totalSteps={schema.totalSteps} className="mb-3"
                          color={Vars.ACCENT_COLOR_DARK}
                          currentStep={schema.currentIndex}/>
@@ -33,6 +33,7 @@ const LevelManager = ({levels}) => {
             <CustomForm schema={schema.level} formData={formData}
                         transformErrors={transformErrors}
                         onSubmit={onNext} validator={validator}
+                        className="mb-2"
                         onChange={(e) => setFormData(e.formData)}>
 
                 <div className="d-flex justify-content-between mt-3">

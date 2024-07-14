@@ -11,6 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -24,9 +29,17 @@ public class LoanData implements ManageableJpa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @CreationTimestamp
+    private Date createdDate;
+
+    @UpdateTimestamp
+    private Date lastModifiedDate;
+
     private LoanType loanType;
 
     private double loanAmount;
+
+    private double apartmentPrice;
 
     private double equity;
 
@@ -35,6 +48,20 @@ public class LoanData implements ManageableJpa {
     private boolean intendsToSellWithin18Months;
 
     private boolean isFirstApartmentPurchase;
+
+    private boolean isPerOccupantApartment;
+
+    private double marketPrice;
+
+    private double contractPrice;
+
+    private double earlyRepayment;
+
+    private LocalDate earlyRepaymentDate;
+
+    private String city;
+
+
 
     @Transient
     private String typeDescription;

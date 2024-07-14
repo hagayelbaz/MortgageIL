@@ -16,6 +16,7 @@ public class UserDTO extends PersonDTO {
     private String phoneNumber;
     private String password;
     private RoleName roleName;
+    private boolean isFirstLogin;
     private Set<UserLiabilityDTO> borrowerLiabilities;
     private Set<BorrowerDTO> borrowers;
     private Set<MortgageGroupDTO> mortgageGroups;

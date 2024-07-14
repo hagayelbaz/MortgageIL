@@ -1,12 +1,5 @@
 .group-container {
-    border: 1px solid #007f5f;
-    padding: .65rem;
-    margin-bottom: .5rem;
-    border-radius: .4rem;
-}
-
-fieldset.group-container {
-    border: 1px solid #007f5f;
+    border: 1px solid var(--secondary-color-light);
     padding: .65rem;
     margin-bottom: .5rem;
     border-radius: .4rem;

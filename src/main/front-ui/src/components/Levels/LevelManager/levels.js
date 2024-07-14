@@ -205,7 +205,7 @@ export const levels = [
                 type: "array",
                 items: {
                     type: "object",
-                    required: ["description", "amount"],
+                    /*required: ["description", "amount"],*/
                     properties: {
                         description: {
                             type: "string",
