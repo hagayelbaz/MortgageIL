@@ -2,7 +2,7 @@
 
     <div class="container-fluid mt-2 rtl">
         <div class=" row d-flex justify-content-center m-2">
-            <button class="btn btn-accent ml-5" type="button" id="btn-calc-1">
+            <button class="btn btn-accent-fill ml-5" type="button" id="btn-calc-1">
                 שיעור מימון מקסימלי
             </button>
             <button class="btn btn-accent ml-5" type="button" id="btn-calc-2">
@@ -20,18 +20,18 @@
                     <div class="row justify-content-center">
                         <div class="col form-group">
                             <label for="equity1" class="font-300"> הון עצמי </label>
-                            <input type="text" class="form-control" id="equity1" placeholder="100,000">
+                            <input type="text" class="form-control" id="equity1" placeholder="100,000" required>
                         </div>
                         <div class="col form-group input-container">
                             <label for="revenues1">
                                 הכנסה פנויה
                             </label>
-                            <input type="text" class="form-control" id="revenues1" placeholder="15,000">
+                            <input type="text" class="form-control" id="revenues1" placeholder="15,000" required>
                             <div class="tooltip-message" id="tooltip-message">ההכנסה פנויה מתייחסת להכנסה שאינה מוקדשת להוצאות קבועות</div>
                         </div>
                         <div class="col form-group">
                             <label for="periodY1"> תקופה בשנים </label>
-                            <select class="form-control" id="periodY1" name="periodY1" >
+                            <select class="form-control" id="periodY1" name="periodY1" required>
                                 <option value="" disabled selected>בחר תקופה בשנים</option>
                                 <th:block th:each="i : ${#numbers.sequence(1, 30)}">
                                     <option th:value="${i}" th:text="${i}"></option>
@@ -58,11 +58,11 @@
 
                         <div class="col form-group">
                             <label for="equity2" class="font-300"> הון עצמי </label>
-                            <input type="text" class="form-control" id="equity2" placeholder="100,000">
+                            <input type="text" class="form-control" id="equity2" placeholder="100,000" required>
                         </div>
                         <div class="col form-group">
                             <label for="periodY2"> תקופה בשנים </label>
-                            <select class="form-control" id="periodY2" >
+                            <select class="form-control" id="periodY2" required>
                                 <option value="" disabled selected>בחר תקופה בשנים</option>
                                 <th:block th:each="i : ${#numbers.sequence(1, 30)}">
                                     <option th:value="${i}" th:text="${i}"></option>
@@ -92,11 +92,11 @@
                     <div class="row justify-content-center">
                         <div class="col form-group">
                             <label for="loan3" class="font-300"> גובה ההלוואה </label>
-                            <input type="text" class="form-control" id="loan3" placeholder="1,150,000">
+                            <input type="text" class="form-control" id="loan3" placeholder="1,150,000" required>
                         </div>
                         <div class="col form-group">
                             <label for="periodY3"> תקופה בשנים </label>
-                            <select class="form-control" id="periodY3" name="periodY3" >
+                            <select class="form-control" id="periodY3" name="periodY3" required>
                                 <option value="" disabled selected>בחר תקופה בשנים</option>
                                 <th:block th:each="i : ${#numbers.sequence(1, 30)}">
                                     <option th:value="${i}" th:text="${i}"></option>

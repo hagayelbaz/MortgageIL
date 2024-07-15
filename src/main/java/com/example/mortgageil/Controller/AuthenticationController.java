@@ -54,7 +54,7 @@ public class AuthenticationController {
         //if (principal != null)
         //    return "redirect:http://localhost:3000/portal";
         try {
-            user.setRoleName(ADMIN);
+            user.setRoleName(USER);
 
             User u = authenticationService.register(user);
         } catch (Exception e) {

@@ -361,12 +361,25 @@
     color: var(--text-color-light);
 }
 
+/* button accent outline , hover accent */
+.btn-accent-fill {
+    background: var(--accent-color);
+    border-radius: 50px;
+    color: var(--text-color-light);
+    font-size: x-large;
+}
+
+.btn-accent-fill i {
+    font-size: x-large;
+    color: var(--text-color-light);
+}
+
 
 /* button accent outline , hover accent */
 .btn-accent {
     border: 2px solid var(--accent-color);
     border-radius: 50px;
-    color: var(--accent-color);;
+    color: var(--accent-color);
     font-size: x-large;
 }
 
@@ -386,9 +399,9 @@
 
 /* button accent outline , hover accent */
 .btn-accent-text-light {
-    border: 2px solid var(--accent-color);
+    border: 2px solid var(--accent-color) !important;
     border-radius: 50px;
-    color: var(--text-color-light);;
+    color: var(--text-color-light) !important;
     font-size: x-large;
 }
 
@@ -398,15 +411,15 @@
 }
 
 .btn-accent-text-light:hover {
-    background:  var(--accent-color);
-    color: var(--text-color-light);
+    background:  var(--accent-color)  !important;
+    color: var(--text-color-light)  !important;
 }
 
 /* button fill accent */
 .btn-accent-fill {
-    background: var(--text-color-accent);
+    background: var(--text-color-accent)  !important;
     border-radius: 50px;
-    color: var(--text-color-light);
+    color: var(--text-color-light)  !important;
     font-size: x-large;
 }
 
@@ -416,7 +429,7 @@
 }
 
 .btn-accent-fill:hover {
-    color: var(--text-color-light);
+    color: var(--text-color-light) !important;
 }
 
 /* border outline accent */

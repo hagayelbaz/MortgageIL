@@ -217,13 +217,13 @@ mortgageil:
   security: #TODO: change it so the use will be with prefix
     paths:
       guest:
-        - auth/**
       all:
         - home
         - calculator
         - dataMarket
+        - about
         - sign
-        - auto/signUP
+        - auth/**
         - /calc/**
         - style/**
         - images/**
