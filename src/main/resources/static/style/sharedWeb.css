@@ -269,7 +269,8 @@
 }
 
 .nav-link:hover {
-    border: 2px solid var(--accent-color);
+    background: var(--accent-color);
+    color: var(--text-color-light);
 }
 
 .dropdown-menu {
@@ -284,7 +285,8 @@
 }
 
 .dropdown-item:hover {
-    border-bottom: 2px double var(--accent-color);
+    background: var(--accent-color);
+    color: var(--text-color-light);
 }
 
 /* about */
@@ -316,7 +318,6 @@
 
 .footer-link:hover {
     color: var(--text-color-light);
-    /* text-decoration: none; */
 }
 
 
