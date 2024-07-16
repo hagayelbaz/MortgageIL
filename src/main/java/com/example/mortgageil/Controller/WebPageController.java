@@ -60,11 +60,6 @@ public class WebPageController {
         return "signIn";
     }
 
-    @GetMapping("/portal")
-    public String startProgram() {
-        return "login";
-    }
-
     //NOTE: in prod this should be the react app url
 
     @RequestMapping(value = "/portal/**")
@@ -95,8 +90,6 @@ public class WebPageController {
         } catch (Exception e) {
             return null;
         }
-
-
 
     }
 

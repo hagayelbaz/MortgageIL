@@ -49,24 +49,15 @@ public class AuthenticationController {
         return "redirect:/portal/details";
     }
 
-    @PostMapping("/signUP")
+    @PostMapping("/sign-up")
     public String signUP(Principal principal, @Payload User user) {
-        //if (principal != null)
-        //    return "redirect:http://localhost:3000/portal";
         try {
             user.setRoleName(USER);
-
-            User u = authenticationService.register(user);
+            authenticationService.register(user);
         } catch (Exception e) {
             return "redirect:/auth/login?error=" + e.getMessage();
         }
-        return "login";
-    }
-
-    @GetMapping("/signUP")
-    public String signup(Principal principal, @Payload User user) {
-
-        return "home";
+        return "redirect:/auth/login";
     }
 
     @ExceptionHandler({Exception.class})
