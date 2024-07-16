@@ -52,12 +52,8 @@ const TabMortgageTrack = () => {
                              setShow={setShowNewMortgagePlan}/>
             <Row>
                 <div className="col col-xl-3">
-                    <p className="mb-2 small muted-text">שיעור מימון</p>
-                    <ProgressBar currentStep={60} color="#22CC00" totalSteps={100}/>
                 </div>
                 <div className="col col-xl-3">
-                    <p className="mb-2 small muted-text">יחס החזר</p>
-                    <ProgressBar currentStep={30} color="#55AA00" totalSteps={100}/>
                 </div>
                 <div className="col col-xl-6 d-flex justify-content-end align-items-center">
                     <Toggle className="mx-2"

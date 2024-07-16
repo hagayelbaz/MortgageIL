@@ -1,15 +1,15 @@
-.nav-tabs{
-    --bs-nav-tabs-border-color: var(--secondary-color-light) !important;
-    --bs-nav-tabs-link-active-bg: var(--secondary-color) !important;
-}
-
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
     border-color: var(--secondary-color-light) !important;
 }
 
+.nav-tabs{
+    border: none !important;
+}
+
 .nav-link {
     color: white !important;
-    border-color: var(--secondary-color) !important;
+    border: 2px solid var(--secondary-color-dark) !important;
+    background-color: var(--secondary-color-light) !important;
 }
 
 .nav-link:hover {
@@ -20,4 +20,7 @@
 
 .nav-link.active {
     color: white !important;
+    border: 2px solid var(--secondary-color-light) !important;
+    border-bottom: none !important;
+    background-color: var(--secondary-color-dark) !important;
 }

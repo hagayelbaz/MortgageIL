@@ -9,7 +9,7 @@ import {menuStyle} from "./style";
 import MenuIcon from '@mui/icons-material/Menu';
 import CottageIcon from '@mui/icons-material/Cottage';
 import {Vars} from "../../Vars";
-import {HelpOutline, PersonOutline} from "@mui/icons-material";
+import {AccountBalance, Details, DetailsTwoTone, GroupAdd, HelpOutline, Home, PersonOutline} from "@mui/icons-material";
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
@@ -19,6 +19,7 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import DescriptionIcon from '@mui/icons-material/Description';
 import logo from '../../assets/logo1.webp';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import HomePage from "../../Pages/HomePage/HomePage";
 
 
 const Portal = () => {
@@ -39,15 +40,19 @@ const Portal = () => {
                         </button>
                     </div>
 
-                    <MenuItem component={<Link to=""/>} icon={<CottageIcon className="text-light"/>}> בית </MenuItem>
+                    <MenuItem component={<Link to=""/>} icon={<Home className="text-light"/>}> בית </MenuItem>
+                    <MenuItem component={<Link to="personal"/>} icon={<PersonOutline className="text-light"/>}> פרטים אישיים </MenuItem>
 
-                    <SubMenu label="פרטים אישיים" icon={<PersonOutline className="text-light"/>}>
+                    <SubMenu label="פרטים נוספים" icon={<GroupAdd className="text-light"/>}>
                         <MenuItem icon={<AttachMoneyIcon className="text-light"/>}> הכנסות </MenuItem>
                         <MenuItem icon={<MoneyOffIcon className="text-light"/>}> הוצאות </MenuItem>
                         <MenuItem component={<Link to="borrowers"/>}
                                   icon={<SupervisorAccountIcon className="text-light"/>}> לווים </MenuItem>
                     </SubMenu>
 
+                    <MenuItem component={<Link to="my-mortgage"/>}
+                              icon={<AccountBalance className="text-light"/>}> המשכנתא שלי
+                    </MenuItem>
                     <MenuItem component={<Link to="mortgageTrack"/>}
                               icon={<TimelineIcon className="text-light"/>}> מסלולים </MenuItem>
                     <MenuItem icon={<DescriptionIcon className="text-light"/>}> מסמכים </MenuItem>

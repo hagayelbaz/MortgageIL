@@ -14,3 +14,7 @@
     transform: scale(1.05);
     transition: 0.3s;
 }
+
+.custom-menu{
+    right: 0 !important;
+}

@@ -7,12 +7,14 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Component
 public class FutureData {
 
     @Resource(name = "boiService")
     private BoiService boiService;
+
 
     public double getFutureInterest(MortgagePlanType type) {
         switch (type) {
@@ -45,8 +47,9 @@ public class FutureData {
 
     public double getFutureCpi(int month) {
         try {
-            var test = boiService.test(month).get("value").asDouble();
-            return test;//FinancialMath.cpiMonthly(test) +1;
+            return boiService.getInflationExpectationsByMonths(month)
+                    .get("value")
+                    .asDouble();
         }catch (Exception e) {
             throw new RuntimeException("Failed to get future cpi");
         }

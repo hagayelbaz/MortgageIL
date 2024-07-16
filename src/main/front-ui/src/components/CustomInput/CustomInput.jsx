@@ -1,5 +1,5 @@
 import './CustomInput.css';
-import {useEffect, useState} from "react";
+import {useEffect, useId, useState} from "react";
 import Toggle from "../Toggle/Toggle";
 
 
@@ -13,6 +13,7 @@ const CustomInput = ({
                          disabled = false,
                          type,
                          example = "",
+                         className,
                          ...rest
                      }) => {
 
@@ -28,22 +29,55 @@ const CustomInput = ({
             setPlaceHolderText(`${placeholder} ${example ? `: (לדוגמא: ${example})` : ''}`);
     }
 
+    const inputClass = () => {
+        if (type === 'radio' || type === 'checkbox') {
+            return 'custom-input-choice custom-input-radio';
+        }
+        if (type === 'checkbox') {
+            return 'custom-input-choice custom-input-checkbox';
+        }
+        return 'custom-input';
+    }
+
+    const labelClass = () => {
+        if (type === 'radio') {
+            return 'custom-input-choice-label custom-input-radio-label';
+        }
+        if (type === 'checkbox') {
+            return 'custom-input-choice-label custom-input-checkbox-label';
+        }
+        return 'custom-input-label';
+    }
+
+    const specialContainer = () => {
+        if (type === 'radio' || type === 'checkbox') {
+            return 'custom-input-choice-container';
+        }
+
+        return 'custom-input-container';
+    }
+
+    const whenChange = (event) => {
+        if (type === 'checkbox' || type === 'radio') {
+            event.target.value = event.target.checked
+        }
+        onChange(event);
+    }
 
     return (
-        <div className="custom-input-container">
+        <div className={`${specialContainer()} ${className}`}>
             {Icon && type !== 'select' && <Icon className="custom-input-icon"/>}
             {type !== 'select' &&
                 <input type={type ? type : 'text'}
                        placeholder=" "
                        value={value}
-                       onChange={onChange}
-                       className="custom-input text-light"
+                       onChange={whenChange}
+                       className={`text-light ${inputClass()}`}
                        name={name}
                        required={required}
                        disabled={disabled}
                        onFocus={handleFocus}
                        onBlur={handleBlur}
-                       id="custom-input-field"
                        {...rest}/>
             }
             {type === 'select' &&
@@ -53,7 +87,7 @@ const CustomInput = ({
                         name={name}
                         {...rest}/>
             }
-            <label htmlFor="custom-input-field" className="custom-input-label">
+            <label htmlFor={rest?.id || ""} className={labelClass()}>
                 {required && <span className="danger-color">*</span>}
                 {type !== 'select' ? placeHolderText : ''}
             </label>

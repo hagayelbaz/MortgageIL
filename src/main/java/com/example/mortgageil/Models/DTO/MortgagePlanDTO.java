@@ -1,6 +1,7 @@
 package com.example.mortgageil.Models.DTO;
 
 import com.example.mortgageil.Core.Enum.MortgagePlanType;
+import com.example.mortgageil.Core.Enum.ScheduleType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +14,7 @@ public class MortgagePlanDTO {
     private Long id;
     private Long mortgageGroupId;
     private MortgagePlanType type;
+    private ScheduleType scheduleType;
     private Double amount;
     private Double interestRate;
     private Integer duration;

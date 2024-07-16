@@ -10,10 +10,6 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", uses = {PersonMapper.class})
 public interface BorrowerMapper extends IMapper<Borrower, BorrowerDTO> {
-
-
     BorrowerDTO toDTO(Borrower borrower);
-
-
     Borrower toEntity(BorrowerDTO dto);
 }

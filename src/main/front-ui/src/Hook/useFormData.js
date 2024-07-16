@@ -31,15 +31,28 @@ const useFormData = (initialData, updateGlobalData, apiPath, messagesOption) => 
     const [isDataSaved, setIsDataSaved] = useState(false);
 
     const updateData = useCallback((path, value) => {
+        if(!path)
+            return;
+        if (value === 'true')
+            value = true;
+        else if (value === 'false')
+            value = false;
+        else if(value === 0)
+            value = 0;
+        else if(!value || value === 'null' || value === '')
+            value = undefined;
+        else if (!isNaN(value))
+            value = Number(value);
         setData(prev => setNestedProperty(path, value, prev));
     }, []);
 
 
-    const saveData = useCallback(() => {
+    const saveData = useCallback((avoidId = false) => {
         if (data?.isNew) {
             postData(apiPath, data);
         } else {
-            putData(apiPath.addPath(data.id), data);
+            const path = avoidId ? apiPath : apiPath.addPath(data.id);
+            putData(path, data);
         }
         setIsDataSaved(true);
     }, [postData, putData, apiPath, data]);

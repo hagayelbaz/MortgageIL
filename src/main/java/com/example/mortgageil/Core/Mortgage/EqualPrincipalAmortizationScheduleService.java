@@ -1,6 +1,7 @@
 package com.example.mortgageil.Core.Mortgage;
 
 import com.example.mortgageil.Core.Clasess.Payment;
+import com.example.mortgageil.Core.calc.FinancialMath;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class EqualPrincipalAmortizationScheduleService extends AmortizationSched
         int duration = getDuration();
 
         for (int month = 0; month < duration; month++) {
-            double cpi = futureData.getFutureCpi(month) + 1;
+            double cpi = FinancialMath.cpiMonthly(getCpi()) + 1;
             double interest = p * r * cpi;
             double principal = (p * cpi) / (duration - month);
             p = p * cpi - principal;

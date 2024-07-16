@@ -36,7 +36,7 @@ const BankAverageInterestCard = ({isLoading, error, isOK, data}) => {
                 <div className="card-body pb-0 mb-0">
                     <h5 className="card-title card-data-header fs-4 fw-lighter p-0 m-0">
                         <span>ממוצע ריביות בבנקים השונים</span>
-                        <Help text="ממוצע זה " className="mx-1">
+                        <Help text="הריבית הממוצעת של הבנקים השונים מהזול ליקר" className="mx-1">
                             <HelpOutlineIcon className="muted-color"/>
                         </Help>
                     </h5>
@@ -48,7 +48,7 @@ const BankAverageInterestCard = ({isLoading, error, isOK, data}) => {
                                 <XAxis hide type="number"/>
                                 <YAxis textAnchor="start" type="category" dataKey="bank" stroke="#FFFFFF"/>
                                 <Bar dataKey="value"
-                                     fill="#696ffb"
+                                     fill="#00a6fa"
                                      layout="vertical"
                                      label={<CustomizedLabel/>}/>
                             </BarChart>

@@ -1,35 +1,26 @@
 package com.example.mortgageil.Core.Mortgage;
 
 import com.example.mortgageil.Core.Enum.MortgagePlanType;
+import com.example.mortgageil.Core.Enum.ScheduleType;
 import com.example.mortgageil.Core.contracts.IAmortizationScheduleFactory;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 
 @Component
 public class AmortizationScheduleFactory implements IAmortizationScheduleFactory {
 
-    @Resource(name = "annuityAmortizationScheduleService")
-    private AnnuityAmortizationScheduleService annuityAmortizationScheduleService;
+    @Autowired
+    private WebApplicationContext webApplicationContext;
 
-    @Resource(name = "equalPrincipalAmortizationScheduleService")
-    private EqualPrincipalAmortizationScheduleService equalPrincipalAmortizationScheduleService;
-
-    public AmortizationScheduleService get(MortgagePlanType mortgagePlanType) {
-        switch (mortgagePlanType) {
-            case NON_LINKED_FIXED:
-            case PRIME_RATE:
-            case VARIABLE_EVERY_FIVE_YEARS:
-            case VARIABLE_EVERY_TWO_AND_HALF_YEARS:
-            case VARIABLE_EVERY_TEN_YEARS:
-            case ENTITLEMENT:
-                return annuityAmortizationScheduleService;
-            case LINKED_FIXED:
-            case VARIABLE_EVERY_FIVE_YEARS_LINKED:
-            case VARIABLE_EVERY_TWO_AND_HALF_YEARS_LINKED:
-            case VARIABLE_EVERY_TEN_YEARS_LINKED:
-            case EURO:
-                return equalPrincipalAmortizationScheduleService;
+    public AmortizationScheduleService get(ScheduleType scheduleType) {
+        switch (scheduleType) {
+            case ANNUITY:
+                return webApplicationContext.getBean(AnnuityAmortizationScheduleService.class);
+            case EQUAL_PRINCIPAL:
+                return webApplicationContext.getBean(EqualPrincipalAmortizationScheduleService.class);
         }
         throw new IllegalArgumentException("Unsupported mortgage plan type");
     }
