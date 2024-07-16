@@ -34,7 +34,7 @@ const FormViewer = forwardRef(({ initialData, fields, endpoint, layoutClasses , 
     return (
         <div className="">
             <hr/>
-            <form className="py-2 container-fluid m-0 px-0" onSubmit={handleSave}>
+            <form className="py-2 container-fluid m-0 px-0">
                 {fields?.data.map((fieldGroup, index) => (
                     <div className={`row my-2 ${layoutClasses[index]}`} key={index}>
                         {

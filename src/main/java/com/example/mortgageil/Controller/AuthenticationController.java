@@ -1,7 +1,9 @@
 package com.example.mortgageil.Controller;
 
 import com.example.mortgageil.Models.User.User;
+import com.example.mortgageil.Service.UrlBuilderService;
 import com.example.mortgageil.Service.auth.AuthenticationService;
+import com.example.mortgageil.props.AppData;
 import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -27,12 +29,18 @@ public class AuthenticationController {
     @Resource(name = "authenticationService")
     private AuthenticationService authenticationService;
 
+    @Resource(name = "appData")
+    private AppData appData;
+
+    @Resource(name = "urlBuilderService")
+    private UrlBuilderService urlBuilderService;
 
     @GetMapping("/login")
     public String login(Principal principal, Model model) {
         if (principal != null)
-            return "redirect:http://localhost:3000/portal";
-        //return "redirect:/portal/details";
+            return urlBuilderService.setBaseUrl("redirect:" + appData.getUrl())
+                    .addPathSegment("portal")
+                    .build();
 
         model.addAttribute("user", new User());
         return "login";

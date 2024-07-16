@@ -4,6 +4,7 @@ import com.example.mortgageil.Models.User.User;
 import com.example.mortgageil.Service.api.BoiMortgageService;
 import com.example.mortgageil.Service.api.BoiService;
 import com.example.mortgageil.props.ApiProperties;
+import com.example.mortgageil.props.AppData;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ public class WebPageController {
 
     @Resource(name = "boiMortgageService")
     private BoiMortgageService boiMortgageService;
+
+    @Resource(name = "appData")
+    private AppData appData;
 
     @GetMapping("")
     public String home() {
@@ -64,7 +68,7 @@ public class WebPageController {
 
     @RequestMapping(value = "/portal/**")
     public String forwardReactRoutes() {
-        return "redirect:http://localhost:3000";
+        return appData.getForward();
     }
 
     @GetMapping("/error")

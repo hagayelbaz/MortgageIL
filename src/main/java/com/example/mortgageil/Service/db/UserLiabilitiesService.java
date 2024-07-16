@@ -12,14 +12,14 @@ public class UserLiabilitiesService extends DBService<UserLiability, UserLiabili
         super(repository);
     }
 
-    public UserLiability getByPersonId(Long id) {
+    public UserLiability getByUserId(Long id) {
         return repository.findByUserId(id)
                 .stream()
                 .findFirst()
                 .orElse(null);
     }
 
-    public void deleteAllByPersonId(Long id) {
+    public void deleteByUserId(Long id) {
         repository.deleteAllByUserId(id);
     }
 }

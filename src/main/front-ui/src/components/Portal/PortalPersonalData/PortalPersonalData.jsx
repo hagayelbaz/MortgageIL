@@ -15,7 +15,7 @@ const userFields = {
         [
             {name: "id", placeholder: "מספר משתמש", type: "text", required: true, disabled: true},
             {name: "email", placeholder: "דואר אלקטרוני", type: "email", required: true, disabled: true},
-            {name: "phone", placeholder: "טלפון", type: "text", required: true}
+            {name: "phoneNumber", placeholder: "טלפון", type: "text", required: true}
         ],
         [
             {name: "address", placeholder: "כתובת", type: "text", required: true},
@@ -30,7 +30,7 @@ const PortalPersonalData = () => {
 
     const handleSave = () => {
         if(formRef.current) {
-            formRef.current.saveData();
+            formRef.current.saveData(true);
         }
     }
 

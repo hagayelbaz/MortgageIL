@@ -52,6 +52,7 @@ public abstract class DBService<
         if (existingEntity == null) {
             return null;
         }
+        existingEntity.saveRelatedEntities();
         return repository.save(entity);
     }
     //</editor-fold>

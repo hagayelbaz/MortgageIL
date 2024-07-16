@@ -51,7 +51,7 @@ public class UserLiabilitiesController {
 
     @GetMapping("/person/{id}")
     public ResponseEntity<?> getByPersonId(@PathVariable Long id) {
-        return ResponseEntity.ok(userLiabilitiesService.getByPersonId(id));
+        return ResponseEntity.ok(userLiabilitiesService.getByUserId(id));
     }
     //</editor-fold>
 
@@ -71,7 +71,7 @@ public class UserLiabilitiesController {
 
     @DeleteMapping("/person/{id}")
     public ResponseEntity<?> deleteByPersonId(@PathVariable Long id) {
-        userLiabilitiesService.deleteAllByPersonId(id);
+        userLiabilitiesService.deleteByUserId(id);
         return ResponseEntity.ok().build();
     }
 }

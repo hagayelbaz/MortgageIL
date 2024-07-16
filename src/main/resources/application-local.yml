@@ -11,14 +11,11 @@ spring:
     suffix: .html
     cache: false  # Set to true in production
 
-  #TODO: Delete in production!
-  #main:
-    #allow-circular-references: true
 
   datasource:
     url: jdbc:postgresql://localhost:5432/MortgageIL
     username: postgres
-    password: Yehouda1997
+    password: gba581p
   jpa:
     hibernate:
       ddl-auto: update
@@ -142,7 +139,9 @@ api:
       base-code: BNK
       final-code: BIR_MRTG
 
-
+# option: LOCAL, RUN, PROD
+app-data:
+  mode: RUN
 
 mortgageil:
   data:
@@ -240,7 +239,7 @@ mortgageil:
   auth:
     login:
       page-url: /auth/login
-      success-url: http://localhost:3000/portal
+      success-url: /portal
       failure-url: /auth/login?error=true
     logout:
       page-url: /logout

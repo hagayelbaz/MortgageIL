@@ -2,6 +2,7 @@ package com.example.mortgageil.Config;
 
 import com.example.mortgageil.Models.Repositories.UserRepository;
 import com.example.mortgageil.Models.User.RoleName;
+import com.example.mortgageil.props.AppData;
 import com.example.mortgageil.props.SecurityProperties;
 import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,9 @@ public class SecurityConfig {
     @Resource(name = "securityProperties")
     private SecurityProperties securityProperties;
 
+    @Resource(name = "appData")
+    private AppData appData;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         String [] guest = securityProperties.getSecurity().getPaths().getGuest();
@@ -73,7 +77,7 @@ public class SecurityConfig {
                         .loginPage(loginPageUrl)
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .defaultSuccessUrl(loginSuccessUrl, true)
+                        .defaultSuccessUrl(appData.processSuccessUrl(loginSuccessUrl), true)
                         .failureUrl(loginFailureUrl)
                         .permitAll()
                 )
@@ -92,7 +96,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationSuccessHandler oauth2AuthenticationSuccessHandler() {
         SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler();
-        handler.setDefaultTargetUrl("/create-delivery");
+        handler.setDefaultTargetUrl("/portal");
         return handler;
     }
 

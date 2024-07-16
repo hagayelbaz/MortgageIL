@@ -2,7 +2,7 @@ import UrlBuilderFactory from "./UrlBuilder";
 
 class Endpoints {
 
-    static BASE_URL = "http://localhost:8080";
+    static BASE_URL = process.env.REACT_APP_API_URL;
     static API_VERSION = "api/v1";
     static INTERNAL = "internal";
     static EXTERNAL = "external";

@@ -1,5 +1,7 @@
 package com.example.mortgageil.Config;
 
+import com.example.mortgageil.props.AppData;
+import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
@@ -10,11 +12,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    @Resource(name = "appData")
+    private AppData appData;
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         //NOTE: change it in production
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")
+                .allowedOrigins(appData.getUrl())
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true);

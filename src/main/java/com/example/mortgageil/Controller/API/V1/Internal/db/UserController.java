@@ -1,9 +1,11 @@
 package com.example.mortgageil.Controller.API.V1.Internal.db;
 
 
+import com.example.mortgageil.Classes.HttpResponse;
 import com.example.mortgageil.Models.DTO.UserDTO;
 import com.example.mortgageil.Models.Mapper.UserMapper;
 import com.example.mortgageil.Models.User.User;
+import com.example.mortgageil.Service.auth.PrincipalService;
 import com.example.mortgageil.Service.db.DtoMapper;
 import com.example.mortgageil.Service.db.UserService;
 import jakarta.annotation.Resource;
@@ -24,6 +26,9 @@ public class UserController {
     @Resource(name = "userMapper")
     private UserMapper mapper;
 
+
+    @Resource(name = "principalService")
+    private PrincipalService principalService;
 
     //<editor-fold desc="create">
     @PostMapping("")
@@ -52,11 +57,15 @@ public class UserController {
     //</editor-fold>
 
     //<editor-fold desc="update">
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody UserDTO userDTO) {
-        var user = userService.getById(id);
-        userDTO.setId(user.getId());
-        return ResponseEntity.ok(mapper.toDTO(userService.update(id, mapper.toEntity(userDTO))));
+    @PutMapping("")
+    public ResponseEntity<?> update(Principal principal, @RequestBody UserDTO userDTO) {
+        var id = principalService.getUserId(principal);
+        userService.update(id, mapper.toEntity(userDTO));
+        return ResponseEntity.ok(HttpResponse
+                .builder()
+                .message("User updated successfully")
+                .status(200)
+                .build());
     }
     //</editor-fold>
 
