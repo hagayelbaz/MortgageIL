@@ -87,7 +87,7 @@ public class WebPageController {
             irr.forEach(bankData ->  { interestMap.put("ריבית ממוצעת בבנק " + bankData.getBank(), String.format("%.2f",Double.valueOf(bankData.getValue())) + "%"); });
 
             var cpi = boiService.getCPI();
-            interestMap.put("מדד המחירים לצרכן  נכון ל:" + String.valueOf(cpi.get("date")).replace("\"", ""), String.format("%.2f", Double.valueOf(cpi.get("value").toString().replace("\"", ""))) + "%");
+            interestMap.put("שינוי במדד המחירים לצרכן בחודש:" + String.valueOf(cpi.get("date")).replace("\"", ""), String.format("%.2f", Double.valueOf(cpi.get("value").toString().replace("\"", ""))) + "%");
             interestMap.put("ריבית בנק ישראל", boiService.getCurrentInterest().get("value").toString().replace("\"", "") + "%");
             interestMap.put("ריבית פריים", (Double.parseDouble(boiService.getCurrentInterest().get("value").toString().replace("\"", "")) + 1.5) + "%");
 
