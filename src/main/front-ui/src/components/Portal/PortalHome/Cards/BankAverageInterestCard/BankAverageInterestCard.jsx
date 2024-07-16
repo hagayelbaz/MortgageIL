@@ -48,7 +48,7 @@ const BankAverageInterestCard = ({isLoading, error, isOK, data}) => {
                                 <XAxis hide type="number"/>
                                 <YAxis textAnchor="start" type="category" dataKey="bank" stroke="#FFFFFF"/>
                                 <Bar dataKey="value"
-                                     fill="#696ffb"
+                                     fill="#00a6fa"
                                      layout="vertical"
                                      label={<CustomizedLabel/>}/>
                             </BarChart>

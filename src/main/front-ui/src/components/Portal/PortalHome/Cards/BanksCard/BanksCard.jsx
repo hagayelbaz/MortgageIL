@@ -34,7 +34,7 @@ const BanksCard = ({isLoading, error, isOK, data}) => {
                            style={{maxHeight: "40dvh"}}>
                     {uniqueBanks?.map((bank, index) => {
                         return (
-                            <ListGroup.Item className="py-3 ms-1 my-1 border-0 rounded-1 d-flex justify-content-between secondary-bg-dark text-light">
+                            <ListGroup.Item key={index} className="py-3 ms-1 my-1 border-0 rounded-1 d-flex justify-content-between secondary-bg-dark text-light">
                                 <div>
                                     <img src={bank.logoUrl}
                                          alt={bank.name}

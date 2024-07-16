@@ -33,11 +33,11 @@ const initialData = {
 }
 
 const loanTypes = [
-    "דירה",
-    "מגרש",
-    "בנייה עצמית",
-    "מחזור",
-    "כל מטרה",
+    'דירה',
+    'מגרש',
+    'בנייה עצמית',
+    'מחזור',
+    'כל מטרה'
 ]
 
 
@@ -57,6 +57,14 @@ const PortalMortgageData = () => {
 
     const handleChange = (e) => {
         setIsOwner(e.target.id === 'y');
+        if(e.target.id === 'y'){
+            updateForm('isFirstApartmentPurchase', false);
+            updateForm('isPerOccupantApartment', false);
+        }
+        if(e.target.id === 'n'){
+            updateForm('numberOfApartments', 0);
+            updateForm('intendsToSellWithin18Months', false);
+        }
     }
 
     const isEnablePerOccupantApartment = () => {
@@ -67,13 +75,14 @@ const PortalMortgageData = () => {
         return formData?.isPerOccupantApartment && isEnablePerOccupantApartment();
     }
 
-    const logSave = () => {
-        saveFormData();
-    }
 
     useEffect(() => {
-        console.log(formData);
-        setSelectedType(loanTypes[formData?.loanType]);
+        if (!isNaN(formData.loanType)) {
+            setSelectedType(loanTypes[formData.loanType]);
+        }
+        if (formData.numberOfApartments > 0) {
+            setIsOwner(true);
+        }
     }, [formData]);
 
     useEffect(() => {
@@ -84,6 +93,8 @@ const PortalMortgageData = () => {
         if (data) {
             Object.keys(data).forEach(key => updateForm(key, data[key]));
             document.getElementById(formData?.numberOfApartments ? 'y' : 'n').checked = true;
+            setSelectedType(data?.typeDescription);
+            updateForm('isNew', false);
         }
     }, [data])
 
@@ -95,7 +106,7 @@ const PortalMortgageData = () => {
                     <h1 className="mt-1 fs-2">פרטי עסקה</h1>
                     <Help text='שמור שינויים'>
                         <SaveIcon role="button"
-                                  onClick={logSave}
+                                  onClick={() => saveFormData(true)}
                                   className="fs-2 mx-2"/>
                     </Help>
                 </div>
@@ -110,12 +121,12 @@ const PortalMortgageData = () => {
                                     <SimpleCard header={'סך הלוואה'}
                                                 className="col"
                                                 iconColor="#15da55"
-                                                value={toNis(formData?.apartmentPrice - formData?.equity)}
+                                                value={toNis(formData?.loanAmount)}
                                                 icon={<Money/>}/>
                                     <SimpleCard header={'שיעור מימון'}
                                                 className="col"
                                                 iconColor="success"
-                                                value={toPercentage((formData?.apartmentPrice - formData?.equity) / formData?.apartmentPrice * 100)}
+                                                value={toPercentage(formData?.loanAmount / formData?.apartmentPrice * 100)}
                                                 icon={<Percent/>}/>
                                     <SimpleCard header={'סוג עסקה'}
                                                 className="col"
@@ -128,7 +139,7 @@ const PortalMortgageData = () => {
                     </div>
                     <div className="row mt-3">
                         <div className="col shadow-strong secondary-bg mx-2 rounded-3 py-3">
-                            <FormHeader title="פרטים כלליים" no="1"/>
+                            <FormHeader title="פרטים כלליים" no="1" help="שמור שינויים"/>
                             <div className="my-3 d-flex align-items-center">
                                 <span className="ms-3">סוג העסקה:</span>
                                 <Toggle items={loanTypes}
@@ -145,23 +156,32 @@ const PortalMortgageData = () => {
                             <CustomInput placeholder="מחיר הנכס"
                                          className="my-3"
                                          value={formData.apartmentPrice} onChange={onFormChange}
-                                         name="apartmentPrice" required type="number" icon={Person}/>
-                            <CustomInput placeholder="הון עצמי" value={formData.equity} required
-                                         className="my-3"
-                                         onChange={onFormChange} name="equity"
-                                         type="number" icon={Person}/>
+                                         name="apartmentPrice" type="text" icon={Person}/>
+                            <div className="row my-3">
+                                <div className="col">
+                                    <CustomInput placeholder="סכום הלוואה"
+                                                 value={formData.loanAmount} onChange={onFormChange}
+                                                 name="loanAmount" type="number" icon={Person}/>
+                                </div>
+                                <div className="col">
+                                    <CustomInput placeholder="הון עצמי" value={formData.equity}
+                                                 onChange={onFormChange} name="equity"
+                                                 type="number" icon={Person}/>
+                                </div>
+                            </div>
                         </div>
                         <div className="col shadow-strong secondary-bg col-xl-4 mx-2 rounded-3 py-3">
-                            <FormHeader title="פרעון מוקדם" no="2"/>
+                            <FormHeader title="פרעון מוקדם" no="2"
+                                        help="אם יש צפי לפרעון מוקדם ניתן להזין כאן, אין צורך להזין תאריך, אך זה יעזור לנו לשפר את ההצעות."/>
                             <CustomInput placeholder="סכום הפרעון"
                                          className="my-3"
-                                         value={formData.earlyPaymentAmount}
-                                         onChange={onFormChange} name="earlyPaymentAmount"
+                                         value={formData.earlyRepayment}
+                                         onChange={onFormChange} name="earlyRepayment"
                                          type="number" icon={Person}/>
                             <CustomInput placeholder="תאריך פרעון"
-                                         value={formData.earlyPaymentDate}
+                                         value={formData.earlyRepaymentDate}
                                          className="my-3"
-                                         onChange={onFormChange} name="earlyPaymentDate"
+                                         onChange={onFormChange} name="earlyRepaymentDate"
                                          type="date" icon={Person}/>
                         </div>
                     </div>
@@ -170,20 +190,22 @@ const PortalMortgageData = () => {
                             <FormHeader title="נכסים קיימים" no="3"/>
                             <CustomInput placeholder="כן" value={1}
                                          className="my-3"
+                                         checked={isOwner}
                                          onChange={handleChange} name="ownOne"
                                          type="radio" id="y"/>
                             <CustomInput placeholder="לא" value={2}
                                          className="my-3"
+                                         checked={!isOwner}
                                          onChange={handleChange} name="ownOne"
                                          type="radio" id="n"/>
                             <CustomInput placeholder="זו הדירה הראשונה שלי"
-                                         value={formData.isFirstApartmentPurchase}
+                                         checked={formData.isFirstApartmentPurchase}
                                          className={isOwner ? 'd-none my-3' : 'my-3'}
                                          onChange={onFormChange}
                                          name="isFirstApartmentPurchase"
                                          type="checkbox" id="isFirstApartmentPurchase"/>
                             <CustomInput placeholder="האם מדובר במחיר למשתכן?"
-                                         value={formData.isPerOccupantApartment}
+                                         checked={formData.isPerOccupantApartment}
                                          className={isEnablePerOccupantApartment() ? 'my-3' : 'd-none my-3'}
                                          onChange={onFormChange}
                                          name="isPerOccupantApartment"
@@ -198,7 +220,7 @@ const PortalMortgageData = () => {
                                          onChange={onFormChange} name="numberOfApartments"
                                          type="number" example="2"/>
                             <CustomInput placeholder="בכוונתי למכור בתוך 18 חודשים"
-                                         value={formData.intendsToSellWithin18Months}
+                                         checked={formData.intendsToSellWithin18Months}
                                          type="checkbox" id="3"
                                          className="my-3"
                                          onChange={onFormChange} name="intendsToSellWithin18Months"/>

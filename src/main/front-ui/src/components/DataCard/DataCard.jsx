@@ -2,6 +2,8 @@ import './DataCard.css'
 import {ArrowDropUp} from "@mui/icons-material";
 
 
+//TODO: delete that?
+
 const DataCard = ({ header, text = "" }) => {
     return (
         <div className="container-fluid p-0 m-0">

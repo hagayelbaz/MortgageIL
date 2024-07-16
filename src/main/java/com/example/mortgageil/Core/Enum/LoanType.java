@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum LoanType {
     APARTMENT("דירה"),
-    LAND("מגרש"),
+    PLOT("מגרש"),
     SELF_BUILD("בניית עצמית"),
     REFINANCING("מחזור"),
     ANY("כל מטרה")

@@ -59,7 +59,7 @@ const CustomInput = ({
 
     const whenChange = (event) => {
         if (type === 'checkbox' || type === 'radio') {
-            event.target.value = event.target.checked;
+            event.target.value = event.target.checked
         }
         onChange(event);
     }

@@ -1,6 +1,7 @@
 package com.example.mortgageil.Controller.API.V1.Internal.db;
 
 
+import com.example.mortgageil.Classes.HttpResponse;
 import com.example.mortgageil.Models.DTO.LoanDataDTO;
 import com.example.mortgageil.Models.Mapper.LoanDataMapper;
 import com.example.mortgageil.Service.auth.PrincipalService;
@@ -36,7 +37,7 @@ public class LoanDataController {
     @GetMapping("")
     public ResponseEntity<?> get(Principal principal) {
         var loanData = loanDataService.getByUserId(principalService.getUserId(principal));
-        return  ResponseEntity.ok(mapper.toDTO(loanData));
+        return ResponseEntity.ok(mapper.toDTO(loanData));
     }
     //</editor-fold>
 
@@ -44,8 +45,12 @@ public class LoanDataController {
     @PutMapping("")
     public ResponseEntity<?> update(Principal principal, @RequestBody LoanDataDTO loanDataDTO) {
         loanDataDTO.setUser(principalService.getUserDTO(principal));
-        var loanDataEntity = loanDataService.getByUserId(principalService.getUserId(principal));
-        return ResponseEntity.ok(loanDataService.update(loanDataDTO.getId(), loanDataEntity));
+        loanDataService.save(mapper.toEntity(loanDataDTO));
+        return ResponseEntity.ok(HttpResponse
+                .builder()
+                .status(200)
+                .message("Loan data updated")
+                .build());
     }
     //</editor-fold>
 }
