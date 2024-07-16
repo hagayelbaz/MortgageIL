@@ -13,7 +13,7 @@ const LoadDataStatisticsCard = () => {
             <div className="card-body pb-0 mb-0">
                 <h5 className="card-title card-data-header fs-4 fw-lighter p-0 m-0">
                     <span>התיק שלי</span>
-                    <Help text="ממוצע זה " className="mx-1">
+                    <Help text="חישוב של חוזק התיק שלך מתבצע בהתאם להיתכנות לקבלת משכנתא מהבנק (כגון יחס החזר, שיעור מימון), וכן על פי חוזק הפרופיל בכדי שנוכל להתאים לך המלצות שונות." className="mx-1">
                         <HelpOutlineIcon className="muted-color"/>
                     </Help>
                 </h5>

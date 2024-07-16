@@ -25,7 +25,7 @@ const BanksCard = ({isLoading, error, isOK, data}) => {
             <div className="card-body pb-0 mb-0">
                 <h5 className="card-title card-data-header fs-4 fw-lighter p-0 m-0">
                     <span>הגשת בקשה לאישור עקרוני</span>
-                    <Help text="ממוצע זה " className="mx-1">
+                    <Help text="מצורפים קישורים מהירים להגשת בקשה לאישור עקרוני בבנקים השונים." className="mx-1">
                         <HelpOutlineIcon className="muted-color"/>
                     </Help>
                 </h5>

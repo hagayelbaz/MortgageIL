@@ -38,7 +38,9 @@ const TableBanksInterest = ({isLoading, error, isOK, data}) => {
                              tableStyle={{height: "40dvh"}}
                              columns={colData}
                              spacialIcon={(bank) => (
-                                 <img src={bank.logo} alt={bank.bank} style={{width: "50px"}}/>
+                                 <img src={bank.logo} alt={bank.bank} style={
+                                     {width: "30px", height: "30px"}
+                                 }/>
                              )}/>
             </div>
         </div>

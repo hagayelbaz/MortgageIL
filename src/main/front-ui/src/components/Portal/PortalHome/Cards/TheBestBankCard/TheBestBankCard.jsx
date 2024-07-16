@@ -31,7 +31,7 @@ const TheBestBankCard = () => {
                            icon={icon}
                            dataMapping={mapData}
                            iconColor="bg-primary"
-                           help="ריבית בנק ישראל (ריבית הפריים היא ריבית בנק ישראל + 1.5%)"
+                           help="הבנק הזול ביותר בהתאם IRR של הבנקים השונים"
                            header="הבנק הזול">
                 <InsideCardWithFetch endpoint={Endpoints.BANK.BEST_BANK}
                                      dataMapping={mapInsideData}/>

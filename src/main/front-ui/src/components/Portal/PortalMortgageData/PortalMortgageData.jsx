@@ -120,17 +120,17 @@ const PortalMortgageData = () => {
                                 <div className="row">
                                     <SimpleCard header={'סך הלוואה'}
                                                 className="col"
-                                                iconColor="#15da55"
+                                                iconColor="#0054c855"
                                                 value={toNis(formData?.loanAmount)}
                                                 icon={<Money/>}/>
                                     <SimpleCard header={'שיעור מימון'}
                                                 className="col"
-                                                iconColor="success"
+                                                iconColor="#9422e455"
                                                 value={toPercentage(formData?.loanAmount / formData?.apartmentPrice * 100)}
                                                 icon={<Percent/>}/>
                                     <SimpleCard header={'סוג עסקה'}
                                                 className="col"
-                                                iconColor="#99af3c"
+                                                iconColor="#ffab0055"
                                                 value={selectedType}
                                                 icon={<BusinessSharp/>}/>
                                 </div>

@@ -151,43 +151,43 @@ mortgageil:
         code: 10
         color: "#00b0f0"
         full-code: 10001
-        logo-url: https://play-lh.googleusercontent.com/ifS3ZQkc31sCsO315uv25uGHNkdORi1TkYwkdr_6EoTu-cQypzZRoqT6KEwE7aNFYak=s48-rw
+        logo-url: /images/bank/leumi.jpg
         pre-approved-url: https://leumi.easysend.app/mortgage-request-new/
       - name: דיסקונט
         code: 11
         color: "#62a93b"
         full-code: 11001
-        logo-url: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkxihLZaxVFo8zuh8KyNMUke8e0YP1Yix_BQ&s
+        logo-url: /images/bank/discount.svg
         pre-approved-url: https://mortgage.discountbank.co.il/
       - name: הפועלים
         code: 12
         color: "#ed1b2e"
         full-code: 12001
-        logo-url: https://play-lh.googleusercontent.com/5aAU4pZJsYHTQhgVXkwT-L3ZDtCHK8nVtJxcfXmoj7rmmELX-85f78QRYd5VO2KyoA
+        logo-url: /images/bank/bankhapoalim.svg
         pre-approved-url: https://mortgage.bankhapoalim.co.il/ng-portals/dm/he/all-purposes
       - name: מרכנתיל
         code: 17
         color: "#409261"
         full-code: 17001
-        logo-url: https://www.mercantile.co.il/media/4sinzl2k/logo_mer_yellow_ribbon-3.svg
+        logo-url: /images/bank/mercantile.svg
         pre-approved-url: https://mortgage.mercantile.co.il/
       - name: מזרחי
         code: 20
         color: "#f5821f"
         full-code: 20001
-        logo-url: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzm-X_utUQz5Jm7gkakDXX8XYHiVYmr9LYxQ&s
+        logo-url: /images/bank/mizrahi.svg
         pre-approved-url: https://sc.mizrahi-tefahot.co.il/TofesMashkantaClient/
       - name: הבינלאומי
         code: 31
         color: "#fdb726"
         full-code: 31001
-        logo-url: https://www.fibi.co.il/media/uo1anbe3/logo-header.png
+        logo-url: /images/bank/fibi.png
         pre-approved-url: https://mortgage.fibi.co.il/digmo/
       - name: ירושלים
         code: 54
         color: "#c1905a"
         full-code: 54001
-        logo-url: https://cdn2.downdetector.com/static/uploads/c/300/581cd/download_6jD6tW2.png
+        logo-url: /images/bank/jerusalem.png
         pre-approved-url: https://www.bankjerusalem.co.il/mortgage/go_mortgage/target-details
       - name: מערכת
         code: 99

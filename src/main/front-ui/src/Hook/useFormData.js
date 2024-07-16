@@ -37,6 +37,8 @@ const useFormData = (initialData, updateGlobalData, apiPath, messagesOption) => 
             value = true;
         else if (value === 'false')
             value = false;
+        else if(value === 0)
+            value = 0;
         else if(!value || value === 'null' || value === '')
             value = undefined;
         else if (!isNaN(value))
