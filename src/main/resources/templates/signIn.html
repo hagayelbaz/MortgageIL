@@ -16,7 +16,39 @@
 <div class="container-fluid">
     <div class="row justify-content-center img-light mt-5">
         <div class="col-6 m-5 p-5" >
-            <div th:insert="~{layouts/signInForm :: signInForm}"></div>
+            <div class="h-100 d-flex flex-column text-center p-5 brd-outline-accent">
+                <h1> הרשמה </h1>
+
+                <form action="#" th:action="@{/auth/sign-up}" method="post" th:object="${user}">
+
+                    <div class="form-group">
+                        <label for="firstName">שם פרטי</label>
+                        <input type="text" class="form-control text-right" id="firstName" name="firstName" th:field="*{firstName}" placeholder="שם פרטי" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">שם משפחה</label>
+                        <input type="text" class="form-control text-right" id="lastName" name="lastName" th:field="*{lastName}" placeholder="שם משפחה" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phoneNumber">מספר טלפון</label>
+                        <input type="text" class="form-control text-right" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" placeholder="מספר טלפון" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">אימייל</label>
+                        <input type="email" class="form-control text-right" id="email" name="email" th:field="*{email}" placeholder="אימייל" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">סיסמה</label>
+                        <input type="password" class="form-control text-right" id="password" name="password" pattern=".+" th:field="*{password}" placeholder="סיסמה" required>
+                    </div>
+
+                    <button type="submit" class="btn m-3 btn-accent"><i class="bi bi-arrow-left"></i> הרשמה </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -1,18 +1,28 @@
 package com.example.mortgageil.Controller;
 
+import com.example.mortgageil.Models.User.User;
+import com.example.mortgageil.Service.api.BoiMortgageService;
+import com.example.mortgageil.Service.api.BoiService;
+import com.example.mortgageil.props.ApiProperties;
+import com.fasterxml.jackson.databind.JsonNode;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 public class WebPageController {
+
+    @Resource(name = "boiService")
+    private BoiService boiService;
+
+    @Resource(name = "boiMortgageService")
+    private BoiMortgageService boiMortgageService;
 
     @GetMapping("")
     public String home() {
@@ -20,18 +30,21 @@ public class WebPageController {
     }
 
     @GetMapping("/home")
-    public String home(Model model) {
+    public String home1() {
         return "home";
     }
 
     @GetMapping("/about")
-    public String about(Principal principal) {
+    public String about() {
         return "about";
     }
 
     @GetMapping("/dataMarket")
     public String dataMarket(Model model) {
         Map<String, String> data = getAllInterest();
+        if(data == null) {
+            return "error";
+        }
         model.addAttribute("interestMap", data);
         return "dataMarket";
     }
@@ -43,30 +56,8 @@ public class WebPageController {
 
     @GetMapping("/sign")
     public String sign(Model model) {
+        model.addAttribute("user", new User());
         return "signIn";
-    }
-
-    @PostMapping("/signInCheck")
-    public String signInCheck(@RequestParam("email") String email,
-                              @RequestParam("password") String password,
-                              @RequestParam(value = "firstName", required = false) String firstName,
-                              @RequestParam(value = "lastName", required = false) String lastName,
-                              @RequestParam(value = "phone", required = false) String phone,
-                              @RequestParam(value = "savePassword", required = false) String savePassword,
-                              Model model) {
-        System.out.println("check login for: email =" + email + " password =" + password + " firstName = " + firstName + " lastName = " + lastName + " phone = " + phone);
-        if (addToDB(email, password, firstName, lastName, phone)) {
-            model.addAttribute("username", email);
-            return "redirect:http://localhost:3000";
-        } else {
-            model.addAttribute("error", "There is un error try again ");
-            return "signIn";
-        }
-    }
-
-    @GetMapping("/portal")
-    public String startProgram(Model model) {
-        return "login";
     }
 
     //NOTE: in prod this should be the react app url
@@ -82,26 +73,24 @@ public class WebPageController {
         return "error";
     }
 
-
-    private boolean addToDB(String firstName, String lastName, String phone, String email, String password) {
-        // add to DB
-        System.out.println("Adding to database: " + ", FirstName=" + firstName + ", LastName=" + lastName + ", Phone=" + phone + ", Email=" + email);
-
-        return true;
-    }
-
     public Map<String, String> getAllInterest() {
-        Map<String, String> interestMap = new HashMap<>();
-        interestMap.put("ריבית פריים", "3.5%");
-        interestMap.put("ריבית קבועה", "4.0%");
-        interestMap.put("מדד המחירים לצרכן", "1.2%");
-        interestMap.put("ריבית פריים 1", "3.5%");
-        interestMap.put("ריבית קבועה 1", "4.0%");
-        interestMap.put("מדד המחירים לצרכן 1", "1.2%");
-        interestMap.put("ריבית פריים 2", "3.5%");
-        interestMap.put("ריבית קבועה 2", "4.0%");
-        interestMap.put("מדד המחירים לצרכן 2", "1.2%");
-        return interestMap;
+        try {
+            Map<String, String> interestMap = new HashMap<>();
+
+            boiMortgageService.refresh();
+            var irr = boiMortgageService.getByMortgage("irr");
+            irr.forEach(bankData ->  { interestMap.put("ריבית ממוצעת בבנק " + bankData.getBank(), String.format("%.2f",Double.valueOf(bankData.getValue())) + "%"); });
+
+            var cpi = boiService.getCPI();
+            interestMap.put("שינוי במדד המחירים לצרכן בחודש:" + String.valueOf(cpi.get("date")).replace("\"", ""), String.format("%.2f", Double.valueOf(cpi.get("value").toString().replace("\"", ""))) + "%");
+            interestMap.put("ריבית בנק ישראל", boiService.getCurrentInterest().get("value").toString().replace("\"", "") + "%");
+            interestMap.put("ריבית פריים", (Double.parseDouble(boiService.getCurrentInterest().get("value").toString().replace("\"", "")) + 1.5) + "%");
+
+            return interestMap;
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
 }

@@ -32,11 +32,4 @@ public class MortgageController {
         var summary = amortizationCalculationService.calculateForMortgageGroup(selectedGroup);
         return ResponseEntity.ok(summary);
     }
-
-    @GetMapping("/test")
-    public ResponseEntity<?> test() {
-        double [] values = {-100,40,59,55,20};
-        var irr = FinancialMath.IRR(values);
-        return ResponseEntity.ok(irr);
-    }
 }

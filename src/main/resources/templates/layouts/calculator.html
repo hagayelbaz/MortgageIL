@@ -1,30 +1,42 @@
 <div th:fragment="calculator" xmlns="http://www.w3.org/1999/html">
 
-    <div class="container-fluid mt-5 rtl">
-        <div class=" row d-flex justify-content-around m-5">
-            <a class="btn btn-accent" type="button" data-toggle="collapse" id="btn-calc-1">
-                גובה משכנתא לפי הון
-            </a>
-            <button class="btn btn-accent" type="button" data-toggle="collapse" id="btn-calc-2">
-                גובה משכתא לפי החזר
+    <div class="container-fluid mt-2 rtl">
+        <div class=" row d-flex justify-content-center m-2">
+            <button class="btn btn-accent-fill ml-5" type="button" id="btn-calc-1">
+                שיעור מימון מקסימלי
             </button>
-            <button class="btn btn-accent" type="button" id="btn-calc-3">
-                החזר חודשי וריבית
+            <button class="btn btn-accent ml-5" type="button" id="btn-calc-2">
+                שיעור מימון לפי החזר
+            </button>
+            <button class="btn btn-accent ml-5" type="button" id="btn-calc-3">
+                החזר חודשי ממוצע וריבית
             </button>
         </div>
 
         <div class=" row d-flex justify-content-center">
             <div id="calc-1" class="collapse show brd-outline-accent text-right mt-5 p-5">
-                <h5 class="text-center"> חישוב גובה המשכנתא האפשרית לפי הון העצמי וההכנסה פנויה </h5>
-                <form class="p-5" id="form1" onsubmit="return false;">
+                <h5 class="text-center"> חישוב שיעור מימון מקסימלי </h5>
+                <form class="p-5 mt-4" id="form1" onsubmit="return false;">
                     <div class="row justify-content-center">
                         <div class="col form-group">
                             <label for="equity1" class="font-300"> הון עצמי </label>
-                            <input type="text" class="form-control" id="equity1" placeholder="100,000">
+                            <input type="text" class="form-control" id="equity1" placeholder="100,000" required>
+                        </div>
+                        <div class="col form-group input-container">
+                            <label for="revenues1">
+                                הכנסה פנויה
+                            </label>
+                            <input type="text" class="form-control" id="revenues1" placeholder="15,000" required>
+                            <div class="tooltip-message" id="tooltip-message">ההכנסה פנויה מתייחסת להכנסה שאינה מוקדשת להוצאות קבועות</div>
                         </div>
                         <div class="col form-group">
-                            <label for="revenues1"> הכנסות </label>
-                            <input type="text" class="form-control" id="revenues1" placeholder="15,000">
+                            <label for="periodY1"> תקופה בשנים </label>
+                            <select class="form-control" id="periodY1" name="periodY1" required>
+                                <option value="" disabled selected>בחר תקופה בשנים</option>
+                                <th:block th:each="i : ${#numbers.sequence(1, 30)}">
+                                    <option th:value="${i}" th:text="${i}"></option>
+                                </th:block>
+                            </select>
                         </div>
                     </div>
 
@@ -34,23 +46,28 @@
 
                     <div class="row form-group">
                         <label for="result1"> גובה משכנתא אפשרי </label>
-                        <input type="text" class="form-control" id="result1">
+                        <input type="text" class="form-control" id="result1" disabled>
                     </div>
                 </form>
             </div>
 
             <div id="calc-2" class="collapse brd-outline-accent text-right mt-5 p-5">
-                <h5 class="text-center"> חישוב גובה המשכנתא האפשרית לפי החזר חודשי רצוי </h5>
+                <h5 class="text-center"> חישוב שיעור מימון לפי החזר חודשי רצוי </h5>
                 <form class="p-5" id="form2" onsubmit="return false;">
                     <div class="row justify-content-center">
 
                         <div class="col form-group">
                             <label for="equity2" class="font-300"> הון עצמי </label>
-                            <input type="text" class="form-control" id="equity2" placeholder="100,000">
+                            <input type="text" class="form-control" id="equity2" placeholder="100,000" required>
                         </div>
                         <div class="col form-group">
-                            <label for="periodY2"> החזר חודשי רצוי </label>
-                            <input type="text" class="form-control" id="periodY2" placeholder="30">
+                            <label for="periodY2"> תקופה בשנים </label>
+                            <select class="form-control" id="periodY2" required>
+                                <option value="" disabled selected>בחר תקופה בשנים</option>
+                                <th:block th:each="i : ${#numbers.sequence(1, 30)}">
+                                    <option th:value="${i}" th:text="${i}"></option>
+                                </th:block>
+                            </select>
                         </div>
                         <div class="col form-group">
                             <label for="refund2"> החזר חודשי רצוי </label>
@@ -64,7 +81,7 @@
 
                     <div class="row form-group">
                         <label for="result2"> גובה משכנתא לפי ההחזר הנתון </label>
-                        <input type="text" class="form-control" id="result2">
+                        <input type="text" class="form-control" id="result2" disabled>
                     </div>
                 </form>
             </div>
@@ -75,15 +92,16 @@
                     <div class="row justify-content-center">
                         <div class="col form-group">
                             <label for="loan3" class="font-300"> גובה ההלוואה </label>
-                            <input type="text" class="form-control" id="loan3" placeholder="1,150,000">
+                            <input type="text" class="form-control" id="loan3" placeholder="1,150,000" required>
                         </div>
                         <div class="col form-group">
                             <label for="periodY3"> תקופה בשנים </label>
-                            <input type="text" class="form-control" id="periodY3" placeholder="30">
-                        </div>
-                        <div class="col form-group">
-                            <label for="interest3"> ריבית </label>
-                            <input type="text" class="form-control" id="interest3" placeholder="4.65">
+                            <select class="form-control" id="periodY3" name="periodY3" required>
+                                <option value="" disabled selected>בחר תקופה בשנים</option>
+                                <th:block th:each="i : ${#numbers.sequence(1, 30)}">
+                                    <option th:value="${i}" th:text="${i}"></option>
+                                </th:block>
+                            </select>
                         </div>
                     </div>
 
@@ -94,19 +112,19 @@
                     <div class="row justify-content-center">
                         <div class="col form-group">
                             <label for="resultM3"> ממוצע החזר חודשי </label>
-                            <input type="text" class="form-control" id="resultM3">
+                            <input type="text" class="form-control" id="resultM3" disabled>
                         </div>
                         <div class="col form-group">
                             <label for="resultI3"> ריבית כוללת </label>
-                            <input type="text" class="form-control" id="resultI3">
+                            <input type="text" class="form-control" id="resultI3" disabled>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
 
-        <div class=" row text-center mt-5">
-            <h1> היכנסו לאיזור האישי ותוכלו להנות מעוד הרבה מחשבונים מעניינים </h1>
+        <div class=" row justify-content-center mt-5">
+            <h1 class="text-center"> היכנסו לאיזור האישי ותוכלו להנות מעוד הרבה מחשבונים מעניינים </h1>
         </div>
     </div>
 </div>

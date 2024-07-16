@@ -2,7 +2,6 @@ package com.example.mortgageil.Controller;
 
 import com.example.mortgageil.Models.User.User;
 import com.example.mortgageil.Service.auth.AuthenticationService;
-import com.example.mortgageil.Service.auth.PrincipalService;
 import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,9 @@ import org.springframework.messaging.handler.annotation.Payload;
 
 import java.security.Principal;
 
-//TODO: this class never used!!!
+import static com.example.mortgageil.Models.User.RoleName.ADMIN;
+import static com.example.mortgageil.Models.User.RoleName.USER;
+
 @Controller
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -26,17 +27,11 @@ public class AuthenticationController {
     @Resource(name = "authenticationService")
     private AuthenticationService authenticationService;
 
-    @Resource(name = "principalService")
-    private PrincipalService principalService;
-
 
     @GetMapping("/login")
     public String login(Principal principal, Model model) {
-        if (principal != null) {
-            if (principalService.getStatusAndSet(principal))
-                return "redirect:http://localhost:3000/portal/details";
+        if (principal != null)
             return "redirect:http://localhost:3000/portal";
-        }
         //return "redirect:/portal/details";
 
         model.addAttribute("user", new User());
@@ -45,16 +40,24 @@ public class AuthenticationController {
 
 
     @PostMapping("/login")
-    public String login(@Payload User user, Principal principal) {
+    public String login(@Payload User user) {
         try {
             authenticationService.authenticate(user);
         } catch (Exception e) {
             return "redirect:/auth/login?error=" + e.getMessage();
         }
-        if (principalService.getStatusAndSet(principal))
-            return "redirect:/portal/details";
+        return "redirect:/portal/details";
+    }
 
-        return "redirect:/portal";
+    @PostMapping("/sign-up")
+    public String signUP(Principal principal, @Payload User user) {
+        try {
+            user.setRoleName(USER);
+            authenticationService.register(user);
+        } catch (Exception e) {
+            return "redirect:/auth/login?error=" + e.getMessage();
+        }
+        return "redirect:/auth/login";
     }
 
     @ExceptionHandler({Exception.class})
